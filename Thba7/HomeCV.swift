@@ -24,6 +24,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         
         ref = Database.database().reference()
         ref.child("data").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -93,6 +94,13 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }
         
         cell.label.text = dataArray[indexPath.item].label!
+        
+        // MARK: - CardView Layout
+//        cell.layer.cornerRadius = 15.0
+//        cell.layer.masksToBounds = false
+//        cell.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+//        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        cell.layer.shadowOpacity = 0.8
         return cell
     }
     

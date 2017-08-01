@@ -11,42 +11,50 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="gTV-IL-0wX" customClass="HomeCollectionViewCell" customModule="Thba7" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="336" height="415"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="Cell" id="gTV-IL-0wX" customClass="HomeCollectionViewCell" customModule="Thba7" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="542" height="426"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="336" height="415"/>
+                <rect key="frame" x="0.0" y="0.0" width="542" height="426"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eF-tY-rbY">
+                        <rect key="frame" x="0.0" y="0.0" width="542" height="426"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRI-H8-Bl5">
-                        <rect key="frame" x="0.0" y="383" width="336" height="32"/>
+                        <rect key="frame" x="0.0" y="394" width="542" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="32" id="noq-v2-HR5"/>
+                            <constraint firstAttribute="height" constant="32" id="vLR-Rs-Dpm"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="نعيمي" translatesAutoresizingMaskIntoConstraints="NO" id="5CD-d9-gBu">
-                        <rect key="frame" x="0.0" y="0.0" width="336" height="375"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="نعيمي" translatesAutoresizingMaskIntoConstraints="NO" id="5CD-d9-gBu">
+                        <rect key="frame" x="0.0" y="0.0" width="542" height="386"/>
                     </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="5CD-d9-gBu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5jO-KU-j5W"/>
-                <constraint firstItem="5CD-d9-gBu" firstAttribute="leading" secondItem="tRI-H8-Bl5" secondAttribute="leading" id="9dE-tG-UW4"/>
-                <constraint firstAttribute="bottom" secondItem="tRI-H8-Bl5" secondAttribute="bottom" id="EZW-2Y-Y1t"/>
-                <constraint firstAttribute="trailing" secondItem="5CD-d9-gBu" secondAttribute="trailing" id="OS6-tR-Bv8"/>
-                <constraint firstItem="5CD-d9-gBu" firstAttribute="trailing" secondItem="tRI-H8-Bl5" secondAttribute="trailing" id="aMP-gl-c4a"/>
-                <constraint firstItem="tRI-H8-Bl5" firstAttribute="top" secondItem="5CD-d9-gBu" secondAttribute="bottom" constant="8" symbolic="YES" id="njy-CN-IHu"/>
-                <constraint firstItem="5CD-d9-gBu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pkO-jo-YK1"/>
+                <constraint firstItem="8eF-tY-rbY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="36v-H2-gx2"/>
+                <constraint firstItem="5CD-d9-gBu" firstAttribute="trailing" secondItem="8eF-tY-rbY" secondAttribute="trailing" id="90p-ym-xTh"/>
+                <constraint firstItem="tRI-H8-Bl5" firstAttribute="top" secondItem="5CD-d9-gBu" secondAttribute="bottom" constant="8" symbolic="YES" id="GFb-Fg-9vj"/>
+                <constraint firstItem="8eF-tY-rbY" firstAttribute="bottom" secondItem="tRI-H8-Bl5" secondAttribute="bottom" id="JaO-pC-4nF"/>
+                <constraint firstItem="5CD-d9-gBu" firstAttribute="trailing" secondItem="tRI-H8-Bl5" secondAttribute="trailing" id="R5T-zX-0cv"/>
+                <constraint firstItem="5CD-d9-gBu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cgP-g7-Z3H"/>
+                <constraint firstItem="8eF-tY-rbY" firstAttribute="leading" secondItem="5CD-d9-gBu" secondAttribute="leading" id="clx-XA-FoR"/>
+                <constraint firstAttribute="trailing" secondItem="8eF-tY-rbY" secondAttribute="trailing" id="gFN-JT-vsj"/>
+                <constraint firstAttribute="bottom" secondItem="8eF-tY-rbY" secondAttribute="bottom" id="pL0-lV-47V"/>
+                <constraint firstItem="8eF-tY-rbY" firstAttribute="top" secondItem="5CD-d9-gBu" secondAttribute="top" id="wzj-lD-Q5p"/>
+                <constraint firstItem="5CD-d9-gBu" firstAttribute="leading" secondItem="tRI-H8-Bl5" secondAttribute="leading" id="y70-xy-5L0"/>
             </constraints>
-            <size key="customSize" width="336" height="415"/>
+            <size key="customSize" width="542" height="426"/>
             <connections>
                 <outlet property="image" destination="5CD-d9-gBu" id="xxT-Gs-K1q"/>
                 <outlet property="label" destination="tRI-H8-Bl5" id="fsX-6b-M8y"/>
             </connections>
-            <point key="canvasLocation" x="-50" y="144.5"/>
+            <point key="canvasLocation" x="53" y="150"/>
         </collectionViewCell>
     </objects>
     <resources>
