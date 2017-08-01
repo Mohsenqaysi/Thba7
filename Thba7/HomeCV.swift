@@ -44,16 +44,6 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }) { (error) in
             print(error.localizedDescription)
         }
-        print("My array: \(String(describing: self.dataArray.first?.image))")
-        
-        // Add continerView in the navigation view
-        
-        //        dataArray = [DataModel(image: "نعيمي", label: "نعيمي"),DataModel(image: "نعيمي", label: "نعيمي"),
-        //                         DataModel(image: "نعيمي", label: "نعيمي"),DataModel(image: "نعيمي", label: "نعيمي"),
-        //                         DataModel(image: "نعيمي", label: "نعيمي"),DataModel(image: "نعيمي", label: "نعيمي"),
-        //                         DataModel(image: "نعيمي", label: "نعيمي"),DataModel(image: "نعيمي", label: "نعيمي")]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
         // Register cell classes
         let nib = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
@@ -105,40 +95,5 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         cell.label.text = dataArray[indexPath.item].label!
         return cell
     }
-    
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    //
-    //        return CGSize(width: (UIApplication.shared.keyWindow?.frame.width)!, height: 200)
-    //    }
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
     
 }
