@@ -7,17 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20B218E991FBAFFB4BFF4F6C /* Pods_Thba7.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */; };
+		FC0DDDF11F2F53AC00B16B2B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */; };
+		FC682F4E1F2F9E0F007D5955 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC682F4D1F2F9E0F007D5955 /* Extensions.swift */; };
+		FC7A55651F2F59140039355B /* HomeCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A55641F2F59140039355B /* HomeCV.swift */; };
+		FC7A55681F2F5A4E0039355B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A55661F2F5A4D0039355B /* HomeCollectionViewCell.swift */; };
+		FC7A55691F2F5A4E0039355B /* HomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A55671F2F5A4E0039355B /* HomeCollectionViewCell.xib */; };
 		FC7B4F041F2E504700970CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7B4F031F2E504700970CFE /* AppDelegate.swift */; };
-		FC7B4F061F2E504700970CFE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7B4F051F2E504700970CFE /* ViewController.swift */; };
 		FC7B4F091F2E504700970CFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7B4F071F2E504700970CFE /* Main.storyboard */; };
 		FC7B4F0B1F2E504700970CFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7B4F0A1F2E504700970CFE /* Assets.xcassets */; };
 		FC7B4F0E1F2E504700970CFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7B4F0C1F2E504700970CFE /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32119CFA4E74804B71EF7094 /* Pods-Thba7.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thba7.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thba7/Pods-Thba7.release.xcconfig"; sourceTree = "<group>"; };
+		7DCABE7E95F210EDD3450D63 /* Pods-Thba7.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thba7.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thba7/Pods-Thba7.debug.xcconfig"; sourceTree = "<group>"; };
+		DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thba7.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC682F4D1F2F9E0F007D5955 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FC7A55641F2F59140039355B /* HomeCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCV.swift; sourceTree = "<group>"; };
+		FC7A55661F2F5A4D0039355B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC7A55671F2F5A4E0039355B /* HomeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC7B4F001F2E504700970CFE /* Thba7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thba7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC7B4F031F2E504700970CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FC7B4F051F2E504700970CFE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FC7B4F081F2E504700970CFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC7B4F0A1F2E504700970CFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC7B4F0D1F2E504700970CFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -29,17 +41,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20B218E991FBAFFB4BFF4F6C /* Pods_Thba7.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		999B496BE1CE2D561D767852 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E852D2F8ABCB0DC4A5366DC6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7DCABE7E95F210EDD3450D63 /* Pods-Thba7.debug.xcconfig */,
+				32119CFA4E74804B71EF7094 /* Pods-Thba7.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FC7A55631F2F58E40039355B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FC7A55641F2F59140039355B /* HomeCV.swift */,
+				FC7A55661F2F5A4D0039355B /* HomeCollectionViewCell.swift */,
+				FC7A55671F2F5A4E0039355B /* HomeCollectionViewCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		FC7B4EF71F2E504700970CFE = {
 			isa = PBXGroup;
 			children = (
 				FC7B4F021F2E504700970CFE /* Thba7 */,
 				FC7B4F011F2E504700970CFE /* Products */,
+				E852D2F8ABCB0DC4A5366DC6 /* Pods */,
+				999B496BE1CE2D561D767852 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,11 +97,13 @@
 			isa = PBXGroup;
 			children = (
 				FC7B4F031F2E504700970CFE /* AppDelegate.swift */,
-				FC7B4F051F2E504700970CFE /* ViewController.swift */,
+				FC7A55631F2F58E40039355B /* Views */,
 				FC7B4F071F2E504700970CFE /* Main.storyboard */,
 				FC7B4F0A1F2E504700970CFE /* Assets.xcassets */,
 				FC7B4F0C1F2E504700970CFE /* LaunchScreen.storyboard */,
 				FC7B4F0F1F2E504700970CFE /* Info.plist */,
+				FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */,
+				FC682F4D1F2F9E0F007D5955 /* Extensions.swift */,
 			);
 			path = Thba7;
 			sourceTree = "<group>";
@@ -71,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC7B4F121F2E504700970CFE /* Build configuration list for PBXNativeTarget "Thba7" */;
 			buildPhases = (
+				CF139C07C15DC129E651F35C /* [CP] Check Pods Manifest.lock */,
 				FC7B4EFC1F2E504700970CFE /* Sources */,
 				FC7B4EFD1F2E504700970CFE /* Frameworks */,
 				FC7B4EFE1F2E504700970CFE /* Resources */,
+				841BBE640D22559D92F33769 /* [CP] Embed Pods Frameworks */,
+				94577B4E51053CE1F963E045 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,7 +171,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7A55691F2F5A4E0039355B /* HomeCollectionViewCell.xib in Resources */,
 				FC7B4F0E1F2E504700970CFE /* LaunchScreen.storyboard in Resources */,
+				FC0DDDF11F2F53AC00B16B2B /* GoogleService-Info.plist in Resources */,
 				FC7B4F0B1F2E504700970CFE /* Assets.xcassets in Resources */,
 				FC7B4F091F2E504700970CFE /* Main.storyboard in Resources */,
 			);
@@ -132,13 +181,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		841BBE640D22559D92F33769 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Thba7/Pods-Thba7-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94577B4E51053CE1F963E045 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Thba7/Pods-Thba7-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF139C07C15DC129E651F35C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FC7B4EFC1F2E504700970CFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC7B4F061F2E504700970CFE /* ViewController.swift in Sources */,
 				FC7B4F041F2E504700970CFE /* AppDelegate.swift in Sources */,
+				FC7A55651F2F59140039355B /* HomeCV.swift in Sources */,
+				FC7A55681F2F5A4E0039355B /* HomeCollectionViewCell.swift in Sources */,
+				FC682F4E1F2F9E0F007D5955 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +358,7 @@
 		};
 		FC7B4F131F2E504700970CFE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DCABE7E95F210EDD3450D63 /* Pods-Thba7.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = K6Q9LJED8Q;
@@ -272,6 +372,7 @@
 		};
 		FC7B4F141F2E504700970CFE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32119CFA4E74804B71EF7094 /* Pods-Thba7.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = K6Q9LJED8Q;
@@ -302,6 +403,7 @@
 				FC7B4F141F2E504700970CFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
