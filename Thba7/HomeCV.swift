@@ -17,19 +17,43 @@ struct DataModel {
 }
 class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    let loader: UIActivityIndicatorView = {
+        let withd = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height
+//        let spinner = UIActivityIndicatorView(frame: CGRect(x: withd / 2, y: height / 2, width: 40, height: 40))
+        let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        spinner.layer.cornerRadius = 3
+        spinner.activityIndicatorViewStyle = .whiteLarge
+        //        spinner.color = .red
+        spinner.backgroundColor = UIColor.darkGray
+        spinner.layer.opacity = 0.5
+//        spinner.hidesWhenStopped = true
+        return spinner
+    }()
+    
     var dataArray = [DataModel]()
     // Firebase Ref
     var ref: DatabaseReference!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView?.addSubview(loader)
+        loader.center = view.center
         view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-        
+        // MARK:- Start Animating loder
+        loader.startAnimating()
+        // End
         ref = Database.database().reference()
+        loadData()
+        // Register cell classes
+        let nib = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
+        self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    func loadData()  {
         ref.child("data").observeSingleEvent(of: .value, with: { (snapshot) in
-            
             // Get values
             print("-----------------------------")
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
@@ -40,17 +64,12 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 self.dataArray.append(model)
             }
             print("-----------------------------")
+            self.loader.stopAnimating()
             self.collectionView?.reloadData()
             
         }) { (error) in
             print(error.localizedDescription)
         }
-        
-        // Register cell classes
-        let nib = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
-        self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        // Do any additional setup after loading the view.
     }
     
     // MARK: UICollectionViewDataSource
@@ -78,6 +97,12 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }
         cell.label.text = dataArray[indexPath.item].label!
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let index = indexPath.item
+        print(dataArray[index].label!)
     }
     
 }

@@ -32,7 +32,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="تيس" translatesAutoresizingMaskIntoConstraints="NO" id="5CD-d9-gBu">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5CD-d9-gBu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDK-W9-Lxe">
@@ -74,10 +74,10 @@
                 <outlet property="image" destination="5CD-d9-gBu" id="xxT-Gs-K1q"/>
                 <outlet property="label" destination="tRI-H8-Bl5" id="fsX-6b-M8y"/>
             </connections>
-            <point key="canvasLocation" x="-59" y="128"/>
+            <point key="canvasLocation" x="-49" y="100"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="تيس" width="900" height="506"/>
+        <image name="logo" width="1504" height="1504"/>
     </resources>
 </document>
