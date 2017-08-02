@@ -22,6 +22,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var ref: DatabaseReference!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
@@ -39,7 +40,6 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 self.dataArray.append(model)
             }
             print("-----------------------------")
-            
             self.collectionView?.reloadData()
             
         }) { (error) in
@@ -52,21 +52,6 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         // Do any additional setup after loading the view.
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     // MARK: UICollectionViewDataSource
     
@@ -87,20 +72,11 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // Configure the cell
         let imageName = dataArray[indexPath.item].image!
         print("dataArray[indexPath.item].image!: \(imageName)")
-        
         if let url = URL.init(string: imageName) {
             print("URL: \(url)")
             cell.image.downloadedFrom(url: url)
         }
-        
         cell.label.text = dataArray[indexPath.item].label!
-        
-        // MARK: - CardView Layout
-//        cell.layer.cornerRadius = 15.0
-//        cell.layer.masksToBounds = false
-//        cell.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-//        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
-//        cell.layer.shadowOpacity = 0.8
         return cell
     }
     
