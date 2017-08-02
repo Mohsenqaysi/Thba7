@@ -33,6 +33,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="gDF-qG-oq2" kind="show" identifier="orderPageVC.Identifier" id="o1H-mA-26j"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -63,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="930.39999999999998" y="-251.42428785607197"/>
         </scene>
-        <!--View Controller-->
+        <!--Order PageVC View Controller-->
         <scene sceneID="i5H-nm-4wr">
             <objects>
-                <viewController id="gDF-qG-oq2" sceneMemberID="viewController">
+                <viewController id="gDF-qG-oq2" customClass="OrderPageVCViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WXb-BQ-v82"/>
                         <viewControllerLayoutGuide type="bottom" id="JVW-we-qVM"/>
@@ -75,8 +78,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-dz-Oqu">
-                                <rect key="frame" x="16" y="64" width="343" height="212"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-dz-Oqu">
+                                <rect key="frame" x="0.0" y="64" width="375" height="212"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

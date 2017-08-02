@@ -29,17 +29,17 @@ extension UIView {
 let imageCaache = NSCache<AnyObject, AnyObject>()
 class CustomImageView: UIImageView {
     var imageUrlString: String?
-
+    
     func loadImageUsingUrl(urlString: String) {
         imageUrlString = urlString
         let url = URL(string: urlString)
         image = nil
         
         if let imageFromCache = imageCaache.object(forKey: urlString as AnyObject) as? UIImage {
-            self.image = imageFromCache 
+            self.image = imageFromCache
             return
         }
-
+        
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, respnse, error) in
             if error != nil {
                 print(error!)
@@ -77,7 +77,7 @@ extension UIImageView {
     }
 }
 
-extension UIImage{
+extension UIImage {
     
     func resizeImageWith(newSize: CGSize) -> UIImage {
         
@@ -91,5 +91,16 @@ extension UIImage{
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
+    }
+}
+
+extension UIView {
+    func viewCardTheme() {
+        // MARK: - CardView Layout
+        self.layer.cornerRadius = 3.0
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowOpacity = 0.8
     }
 }

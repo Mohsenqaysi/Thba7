@@ -70,7 +70,7 @@
             </constraints>
             <size key="customSize" width="318" height="382"/>
             <connections>
-                <outlet property="buyButton" destination="zDK-W9-Lxe" id="pLl-5I-d0a"/>
+                <outlet property="buyButton" destination="zDK-W9-Lxe" id="anw-dJ-lRc"/>
                 <outlet property="image" destination="5CD-d9-gBu" id="xxT-Gs-K1q"/>
                 <outlet property="label" destination="tRI-H8-Bl5" id="fsX-6b-M8y"/>
             </connections>

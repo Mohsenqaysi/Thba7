@@ -15,19 +15,37 @@ struct DataModel {
     let image: String?
     let label: String?
 }
+
+struct Identifires {
+    let orderPageVC: String = "orderPageVC.Identifier"
+}
 class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    
+    
+    //    lazy var palceTheOrder: HomeCollectionViewCell = {
+    //        var order = HomeCollectionViewCell()
+    //        order.homeCV = self
+    //        return order
+    //    }()
+    
+    lazy var palceTheOrder: HomeCollectionViewCell = {
+        let launcher = HomeCollectionViewCell()
+        //        launcher.homeCV = self
+        return launcher
+    }()
     
     let loader: UIActivityIndicatorView = {
         let withd = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height
-//        let spinner = UIActivityIndicatorView(frame: CGRect(x: withd / 2, y: height / 2, width: 40, height: 40))
+        //        let spinner = UIActivityIndicatorView(frame: CGRect(x: withd / 2, y: height / 2, width: 40, height: 40))
         let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         spinner.layer.cornerRadius = 3
         spinner.activityIndicatorViewStyle = .whiteLarge
         //        spinner.color = .red
         spinner.backgroundColor = UIColor.darkGray
         spinner.layer.opacity = 0.5
-//        spinner.hidesWhenStopped = true
+        //        spinner.hidesWhenStopped = true
         return spinner
     }()
     
@@ -96,6 +114,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             cell.image.downloadedFrom(url: url)
         }
         cell.label.text = dataArray[indexPath.item].label!
+        cell.buyButton.addTarget(self, action: #selector(moreToOderVC), for: .touchUpInside)
         return cell
     }
     
@@ -105,4 +124,9 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         print(dataArray[index].label!)
     }
     
+    func moreToOderVC() {
+        print("MoreToOderVC")
+        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
+        
+    }
 }
