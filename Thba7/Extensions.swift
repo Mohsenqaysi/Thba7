@@ -104,3 +104,11 @@ extension UIView {
         self.layer.shadowOpacity = 0.8
     }
 }
+
+// MARK: - UITableView
+extension UICollectionView {
+    func indexPathForCell (view : UIView) -> NSIndexPath? {
+        let location = view.convert(CGPoint.zero, to:self)
+        return indexPathForItem(at: location)! as NSIndexPath
+    }
+}

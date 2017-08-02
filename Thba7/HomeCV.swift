@@ -21,19 +21,7 @@ struct Identifires {
 }
 class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    
-    
-    //    lazy var palceTheOrder: HomeCollectionViewCell = {
-    //        var order = HomeCollectionViewCell()
-    //        order.homeCV = self
-    //        return order
-    //    }()
-    
-    lazy var palceTheOrder: HomeCollectionViewCell = {
-        let launcher = HomeCollectionViewCell()
-        //        launcher.homeCV = self
-        return launcher
-    }()
+    var buyButtoTag: Int?
     
     let loader: UIActivityIndicatorView = {
         let withd = UIScreen.main.bounds.width
@@ -45,7 +33,6 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         //        spinner.color = .red
         spinner.backgroundColor = UIColor.darkGray
         spinner.layer.opacity = 0.5
-        //        spinner.hidesWhenStopped = true
         return spinner
     }()
     
@@ -115,18 +102,33 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }
         cell.label.text = dataArray[indexPath.item].label!
         cell.buyButton.addTarget(self, action: #selector(moreToOderVC), for: .touchUpInside)
+        cell.buyButton.tag = indexPath.item
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let index = indexPath.item
-        print(dataArray[index].label!)
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let index = indexPath.item
+//        print(dataArray[index].label!)
+////        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
+//    }
+    
+    func moreToOderVC(sender:UIButton) {
+        print("MoreToOderVC")
+        buyButtoTag = sender.tag
+        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
     }
     
-    func moreToOderVC() {
-        print("MoreToOderVC")
-        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
-        
+    func getIndexPath(index: Int) -> Int {
+        return index
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "orderPageVC.Identifier" {
+            if let vc = segue.destination as? OrderPageVCViewController {
+                vc.sheepOrderedImage = dataArray[buyButtoTag!].image!
+                // Pass the title
+                vc.title = "\(dataArray[buyButtoTag!].label!)"
+            }
+        }
     }
 }

@@ -16,18 +16,12 @@ class HomeCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         setUpView()
     }
-    
-
-    
     func setUpView(){
         buyButton.backgroundColor = UIColor(red:0.25, green:0.79, blue:0.46, alpha:1.0)
         // MARK: - CardView Layout
         self.viewCardTheme()
         buyButton.viewCardTheme()
     }
-    
-    
 }

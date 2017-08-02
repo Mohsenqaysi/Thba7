@@ -69,7 +69,7 @@
         <!--Order PageVC View Controller-->
         <scene sceneID="i5H-nm-4wr">
             <objects>
-                <viewController id="gDF-qG-oq2" customClass="OrderPageVCViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIStoryboardOrderSegue" id="gDF-qG-oq2" customClass="OrderPageVCViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WXb-BQ-v82"/>
                         <viewControllerLayoutGuide type="bottom" id="JVW-we-qVM"/>
@@ -78,22 +78,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-dz-Oqu">
-                                <rect key="frame" x="0.0" y="64" width="375" height="212"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gJ-XX-z0b">
+                                <rect key="frame" x="16" y="80" width="343" height="196"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-dz-Oqu">
+                                        <rect key="frame" x="8" y="8" width="327" height="180"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Uib-dz-Oqu" firstAttribute="leading" secondItem="5gJ-XX-z0b" secondAttribute="leading" constant="8" id="2my-J5-Skd"/>
+                                    <constraint firstItem="Uib-dz-Oqu" firstAttribute="top" secondItem="5gJ-XX-z0b" secondAttribute="top" constant="8" id="IkZ-NW-wYg"/>
+                                    <constraint firstAttribute="bottom" secondItem="Uib-dz-Oqu" secondAttribute="bottom" constant="8" id="g4O-PO-LHO"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uib-dz-Oqu" secondAttribute="trailing" constant="8" id="sdp-RH-bdG"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="32J-8I-km8">
+                                <rect key="frame" x="16" y="284" width="343" height="326"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellID" rowHeight="55" id="DTZ-a1-oAR" customClass="OrderPageVCCell" customModule="Thba7" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DTZ-a1-oAR" id="IuN-2J-ru9">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="54.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2y5-gD-uOj">
+                                                    <rect key="frame" x="8" y="17" width="327" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="testLabel" destination="2y5-gD-uOj" id="GXk-MU-DFR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="gDF-qG-oq2" id="oeh-Ju-viQ"/>
+                                    <outlet property="delegate" destination="gDF-qG-oq2" id="MYQ-R7-9sO"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JVW-we-qVM" firstAttribute="top" secondItem="Uib-dz-Oqu" secondAttribute="bottom" constant="342" id="4JK-Pp-E9I"/>
-                            <constraint firstItem="Uib-dz-Oqu" firstAttribute="top" secondItem="WXb-BQ-v82" secondAttribute="bottom" id="Tgi-9D-nqF"/>
-                            <constraint firstItem="Uib-dz-Oqu" firstAttribute="trailing" secondItem="K3E-YJ-Y5X" secondAttribute="trailingMargin" id="lGA-E7-QOg"/>
-                            <constraint firstItem="Uib-dz-Oqu" firstAttribute="leading" secondItem="K3E-YJ-Y5X" secondAttribute="leadingMargin" id="par-V2-1Io"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="32J-8I-km8" secondAttribute="leading" id="2Pg-V0-tUB"/>
+                            <constraint firstItem="32J-8I-km8" firstAttribute="top" secondItem="Uib-dz-Oqu" secondAttribute="bottom" constant="16" id="7Jp-9s-5db"/>
+                            <constraint firstItem="JVW-we-qVM" firstAttribute="top" secondItem="32J-8I-km8" secondAttribute="bottom" constant="8" id="Njg-2S-MNf"/>
+                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="top" secondItem="WXb-BQ-v82" secondAttribute="bottom" constant="16" id="QC4-Ke-401"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="32J-8I-km8" secondAttribute="trailing" id="RM7-8W-u0A"/>
+                            <constraint firstItem="JVW-we-qVM" firstAttribute="top" secondItem="5gJ-XX-z0b" secondAttribute="bottom" constant="342" id="dwO-J4-KeK"/>
+                            <constraint firstAttribute="trailing" secondItem="5gJ-XX-z0b" secondAttribute="trailing" constant="16" id="kRf-ex-jge"/>
+                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="leading" secondItem="K3E-YJ-Y5X" secondAttribute="leading" constant="16" id="zf3-iB-hEo"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="SheepImage" destination="Uib-dz-Oqu" id="zq7-8t-cQP"/>
+                        <outlet property="backGroundView" destination="5gJ-XX-z0b" id="oS1-YW-oPy"/>
+                        <outlet property="orderTableView" destination="32J-8I-km8" id="iPS-fi-2Xf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khy-1W-wlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1760.8" y="-251.42428785607197"/>
+            <point key="canvasLocation" x="1702" y="-251"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="ohk-Ra-4yn">
@@ -154,6 +205,5 @@
     </scenes>
     <resources>
         <image name="logo" width="1504" height="1504"/>
-        <image name="test" width="2295" height="1526"/>
     </resources>
 </document>
