@@ -146,7 +146,7 @@
             </objects>
             <point key="canvasLocation" x="1702" y="-251"/>
         </scene>
-        <!--Item 2-->
+        <!--من نحن-->
         <scene sceneID="ohk-Ra-4yn">
             <objects>
                 <viewController id="pFC-7O-1mH" sceneMemberID="viewController">
@@ -159,7 +159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="sGb-LR-rA7"/>
+                    <tabBarItem key="tabBarItem" title="من نحن" image="iconInfo" id="sGb-LR-rA7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zyc-Wk-eHg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -183,11 +183,11 @@
             </objects>
             <point key="canvasLocation" x="-922" y="-19"/>
         </scene>
-        <!--Item-->
+        <!--أطلب-->
         <scene sceneID="FJN-pM-jIH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="afQ-0T-wcK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Ua0-XD-05v"/>
+                    <tabBarItem key="tabBarItem" title="أطلب" image="iconSheep" selectedImage="iconSheep" id="Ua0-XD-05v"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Ve-4b-ign">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -204,6 +204,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iconInfo" width="25" height="25"/>
+        <image name="iconSheep" width="25" height="25"/>
         <image name="logo" width="1504" height="1504"/>
     </resources>
 </document>

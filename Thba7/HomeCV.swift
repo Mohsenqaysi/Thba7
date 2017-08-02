@@ -105,12 +105,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         cell.buyButton.tag = indexPath.item
         return cell
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let index = indexPath.item
-//        print(dataArray[index].label!)
-////        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
-//    }
+
     
     func moreToOderVC(sender:UIButton) {
         print("MoreToOderVC")

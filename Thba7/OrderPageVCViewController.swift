@@ -13,14 +13,13 @@ class OrderPageVCViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var backGroundView: UIView!
     @IBOutlet weak var orderTableView: UITableView!
 
+    var productInfo = ["الكمية","السعر","الدفع","العنوان"]
     let CellID = "CellID"
     var sheepOrderedImage: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(sheepOrderedImage)
-        
-//        orderTableView.delegate = self
+        print(sheepOrderedImage)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,12 +29,12 @@ class OrderPageVCViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return productInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = orderTableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! OrderPageVCCell
-        cell.testLabel.text = "Hi"
+        cell.testLabel.text = productInfo[indexPath.row]
         return cell
     }
 }

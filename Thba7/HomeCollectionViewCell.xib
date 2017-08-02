@@ -23,7 +23,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eF-tY-rbY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="234"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="النوع" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRI-H8-Bl5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="النوع" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRI-H8-Bl5">
                                 <rect key="frame" x="114.5" y="204.5" width="197.5" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tRI-H8-Bl5" secondAttribute="height" multiplier="342:67" constant="86.776119402985074" id="Xix-tT-BBh"/>

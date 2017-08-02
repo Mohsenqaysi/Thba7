@@ -26,37 +26,6 @@ extension UIView {
     }
 }
 
-let imageCaache = NSCache<AnyObject, AnyObject>()
-class CustomImageView: UIImageView {
-    var imageUrlString: String?
-    
-    func loadImageUsingUrl(urlString: String) {
-        imageUrlString = urlString
-        let url = URL(string: urlString)
-        image = nil
-        
-        if let imageFromCache = imageCaache.object(forKey: urlString as AnyObject) as? UIImage {
-            self.image = imageFromCache
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, respnse, error) in
-            if error != nil {
-                print(error!)
-                return
-            }
-            DispatchQueue.main.async {
-                let imageToChache = UIImage(data: data!)
-                
-                if self.imageUrlString == urlString {
-                    self.image = imageToChache
-                }
-                imageCaache.setObject(imageToChache!, forKey: urlString as AnyObject)
-            }
-        }).resume()
-    }
-}
-
 extension UIImageView {
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
@@ -71,26 +40,10 @@ extension UIImageView {
             }
             }.resume()
     }
+    
     func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloadedFrom(url: url, contentMode: mode)
-    }
-}
-
-extension UIImage {
-    
-    func resizeImageWith(newSize: CGSize) -> UIImage {
-        
-        let horizontalRatio = newSize.width / size.width
-        let verticalRatio = newSize.height / size.height
-        
-        let ratio = max(horizontalRatio, verticalRatio)
-        let newSize = CGSize(width: size.width * ratio, height: size.height * ratio)
-        UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
-        draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
     }
 }
 
@@ -105,10 +58,3 @@ extension UIView {
     }
 }
 
-// MARK: - UITableView
-extension UICollectionView {
-    func indexPathForCell (view : UIView) -> NSIndexPath? {
-        let location = view.convert(CGPoint.zero, to:self)
-        return indexPathForItem(at: location)! as NSIndexPath
-    }
-}
