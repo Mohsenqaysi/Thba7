@@ -22,6 +22,7 @@ class MapVC: UIViewController {
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
+    var marker = GMSMarker()
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 18.0
     
@@ -64,9 +65,7 @@ class MapVC: UIViewController {
     
     func creaMarker(mapView: GMSMapView, lat: CLLocationDegrees, long: CLLocationDegrees) {
         // Creates a marker in the center of the map.
-        let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat , longitude: long)
-        marker.isDraggable = true
         if let name = nearestPlaceArray.first?.name , let address = nearestPlaceArray.first?.address {
             marker.title = name
             marker.snippet = address
@@ -123,6 +122,7 @@ extension MapVC: CLLocationManagerDelegate {
             }
             if let lat = self.locationManager.location?.coordinate.latitude, let long = self.locationManager.location?.coordinate.longitude {
                 print("Current location: \(lat) and \(long)")
+//                self.marker.map = nil
                 self.creaMarker(mapView: self.mapView, lat: lat , long: long)
             }
         })
