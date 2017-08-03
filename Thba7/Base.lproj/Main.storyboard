@@ -14,7 +14,7 @@
         <scene sceneID="8wL-bc-ndM">
             <objects>
                 <collectionViewController id="zyT-yd-CJe" customClass="HomeCV" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="O1s-cO-ocn">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="O1s-cO-ocn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -149,7 +149,7 @@
         <!--من نحن-->
         <scene sceneID="ohk-Ra-4yn">
             <objects>
-                <viewController id="pFC-7O-1mH" sceneMemberID="viewController">
+                <viewController id="pFC-7O-1mH" customClass="MapVC" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xcj-Jk-QvW"/>
                         <viewControllerLayoutGuide type="bottom" id="hPN-qQ-alG"/>
@@ -189,7 +189,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="afQ-0T-wcK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="أطلب" image="iconSheep" selectedImage="iconSheep" id="Ua0-XD-05v"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Ve-4b-ign">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Ve-4b-ign">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
