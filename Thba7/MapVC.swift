@@ -10,6 +10,13 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
+struct NearestPlace {
+    let name: String?
+    let address: String?
+    let likelihood: Double?
+    let coordinate: CLLocationCoordinate2D?
+}
+
 class MapVC: UIViewController {
     
     var locationManager = CLLocationManager()
@@ -20,7 +27,7 @@ class MapVC: UIViewController {
     
     /* List of places */
     // An array to hold the list of likely places.
-    var listLikelyPlaces: [GMSPlace] = []
+    var nearestPlaceArray: [NearestPlace] = []
     // The currently selected place.
     var selectedPlace: GMSPlace?
     
@@ -35,10 +42,10 @@ class MapVC: UIViewController {
         locationManager.delegate = self
         
         placesClient = GMSPlacesClient.shared()
-        
-        //        let camera = GMSCameraPosition.camera(withLatitude: defaultLocation.coordinate.latitude,
-        //                                              longitude: defaultLocation.coordinate.longitude,
-        //                                              zoom: zoomLevel)
+        createMap()
+    }
+    
+    func createMap() {
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
@@ -48,22 +55,10 @@ class MapVC: UIViewController {
         // Add the map to the view, hide it until we've got a location update.
         view.addSubview(mapView)
         mapView.isHidden = true
-//        print("Current location: \(e) and \(locationManager.location?.coordinate.longitude)")
-        
-        if let lat = locationManager.location?.coordinate.latitude, let long = locationManager.location?.coordinate.longitude {
-            creaMarker(mapView: mapView, lat: lat , long: long)
-        }
-    }
-    
-    func createMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: zoomLevel)
-        mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
-        mapView.settings.myLocationButton = true
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //mapView.isMyLocationEnabled = true
-        
-        // Add the map to the view, hide it until we've got a location update.
-        view.addSubview(mapView)
+        //        if let lat = locationManager.location?.coordinate.latitude, let long = locationManager.location?.coordinate.longitude {
+        //            print("Current location: \(lat) and \(long)")
+        //            creaMarker(mapView: mapView, lat: lat , long: long)
+        //        }
         mapView.isHidden = true
     }
     
@@ -71,11 +66,13 @@ class MapVC: UIViewController {
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat , longitude: long)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        marker.isDraggable = true
+        if let name = nearestPlaceArray.first?.name , let address = nearestPlaceArray.first?.address {
+            marker.title = name
+            marker.snippet = address
+        }
         marker.map = mapView
     }
-    
 }
 
 extension MapVC: CLLocationManagerDelegate {
@@ -88,7 +85,6 @@ extension MapVC: CLLocationManagerDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: zoomLevel)
-        
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
@@ -96,30 +92,41 @@ extension MapVC: CLLocationManagerDelegate {
             mapView.animate(to: camera)
         }
         // Populate the array with the list of likely places.
-        
         likelyPlaces()
     }
     
     // Populate the array with the list of likely places.
     func likelyPlaces() {
         // Clean up from previous sessions.
-        listLikelyPlaces.removeAll()
         
-        placesClient.currentPlace(callback: { (placeLikelihoods, error) -> Void in
+        nearestPlaceArray.removeAll()
+        placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
             if let error = error {
-                // TODO: Handle the error.
-                print("Current Place error: \(error.localizedDescription)")
+                print("Pick Place error: \(error.localizedDescription)")
                 return
             }
             
-            // Get likely places and add to the list.
-            if let likelihoodList = placeLikelihoods {
-                for likelihood in likelihoodList.likelihoods {
-                    let place = likelihood.place
-                    self.listLikelyPlaces.append(place)
+            if let placeLikelihoodList = placeLikelihoodList {
+                let place = placeLikelihoodList.likelihoods.first?.place
+                if let place = place {
+                    let likely = placeLikelihoodList.likelihoods.first?.likelihood
+                    self.nearestPlaceArray.append(NearestPlace(name: place.name, address: place.formattedAddress, likelihood: likely , coordinate: place.coordinate))
+                    
+                    print("---------------------------------")
+                    print("Current Place name \(place.name)")
+                    print("Current Coordinate \(place.coordinate)")
+                    print("Current Place address \(String(describing: place.formattedAddress!))")
+                    print("Current Place attributions \(String(describing: place.attributions))")
+                    print("Current PlaceID \(place.placeID)")
+                    print("---------------------------------")
                 }
             }
+            if let lat = self.locationManager.location?.coordinate.latitude, let long = self.locationManager.location?.coordinate.longitude {
+                print("Current location: \(lat) and \(long)")
+                self.creaMarker(mapView: self.mapView, lat: lat , long: long)
+            }
         })
+        
     }
     
     // Handle authorization for the location manager.
