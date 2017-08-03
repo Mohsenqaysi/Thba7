@@ -100,6 +100,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             print("URL: \(url)")
             cell.image.downloadedFrom(url: url)
         }
+        
         cell.label.text = dataArray[indexPath.item].label!
         cell.buyButton.addTarget(self, action: #selector(moreToOderVC), for: .touchUpInside)
         cell.buyButton.tag = indexPath.item

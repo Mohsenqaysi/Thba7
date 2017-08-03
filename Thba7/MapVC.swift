@@ -52,15 +52,14 @@ class MapVC: UIViewController {
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.isMyLocationEnabled = true
-        
+        mapView.isHidden = true
+
         // Add the map to the view, hide it until we've got a location update.
         view.addSubview(mapView)
-        mapView.isHidden = true
-        //        if let lat = locationManager.location?.coordinate.latitude, let long = locationManager.location?.coordinate.longitude {
-        //            print("Current location: \(lat) and \(long)")
-        //            creaMarker(mapView: mapView, lat: lat , long: long)
-        //        }
-        mapView.isHidden = true
+        
+       _ = mapView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+
+//        mapView.addConstraint(NSLayoutConstraint(item: mapView, attribute: .bottomMargin, relatedBy: .equal, toItem: view, attribute: .bottomMargin, multiplier: 1, constant: 30))
     }
     
     func creaMarker(mapView: GMSMapView, lat: CLLocationDegrees, long: CLLocationDegrees) {
