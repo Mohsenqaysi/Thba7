@@ -29,10 +29,13 @@ class OrderPageVCViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         backGroundView.viewCardTheme()
-//        let url = URL(string: sheepOrderedImage)!
-//        imageView.kf.indicatorType = .activity
-//        SheepImage.kf.indicatorType = .activity
-//        SheepImage.kf.setImage(with: url)
+        let url = URL(string: sheepOrderedImage)!
+        SheepImage.kf.indicatorType = .activity
+        SheepImage.kf.setImage(with: url)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

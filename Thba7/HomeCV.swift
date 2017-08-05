@@ -12,6 +12,8 @@ import Kingfisher
 
 private let reuseIdentifier = "Cell"
 private let noConnectionColor: UIColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
+private let withd = UIScreen.main.bounds.width
+private let height = UIScreen.main.bounds.height
 
 struct DataModel {
     let image: String?
@@ -25,17 +27,22 @@ struct Identifires {
 class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var buyButtoTag: Int?
-
-//    var noView = NoInternetConnectVC(frame: CGRect(x: 0, y: 0, width: 300, height: 400))
+    
+    let loderStatusLabel: UILabel = {
+        let lb = UILabel() //frame: CGRect(x: 0, y: 0, width: withd/3, height: 100))
+        lb.text = "جاري التحميل..."
+        lb.textAlignment = .center
+        lb.textColor = .white
+        lb.font = UIFont.boldSystemFont(ofSize: 18)
+        return lb
+    }()
     
     let loader: UIActivityIndicatorView = {
-        let withd = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height
-        let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        let spinner = UIActivityIndicatorView()//frame: CGRect(x: 0, y: 0, width: withd/3, height: 400))
         spinner.layer.cornerRadius = 3
         spinner.activityIndicatorViewStyle = .whiteLarge
         spinner.backgroundColor = UIColor.darkGray
-        spinner.layer.opacity = 0.5
+        spinner.layer.opacity = 0.9
         return spinner
     }()
     
@@ -48,13 +55,24 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         if Bool().isInternetAvailable() {
             collectionView?.addSubview(loader)
-            loader.center = view.center
+ 
             view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
             // MARK:- Start Animating loder
             loader.startAnimating()
             // End
+            // MARK: add loderStatusLabel to the Loder indecator
+            loader.insertSubview(loderStatusLabel, aboveSubview: loader)
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+
+            // add constraint to loderStatusLabel
+            _ = loader.anchor(nil, left: nil, bottom: nil, right: nil, topConstant: height/4, leftConstant: withd/4, bottomConstant: height/4, rightConstant: withd/4, widthConstant: 150, heightConstant: 80)
+            
+            _ = loderStatusLabel.anchor(nil, left: loader.leftAnchor, bottom: loader.bottomAnchor, right: loader.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            
             ref = Database.database().reference()
             loadData()
+            
             // Register cell classes
             let nib = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
             self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)

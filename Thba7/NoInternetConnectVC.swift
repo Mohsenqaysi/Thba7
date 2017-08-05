@@ -11,7 +11,6 @@ import UIKit
 class NoInternetConnectVC: UIView {
     private let noConnectionColor: UIColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
     
-//    let MainViewFrame: 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpNoConnectionViews()
