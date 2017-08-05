@@ -127,6 +127,7 @@ extension MapVC: CLLocationManagerDelegate {
                 let place = placeLikelihoodList.likelihoods.first?.place
                 if let place = place {
                     let likely = placeLikelihoodList.likelihoods.first?.likelihood
+                    // Add data to the array
                     self.nearestPlaceArray.append(NearestPlace(name: place.name, address: place.formattedAddress, likelihood: likely , coordinate: place.coordinate))
                     
                     print("---------------------------------")
@@ -140,7 +141,6 @@ extension MapVC: CLLocationManagerDelegate {
             }
             if let lat = self.locationManager.location?.coordinate.latitude, let long = self.locationManager.location?.coordinate.longitude {
                 print("Current location: \(lat) and \(long)")
-                //                self.marker.map = nil
                 self.creaMarker(mapView: self.mapView, lat: lat , long: long)
             }
         })

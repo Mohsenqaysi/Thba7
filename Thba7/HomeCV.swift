@@ -52,10 +52,13 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadMainView()
+    }
+    
+    func loadMainView(){
         
         if Bool().isInternetAvailable() {
             collectionView?.addSubview(loader)
- 
             view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
             // MARK:- Start Animating loder
             loader.startAnimating()
@@ -64,13 +67,14 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             loader.insertSubview(loderStatusLabel, aboveSubview: loader)
             loader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             loader.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-
+            
             // add constraint to loderStatusLabel
             _ = loader.anchor(nil, left: nil, bottom: nil, right: nil, topConstant: height/4, leftConstant: withd/4, bottomConstant: height/4, rightConstant: withd/4, widthConstant: 150, heightConstant: 80)
             
             _ = loderStatusLabel.anchor(nil, left: loader.leftAnchor, bottom: loader.bottomAnchor, right: loader.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
             ref = Database.database().reference()
+            //MARK:- Load the data into the collectionTable
             loadData()
             
             // Register cell classes
@@ -103,6 +107,25 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             print(error.localizedDescription)
         }
     }
+
+    func moreToOderVC(sender:UIButton) {
+        print("MoreToOderVC")
+        buyButtoTag = sender.tag
+        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "orderPageVC.Identifier" {
+            if let vc = segue.destination as? OrderPageVCViewController {
+                vc.sheepOrderedImage = dataArray[buyButtoTag!].image!
+                // Pass the title
+                vc.title = "\(dataArray[buyButtoTag!].label!)"
+            }
+        }
+    }
+}
+
+extension HomeCV {
     
     // MARK: UICollectionViewDataSource
     
@@ -127,36 +150,11 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             print("URL: \(url)")
             cell.image.kf.indicatorType = .activity
             cell.image.kf.setImage(with: url)
-            
-            //            let resource = ImageResource(downloadURL: url, cacheKey: "my_cache_key")
-            //            cell.image.kf.setImage(with: resource)
-            
         }
         
         cell.label.text = dataArray[indexPath.item].label!
         cell.buyButton.addTarget(self, action: #selector(moreToOderVC), for: .touchUpInside)
         cell.buyButton.tag = indexPath.item
         return cell
-    }
-    
-    
-    func moreToOderVC(sender:UIButton) {
-        print("MoreToOderVC")
-        buyButtoTag = sender.tag
-        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
-    }
-    
-    func getIndexPath(index: Int) -> Int {
-        return index
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "orderPageVC.Identifier" {
-            if let vc = segue.destination as? OrderPageVCViewController {
-                vc.sheepOrderedImage = dataArray[buyButtoTag!].image!
-                // Pass the title
-                vc.title = "\(dataArray[buyButtoTag!].label!)"
-            }
-        }
     }
 }
