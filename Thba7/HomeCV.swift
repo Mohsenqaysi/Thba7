@@ -8,8 +8,10 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 private let reuseIdentifier = "Cell"
+private let noConnectionColor: UIColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
 
 struct DataModel {
     let image: String?
@@ -26,11 +28,9 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let loader: UIActivityIndicatorView = {
         let withd = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height
-        //        let spinner = UIActivityIndicatorView(frame: CGRect(x: withd / 2, y: height / 2, width: 40, height: 40))
         let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         spinner.layer.cornerRadius = 3
         spinner.activityIndicatorViewStyle = .whiteLarge
-        //        spinner.color = .red
         spinner.backgroundColor = UIColor.darkGray
         spinner.layer.opacity = 0.5
         return spinner
@@ -42,19 +42,57 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.addSubview(loader)
-        loader.center = view.center
-        view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-        // MARK:- Start Animating loder
-        loader.startAnimating()
-        // End
-        ref = Database.database().reference()
-        loadData()
-        // Register cell classes
-        let nib = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
-        self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        if Bool().isInternetAvailable() {
+            collectionView?.addSubview(loader)
+            loader.center = view.center
+            view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
+            // MARK:- Start Animating loder
+            loader.startAnimating()
+            // End
+            ref = Database.database().reference()
+            loadData()
+            // Register cell classes
+            let nib = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
+            self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        } else {
+            loader.stopAnimating()
+            print("Sorry no internet connection")
+            setUpNoConnectionViews()
+        }
+    }
+    
+    lazy var noConnnectionBlankView: UIView = {
+        let blankView = UIView()
+        blankView.frame = self.view.frame
+        blankView.backgroundColor = noConnectionColor
+        return blankView
+    }()
+    let noConnnectionImageView: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "noConnection")
+        return image
+    }()
+    
+    let noConnnectionBText: UITextField = {
+        let text = UITextField()
+        text.isEnabled = false
+        text.text = "Sorry No Connection"
+        text.font = UIFont.boldSystemFont(ofSize: 24)
+        text.textAlignment = .center
+        text.textColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+        return text
+    }()
+    
+    func setUpNoConnectionViews() {
+        view.addSubview(noConnnectionBlankView)
+        noConnnectionBlankView.addSubview(noConnnectionImageView)
+        noConnnectionBlankView.addSubview(noConnnectionBText)
         
-        // Do any additional setup after loading the view.
+        let height = UIScreen.main.bounds.size.height / 3
+        noConnnectionImageView.anchorWithConstantsToTop(noConnnectionBlankView.topAnchor, left: noConnnectionBlankView.leftAnchor, bottom: nil, right: noConnnectionBlankView.rightAnchor, topConstant: height, leftConstant: 16, bottomConstant: 16, rightConstant: 16)
+        
+        noConnnectionBText.anchorWithConstantsToTop(noConnnectionImageView.bottomAnchor, left: noConnnectionBlankView.leftAnchor, bottom: nil, right: noConnnectionBlankView.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
     }
     
     func loadData()  {
@@ -98,7 +136,12 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         print("dataArray[indexPath.item].image!: \(imageName)")
         if let url = URL.init(string: imageName) {
             print("URL: \(url)")
-            cell.image.downloadedFrom(url: url)
+            cell.image.kf.indicatorType = .activity
+            cell.image.kf.setImage(with: url)
+            
+            //            let resource = ImageResource(downloadURL: url, cacheKey: "my_cache_key")
+            //            cell.image.kf.setImage(with: resource)
+            
         }
         
         cell.label.text = dataArray[indexPath.item].label!
@@ -106,7 +149,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         cell.buyButton.tag = indexPath.item
         return cell
     }
-
+    
     
     func moreToOderVC(sender:UIButton) {
         print("MoreToOderVC")

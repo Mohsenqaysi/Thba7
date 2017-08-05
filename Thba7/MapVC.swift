@@ -19,6 +19,23 @@ struct NearestPlace {
 
 class MapVC: UIViewController {
     
+    let getMyCurrentLocationButton: UIButton = {
+        let width = UIScreen.main.bounds.width
+        let frame = CGRect(x: 0, y: 0, width: width, height: 200)
+        let bnt = UIButton(type: UIButtonType.system)
+        bnt.setTitle("هذا مكاني", for: UIControlState.normal)
+        bnt.titleLabel!.font =  UIFont.boldSystemFont(ofSize: 20)
+        bnt.setTitleColor(UIColor.white, for: UIControlState.normal)
+        bnt.backgroundColor = .red
+        bnt.addTarget(self, action: #selector(handelCurrentLocation), for: .touchUpInside)
+        bnt.viewCardTheme()
+        return bnt
+    }()
+    
+    func handelCurrentLocation() {
+        print(123)
+    }
+    
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
@@ -53,13 +70,14 @@ class MapVC: UIViewController {
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.isMyLocationEnabled = true
         mapView.isHidden = true
-
+        
         // Add the map to the view, hide it until we've got a location update.
         view.addSubview(mapView)
-        
-       _ = mapView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-
-//        mapView.addConstraint(NSLayoutConstraint(item: mapView, attribute: .bottomMargin, relatedBy: .equal, toItem: view, attribute: .bottomMargin, multiplier: 1, constant: 30))
+        view.addSubview(getMyCurrentLocationButton)
+        let tabBarHeigh = self.tabBarController?.tabBar.frame.size.height
+        _ = mapView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: (tabBarHeigh! * 2), rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        print("tabBarHeigh: \(tabBarHeigh!)")
+         _ = getMyCurrentLocationButton.anchor(mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: tabBarHeigh!, rightConstant: 0, widthConstant: 0, heightConstant: tabBarHeigh!)
     }
     
     func creaMarker(mapView: GMSMapView, lat: CLLocationDegrees, long: CLLocationDegrees) {
@@ -121,11 +139,10 @@ extension MapVC: CLLocationManagerDelegate {
             }
             if let lat = self.locationManager.location?.coordinate.latitude, let long = self.locationManager.location?.coordinate.longitude {
                 print("Current location: \(lat) and \(long)")
-//                self.marker.map = nil
+                //                self.marker.map = nil
                 self.creaMarker(mapView: self.mapView, lat: lat , long: long)
             }
         })
-        
     }
     
     // Handle authorization for the location manager.

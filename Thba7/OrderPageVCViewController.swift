@@ -19,13 +19,20 @@ class OrderPageVCViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(sheepOrderedImage)        
+        print(sheepOrderedImage)
+        let url = URL(string: sheepOrderedImage)!
+
+        SheepImage.kf.indicatorType = .activity
+        SheepImage.kf.setImage(with: url)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         backGroundView.viewCardTheme()
-        SheepImage.downloadedFrom(link: sheepOrderedImage)
+//        let url = URL(string: sheepOrderedImage)!
+//        imageView.kf.indicatorType = .activity
+//        SheepImage.kf.indicatorType = .activity
+//        SheepImage.kf.setImage(with: url)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
