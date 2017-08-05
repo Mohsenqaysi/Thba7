@@ -21,9 +21,12 @@ struct DataModel {
 struct Identifires {
     let orderPageVC: String = "orderPageVC.Identifier"
 }
+
 class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var buyButtoTag: Int?
+
+//    var noView = NoInternetConnectVC(frame: CGRect(x: 0, y: 0, width: 300, height: 400))
     
     let loader: UIActivityIndicatorView = {
         let withd = UIScreen.main.bounds.width
@@ -42,6 +45,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if Bool().isInternetAvailable() {
             collectionView?.addSubview(loader)
             loader.center = view.center
@@ -57,42 +61,9 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         } else {
             loader.stopAnimating()
             print("Sorry no internet connection")
-            setUpNoConnectionViews()
+            let noView = NoInternetConnectVC(frame: view.frame)
+            view.addSubview(noView)
         }
-    }
-    
-    lazy var noConnnectionBlankView: UIView = {
-        let blankView = UIView()
-        blankView.frame = self.view.frame
-        blankView.backgroundColor = noConnectionColor
-        return blankView
-    }()
-    let noConnnectionImageView: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        image.contentMode = .scaleAspectFit
-        image.image = UIImage(named: "noConnection")
-        return image
-    }()
-    
-    let noConnnectionBText: UITextField = {
-        let text = UITextField()
-        text.isEnabled = false
-        text.text = "Sorry No Connection"
-        text.font = UIFont.boldSystemFont(ofSize: 24)
-        text.textAlignment = .center
-        text.textColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
-        return text
-    }()
-    
-    func setUpNoConnectionViews() {
-        view.addSubview(noConnnectionBlankView)
-        noConnnectionBlankView.addSubview(noConnnectionImageView)
-        noConnnectionBlankView.addSubview(noConnnectionBText)
-        
-        let height = UIScreen.main.bounds.size.height / 3
-        noConnnectionImageView.anchorWithConstantsToTop(noConnnectionBlankView.topAnchor, left: noConnnectionBlankView.leftAnchor, bottom: nil, right: noConnnectionBlankView.rightAnchor, topConstant: height, leftConstant: 16, bottomConstant: 16, rightConstant: 16)
-        
-        noConnnectionBText.anchorWithConstantsToTop(noConnnectionImageView.bottomAnchor, left: noConnnectionBlankView.leftAnchor, bottom: nil, right: noConnnectionBlankView.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
     }
     
     func loadData()  {
