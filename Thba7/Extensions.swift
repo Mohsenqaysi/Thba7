@@ -10,6 +10,18 @@ import UIKit
 import Foundation
 import SystemConfiguration
 
+
+extension CGFloat {
+    
+    func getScreenWidth() -> CGFloat {
+        return UIScreen.main.bounds.width
+    }
+    
+    func getScreenHeight() -> CGFloat {
+        return UIScreen.main.bounds.height
+    }
+}
+
 extension UIColor {
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)

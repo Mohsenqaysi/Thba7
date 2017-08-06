@@ -18,7 +18,6 @@ struct NearestPlace {
 }
 
 class MapVC: UIViewController {
-    
     let getMyCurrentLocationButton: UIButton = {
         let width = UIScreen.main.bounds.width
         let frame = CGRect(x: 0, y: 0, width: width, height: 200)
@@ -33,7 +32,9 @@ class MapVC: UIViewController {
     }()
     
     func handelCurrentLocation() {
-        print(123)
+        print("going back to HomeCV...")
+        currentLocation = self.locationManager.location
+        self.performSegue(withIdentifier: "unwindTohomeCV", sender: self)
     }
     
     var locationManager = CLLocationManager()
@@ -78,7 +79,7 @@ class MapVC: UIViewController {
         let tabBarHeigh = self.tabBarController?.tabBar.frame.size.height
         _ = mapView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: (tabBarHeigh! * 2), rightConstant: 0, widthConstant: 0, heightConstant: 0)
         print("tabBarHeigh: \(tabBarHeigh!)")
-         _ = getMyCurrentLocationButton.anchor(mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: tabBarHeigh!, rightConstant: 0, widthConstant: 0, heightConstant: tabBarHeigh!)
+        _ = getMyCurrentLocationButton.anchor(mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: tabBarHeigh!, rightConstant: 0, widthConstant: 0, heightConstant: tabBarHeigh!)
     }
     
     func creaMarker(mapView: GMSMapView, lat: CLLocationDegrees, long: CLLocationDegrees) {
@@ -128,6 +129,7 @@ extension MapVC: CLLocationManagerDelegate {
                 if let place = place {
                     let likely = placeLikelihoodList.likelihoods.first?.likelihood
                     // Add data to the array
+                    
                     self.nearestPlaceArray.append(NearestPlace(name: place.name, address: place.formattedAddress, likelihood: likely , coordinate: place.coordinate))
                     
                     print("---------------------------------")

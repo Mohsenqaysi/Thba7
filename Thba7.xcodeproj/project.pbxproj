@@ -110,7 +110,7 @@
 				FC7B4F031F2E504700970CFE /* AppDelegate.swift */,
 				FC9AC5A41F35513A0001D464 /* Helpper */,
 				FC7A55631F2F58E40039355B /* Controllers */,
-				FC9AC5A51F3551530001D464 /* Contrllers */,
+				FC9AC5A51F3551530001D464 /* Views */,
 				FC7B4F0A1F2E504700970CFE /* Assets.xcassets */,
 				FC7B4F0C1F2E504700970CFE /* LaunchScreen.storyboard */,
 				FC7B4F0F1F2E504700970CFE /* Info.plist */,
@@ -127,13 +127,13 @@
 			name = Helpper;
 			sourceTree = "<group>";
 		};
-		FC9AC5A51F3551530001D464 /* Contrllers */ = {
+		FC9AC5A51F3551530001D464 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				FC7A55671F2F5A4E0039355B /* HomeCollectionViewCell.xib */,
 				FC7B4F071F2E504700970CFE /* Main.storyboard */,
 			);
-			name = Contrllers;
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

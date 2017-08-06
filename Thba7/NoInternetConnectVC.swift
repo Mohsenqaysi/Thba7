@@ -50,7 +50,6 @@ class NoInternetConnectVC: UIView {
         
         let height = UIScreen.main.bounds.size.height / 3
         noConnnectionImageView.anchorWithConstantsToTop(noConnnectionBlankView.topAnchor, left: noConnnectionBlankView.leftAnchor, bottom: nil, right: noConnnectionBlankView.rightAnchor, topConstant: height, leftConstant: 16, bottomConstant: 16, rightConstant: 16)
-        
         noConnnectionBText.anchorWithConstantsToTop(noConnnectionImageView.bottomAnchor, left: noConnnectionBlankView.leftAnchor, bottom: nil, right: noConnnectionBlankView.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
     }
     

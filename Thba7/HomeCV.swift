@@ -10,21 +10,18 @@ import UIKit
 import Firebase
 import Kingfisher
 
-private let reuseIdentifier = "Cell"
-private let noConnectionColor: UIColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
-private let withd = UIScreen.main.bounds.width
-private let height = UIScreen.main.bounds.height
-
 struct DataModel {
     let image: String?
     let label: String?
 }
 
-struct Identifires {
-    let orderPageVC: String = "orderPageVC.Identifier"
+private struct Identifiers {
+    static let homeVCCell: String = "HomeVCCell"
+    static let segueOrderPageVCIdentifier: String = "orderPageVC.Identifier"
 }
 
 class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
     
     var buyButtoTag: Int?
     
@@ -56,20 +53,20 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     func loadMainView(){
-        
         if Bool().isInternetAvailable() {
             collectionView?.addSubview(loader)
             view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
             // MARK:- Start Animating loder
             loader.startAnimating()
-            // End
             // MARK: add loderStatusLabel to the Loder indecator
             loader.insertSubview(loderStatusLabel, aboveSubview: loader)
             loader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             loader.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
             
             // add constraint to loderStatusLabel
-            _ = loader.anchor(nil, left: nil, bottom: nil, right: nil, topConstant: height/4, leftConstant: withd/4, bottomConstant: height/4, rightConstant: withd/4, widthConstant: 150, heightConstant: 80)
+            let w = CGFloat().getScreenWidth()
+            let h =  CGFloat().getScreenHeight()
+            _ = loader.anchor(nil, left: nil, bottom: nil, right: nil, topConstant: h/4, leftConstant: w/4, bottomConstant: h/4, rightConstant: w/4, widthConstant: 150, heightConstant: 80)
             
             _ = loderStatusLabel.anchor(nil, left: loader.leftAnchor, bottom: loader.bottomAnchor, right: loader.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
@@ -79,7 +76,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             
             // Register cell classes
             let nib = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
-            self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+            self.collectionView?.register(nib, forCellWithReuseIdentifier: Identifiers.homeVCCell)
         } else {
             loader.stopAnimating()
             print("Sorry no internet connection")
@@ -107,20 +104,30 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             print(error.localizedDescription)
         }
     }
-
+    
     func moreToOderVC(sender:UIButton) {
         print("MoreToOderVC")
         buyButtoTag = sender.tag
-        self.performSegue(withIdentifier: "orderPageVC.Identifier" , sender: nil)
+        self.performSegue(withIdentifier: Identifiers.segueOrderPageVCIdentifier , sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "orderPageVC.Identifier" {
+        if segue.identifier == Identifiers.segueOrderPageVCIdentifier {
             if let vc = segue.destination as? OrderPageVCViewController {
                 vc.sheepOrderedImage = dataArray[buyButtoTag!].image!
+                let backItem = UIBarButtonItem()
+                backItem.title = "رجوع"
+                navigationItem.backBarButtonItem = backItem
                 // Pass the title
                 vc.title = "\(dataArray[buyButtoTag!].label!)"
             }
+        }
+    }
+    
+    @IBAction func unwindToContainerVC(segue: UIStoryboardSegue) {
+        print("I am back...")
+        if let location = segue.source as? MapVC {
+            print("Current location is: \(location.currentLocation?.coordinate)")
         }
     }
 }
@@ -130,18 +137,15 @@ extension HomeCV {
     // MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #wardataArraymplete implementation, return the number of items
         return dataArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.homeVCCell, for: indexPath) as! HomeCollectionViewCell
         
         // Configure the cell
         let imageName = dataArray[indexPath.item].image!
