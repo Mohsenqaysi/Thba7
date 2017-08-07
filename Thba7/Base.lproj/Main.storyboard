@@ -89,25 +89,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3so-uz-Rof">
-                                <rect key="frame" x="16" y="548" width="343" height="62"/>
-                                <color key="backgroundColor" red="0.21807739160592843" green="1" blue="0.50864074589785169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="wk8-3r-Y33"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <state key="normal" title="أشتري الأن">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="tfp-vK-FgY" kind="show" identifier="segueUserInfoPageVC.ientifier" id="ban-NH-8R8"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="CellID" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6qw-3g-4vI">
                                 <rect key="frame" x="16" y="318" width="343" height="222"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="222" id="xUm-Zo-3md"/>
+                                    <constraint firstAttribute="height" constant="222" id="olk-rr-pbv"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pfv-z5-IHv">
                                     <size key="itemSize" width="343" height="68"/>
@@ -179,19 +165,55 @@
                                     <outlet property="delegate" destination="gDF-qG-oq2" id="0Fu-MA-L8d"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPn-WC-veD">
+                                <rect key="frame" x="16" y="548" width="343" height="62"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3so-uz-Rof">
+                                        <rect key="frame" x="188" y="0.0" width="162" height="62"/>
+                                        <color key="backgroundColor" red="0.21807739160592843" green="1" blue="0.50864074589785169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="162" id="Vww-ZI-lNt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <state key="normal" title="أشتري الأن">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="tfp-vK-FgY" kind="show" identifier="segueUserInfoPageVC.ientifier" id="ban-NH-8R8"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="8lb-Hg-v46">
+                                        <rect key="frame" x="8" y="8" width="172" height="46"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="8lb-Hg-v46" firstAttribute="top" secondItem="CPn-WC-veD" secondAttribute="topMargin" id="AvL-jR-2mh"/>
+                                    <constraint firstAttribute="bottom" secondItem="3so-uz-Rof" secondAttribute="bottom" id="GvB-F7-aHt"/>
+                                    <constraint firstItem="8lb-Hg-v46" firstAttribute="centerY" secondItem="3so-uz-Rof" secondAttribute="centerY" id="SlH-5f-rXH"/>
+                                    <constraint firstItem="8lb-Hg-v46" firstAttribute="leading" secondItem="CPn-WC-veD" secondAttribute="leadingMargin" id="a0N-7i-u0K"/>
+                                    <constraint firstItem="3so-uz-Rof" firstAttribute="leading" secondItem="8lb-Hg-v46" secondAttribute="trailing" constant="8" symbolic="YES" id="gQz-Py-aHd"/>
+                                    <constraint firstItem="3so-uz-Rof" firstAttribute="top" secondItem="CPn-WC-veD" secondAttribute="top" id="ovR-xR-dBW"/>
+                                    <constraint firstAttribute="trailing" secondItem="3so-uz-Rof" secondAttribute="trailing" constant="-7" id="yeI-9E-4pn"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6qw-3g-4vI" firstAttribute="top" secondItem="5gJ-XX-z0b" secondAttribute="bottom" constant="8" symbolic="YES" id="5UA-3m-SB4"/>
-                            <constraint firstItem="JVW-we-qVM" firstAttribute="top" secondItem="3so-uz-Rof" secondAttribute="bottom" constant="8" symbolic="YES" id="Ajj-6X-o7f"/>
-                            <constraint firstItem="3so-uz-Rof" firstAttribute="leading" secondItem="K3E-YJ-Y5X" secondAttribute="leading" constant="16" id="FHD-XG-abA"/>
-                            <constraint firstItem="3so-uz-Rof" firstAttribute="top" secondItem="6qw-3g-4vI" secondAttribute="bottom" constant="8" symbolic="YES" id="N8R-MG-qKz"/>
-                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="leading" secondItem="6qw-3g-4vI" secondAttribute="leading" id="OEB-oQ-yOw"/>
-                            <constraint firstItem="6qw-3g-4vI" firstAttribute="trailing" secondItem="3so-uz-Rof" secondAttribute="trailing" id="Wh5-5o-OZw"/>
-                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="leading" secondItem="K3E-YJ-Y5X" secondAttribute="leadingMargin" id="YTr-MQ-ndI"/>
-                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="top" secondItem="WXb-BQ-v82" secondAttribute="bottom" constant="8" symbolic="YES" id="fLY-uq-LRd"/>
-                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="trailing" secondItem="K3E-YJ-Y5X" secondAttribute="trailingMargin" id="vSK-YS-HP4"/>
-                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="trailing" secondItem="6qw-3g-4vI" secondAttribute="trailing" id="yCk-JG-snR"/>
+                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="trailing" secondItem="6qw-3g-4vI" secondAttribute="trailing" id="46q-IF-qHH"/>
+                            <constraint firstItem="CPn-WC-veD" firstAttribute="top" secondItem="6qw-3g-4vI" secondAttribute="bottom" constant="8" symbolic="YES" id="7W6-1R-iAo"/>
+                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="leading" secondItem="6qw-3g-4vI" secondAttribute="leading" id="9ba-kb-Z9E"/>
+                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="trailing" secondItem="K3E-YJ-Y5X" secondAttribute="trailingMargin" id="F10-55-aX5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CPn-WC-veD" secondAttribute="trailing" id="KKP-iY-Crw"/>
+                            <constraint firstItem="6qw-3g-4vI" firstAttribute="leading" secondItem="CPn-WC-veD" secondAttribute="leading" id="MEc-AF-hNG"/>
+                            <constraint firstItem="JVW-we-qVM" firstAttribute="top" secondItem="CPn-WC-veD" secondAttribute="bottom" constant="8" symbolic="YES" id="QNd-Ou-a0U"/>
+                            <constraint firstItem="6qw-3g-4vI" firstAttribute="top" secondItem="5gJ-XX-z0b" secondAttribute="bottom" constant="8" symbolic="YES" id="SGK-wv-Kmd"/>
+                            <constraint firstItem="6qw-3g-4vI" firstAttribute="top" secondItem="K3E-YJ-Y5X" secondAttribute="top" constant="318" id="azr-N5-bXw"/>
+                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="leading" secondItem="K3E-YJ-Y5X" secondAttribute="leadingMargin" id="gxB-mY-jPq"/>
+                            <constraint firstItem="5gJ-XX-z0b" firstAttribute="top" secondItem="WXb-BQ-v82" secondAttribute="bottom" constant="8" symbolic="YES" id="hDx-IE-Zbo"/>
                         </constraints>
                     </view>
                     <connections>
@@ -199,11 +221,13 @@
                         <outlet property="backGroundView" destination="5gJ-XX-z0b" id="oS1-YW-oPy"/>
                         <outlet property="buyNowButton" destination="3so-uz-Rof" id="7Lk-Yy-FkR"/>
                         <outlet property="productInfoTBV" destination="6qw-3g-4vI" id="pIP-W6-7oL"/>
+                        <outlet property="totalCostLabel" destination="8lb-Hg-v46" id="nKM-dI-QAa"/>
+                        <outlet property="viewUnderBuyButton" destination="CPn-WC-veD" id="ziJ-zU-dbZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khy-1W-wlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1510" y="-252"/>
+            <point key="canvasLocation" x="1509.5999999999999" y="-252.32383808095955"/>
         </scene>
         <!--User Info PageVC-->
         <scene sceneID="TXT-aL-KHM">

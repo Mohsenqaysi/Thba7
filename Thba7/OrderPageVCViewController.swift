@@ -20,37 +20,35 @@ private struct Identifiers {
     static let segueUserInfoPageVCIdentifier: String = "segueUserInfoPageVC.ientifier"
 }
 
-//
-//struct OrderInfo {
-//    var animaleImage: UIImageView?
-//    var animaleNameOrdered: String?
-//    var size: String?
-//    var cutType: String?
-//    var countity: String?
-//}
-
 class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var SheepImage: UIImageView!
     @IBOutlet weak var backGroundView: UIView!
     @IBOutlet weak var productInfoTBV: UICollectionView!
     @IBOutlet weak var buyNowButton: UIButton!
+    @IBOutlet weak var totalCostLabel: UILabel!
+    @IBOutlet weak var viewUnderBuyButton: UIView!
     
-    var productInfo = [customCellData(name: "الحجم", image: #imageLiteral(resourceName: "arrow")),
-                       customCellData(name: "التقطيع", image: #imageLiteral(resourceName: "basket")),
-                       customCellData(name: "الكمية", image: #imageLiteral(resourceName: "menu"))]
+    //MARK: Order instans
+    let userOrder = Order()
     var sheepOrderedImage: String = ""
     var animaleName: String = ""
     var animleImage: AnyObject?
-    //    var placedOrder = [OrderInfo]()
+    
+    var productInfo = [customCellData(name: "الحجم", image: #imageLiteral(resourceName: "iconSheep")),
+                       customCellData(name: "التقطيع", image: #imageLiteral(resourceName: "cut")),
+                       customCellData(name: "الكمية", image: #imageLiteral(resourceName: "quantity"))]
+    
     var choosesArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.placedOrder.append(OrderInfo(countity: animaleName))
+        // Get the sheep name
+        self.userOrder.name = animaleName
         productInfoTBV.delegate = self
         productInfoTBV.viewCardTheme()
-        buyNowButton.viewCardTheme()
+        buyNowButton.viewCardThemeWithCornerRadius(radius: 0)
+        viewUnderBuyButton.viewCardTheme()
         buyNowButton.backgroundColor = UIColor(red:0.25, green:0.79, blue:0.46, alpha:1.0)
         productInfoTBV.isScrollEnabled = false
         loadData()
@@ -59,13 +57,15 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     // MARK: Segue to the userInfo VC
     func handelBuyButton(){
         if !choosesArray.isEmpty {
-//            print(choosesArray)
+            if let info = userOrder.getOrderInfo() {
+                print(info)
+            }
         } else {
             print("Place fill in the form fully")
         }
     }
     
-    // MARK: Perper for segue 
+    // MARK: Perper for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.segueUserInfoPageVCIdentifier {
             if let vc = segue.destination as? UserInfoPageVC {
@@ -83,7 +83,7 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
         let url = URL(string: sheepOrderedImage)!
         SheepImage.kf.indicatorType = .activity
         SheepImage.kf.setImage(with: url)
-
+        
         // set the height of the TBV
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
@@ -92,6 +92,8 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        //        choosesArray.removeAll()
+        enbaleBuyButton()
         backGroundView.viewCardTheme()
         let url = URL(string: sheepOrderedImage)!
         SheepImage.kf.indicatorType = .activity
@@ -118,10 +120,13 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         let cell = self.productInfoTBV.cellForItem(at: indexPath) as! OrderPageVCCell
         
         if indexPath.row == 0 {
-            StringPickerPopover(title: "أختر الحجم", choices: ["خروف لباني 650","خروف وسط 850","خروف كبير 1000"])
+            StringPickerPopover(title: "أختر الحجم", choices: ["خروف صغير","خروف وسط","خروف كبير"])
                 .setSize(width: 250.0, height: 200.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
+                    self.userOrder.size = selectedString
+                    self.userOrder.sizeIndex = selectedRow
+                    self.setTheCostLabel()
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -134,6 +139,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 .setSize(width: 250.0, height: 200.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
+                    self.userOrder.cutTypee = selectedString
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -146,6 +152,8 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 .setSize(width: 250.0, height: 200.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
+                    self.userOrder.quantity = selectedString
+                    self.setTheCostLabel()
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -174,11 +182,41 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         if choosesArray.count == 3 {
             buyNowButton.isEnabled = true
             buyNowButton.layer.opacity = 1.0
+//            viewUnderBuyButton.layer.opacity = 1.0
             print(choosesArray)
         } else {
             buyNowButton.isEnabled = false
             buyNowButton.layer.opacity = 0.5
+//            viewUnderBuyButton.layer.opacity = 0.5
             print(choosesArray)
+        }
+    }
+    
+    //Mark: Pick the price
+    // get the type
+    // use the index to gte the price
+    // update the label
+    // ["خروف صغير 650","خروف وسط 850","خروف كبير 1000"]
+    
+    func setTheCostLabel() {
+        guard let index = userOrder.sizeIndex, userOrder.sizeIndex != nil else {
+            return
+        }
+        guard let quantity =  Int(self.userOrder.quantity!), Int(self.userOrder.quantity!) != nil else {
+            return
+        }
+        
+        //        if let index = userOrder.sizeIndex, let quantity = Int(self.userOrder.quantity!) {
+        print(index)
+        switch index {
+        case 0:
+            self.totalCostLabel.text = "\(quantity * 650) ريال"
+        case 1:
+            self.totalCostLabel.text = "\(quantity * 850) ريال"
+        case 2:
+            self.totalCostLabel.text = "\(quantity * 1000) ريال"
+        default:
+            self.totalCostLabel.text = ""
         }
     }
 }
