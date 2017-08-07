@@ -112,6 +112,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
         if segue.identifier == Identifiers.segueOrderPageVCIdentifier {
             if let vc = segue.destination as? OrderPageVCViewController {
                 vc.sheepOrderedImage = dataArray[buyButtoTag!].image!
@@ -119,7 +120,9 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 backItem.title = "رجوع"
                 navigationItem.backBarButtonItem = backItem
                 // Pass the title
-                vc.title = "\(dataArray[buyButtoTag!].label!)"
+                let animalType = dataArray[buyButtoTag!].label!
+                vc.title = animalType
+                vc.animaleName = animalType
             }
         }
     }
@@ -127,7 +130,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @IBAction func unwindToContainerVC(segue: UIStoryboardSegue) {
         print("I am back...")
         if let location = segue.source as? MapVC {
-            print("Current location is: \(location.currentLocation?.coordinate)")
+            print("Current location is: \(String(describing: location.currentLocation?.coordinate))")
         }
     }
 }

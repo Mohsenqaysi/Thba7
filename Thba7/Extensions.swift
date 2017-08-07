@@ -12,7 +12,6 @@ import SystemConfiguration
 
 
 extension CGFloat {
-    
     func getScreenWidth() -> CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -72,6 +71,16 @@ extension UIView {
     }
 }
 
+extension UIView {
+    func viewCardThemeWithCornerRadius(radius: CGFloat) {
+        // MARK: - CardView Layout
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowOpacity = 0.8
+    }
+}
 extension UIView {
     
     func anchorToTop(_

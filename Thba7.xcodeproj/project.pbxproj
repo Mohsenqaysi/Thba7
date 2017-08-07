@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		20B218E991FBAFFB4BFF4F6C /* Pods_Thba7.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */; };
 		FC0DDDF11F2F53AC00B16B2B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */; };
+		FC169A1A1F3764E900756314 /* OrderPageVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC169A191F3764E900756314 /* OrderPageVCCell.swift */; };
 		FC682F4E1F2F9E0F007D5955 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC682F4D1F2F9E0F007D5955 /* Extensions.swift */; };
 		FC73F6DE1F33464900008767 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73F6DD1F33464900008767 /* MapVC.swift */; };
 		FC7A55651F2F59140039355B /* HomeCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A55641F2F59140039355B /* HomeCV.swift */; };
@@ -20,7 +21,7 @@
 		FC7B4F0E1F2E504700970CFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7B4F0C1F2E504700970CFE /* LaunchScreen.storyboard */; };
 		FC9AC5A31F354C470001D464 /* NoInternetConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */; };
 		FCC456741F3232C200C24D79 /* OrderPageVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */; };
-		FCC456761F32545900C24D79 /* OrderPageVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC456751F32545900C24D79 /* OrderPageVCCell.swift */; };
+		FCEDDC0A1F38A17F00571E82 /* UserInfoPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDDC091F38A17F00571E82 /* UserInfoPageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		7DCABE7E95F210EDD3450D63 /* Pods-Thba7.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thba7.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thba7/Pods-Thba7.debug.xcconfig"; sourceTree = "<group>"; };
 		DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thba7.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC169A191F3764E900756314 /* OrderPageVCCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPageVCCell.swift; sourceTree = "<group>"; };
 		FC682F4D1F2F9E0F007D5955 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FC73F6DD1F33464900008767 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		FC7A55641F2F59140039355B /* HomeCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCV.swift; sourceTree = "<group>"; };
@@ -41,7 +43,7 @@
 		FC7B4F0F1F2E504700970CFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoInternetConnectVC.swift; sourceTree = "<group>"; };
 		FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPageVCViewController.swift; sourceTree = "<group>"; };
-		FCC456751F32545900C24D79 /* OrderPageVCCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPageVCCell.swift; sourceTree = "<group>"; };
+		FCEDDC091F38A17F00571E82 /* UserInfoPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoPageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +81,9 @@
 				FC7A55641F2F59140039355B /* HomeCV.swift */,
 				FC7A55661F2F5A4D0039355B /* HomeCollectionViewCell.swift */,
 				FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */,
-				FCC456751F32545900C24D79 /* OrderPageVCCell.swift */,
+				FC169A191F3764E900756314 /* OrderPageVCCell.swift */,
 				FC73F6DD1F33464900008767 /* MapVC.swift */,
-				FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */,
+				FCEDDC091F38A17F00571E82 /* UserInfoPageVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				FC682F4D1F2F9E0F007D5955 /* Extensions.swift */,
+				FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */,
 			);
 			name = Helpper;
 			sourceTree = "<group>";
@@ -264,9 +267,10 @@
 			files = (
 				FC7B4F041F2E504700970CFE /* AppDelegate.swift in Sources */,
 				FC7A55651F2F59140039355B /* HomeCV.swift in Sources */,
-				FCC456761F32545900C24D79 /* OrderPageVCCell.swift in Sources */,
+				FC169A1A1F3764E900756314 /* OrderPageVCCell.swift in Sources */,
 				FC7A55681F2F5A4E0039355B /* HomeCollectionViewCell.swift in Sources */,
 				FC73F6DE1F33464900008767 /* MapVC.swift in Sources */,
+				FCEDDC0A1F38A17F00571E82 /* UserInfoPageVC.swift in Sources */,
 				FC9AC5A31F354C470001D464 /* NoInternetConnectVC.swift in Sources */,
 				FC682F4E1F2F9E0F007D5955 /* Extensions.swift in Sources */,
 				FCC456741F3232C200C24D79 /* OrderPageVCViewController.swift in Sources */,

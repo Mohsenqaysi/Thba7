@@ -27,7 +27,7 @@ class MapVC: UIViewController {
         bnt.setTitleColor(UIColor.white, for: UIControlState.normal)
         bnt.backgroundColor = .red
         bnt.addTarget(self, action: #selector(handelCurrentLocation), for: .touchUpInside)
-        bnt.viewCardTheme()
+        bnt.viewCardThemeWithCornerRadius(radius: 0)
         return bnt
     }()
     
@@ -63,8 +63,22 @@ class MapVC: UIViewController {
         
         placesClient = GMSPlacesClient.shared()
         createMap()
+        
+//        self.mapView.settings.consumesGesturesInView = false
+//        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panRecognition))
+//        view.addGestureRecognizer(panGestureRecognizer)
     }
     
+//    func panRecognition(recognizer: UIPanGestureRecognizer) {
+//        if marker.isDraggable {
+//            let markerPosition = mapView.projection.point(for: marker.position)
+//            let translation = recognizer.translation(in: view)
+//            recognizer.setTranslation(.zero, in: view)
+//            let newPosition = CGPoint(x: markerPosition.x + translation.x, y: markerPosition.y + translation.y)
+//            marker.position = mapView.projection.coordinate(for: newPosition)
+//        }
+//    }
+//    
     func createMap() {
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
