@@ -25,11 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Services Key
         GMSServices.provideAPIKey("AIzaSyDEbT85P2Fu1WeVRRkYpj3yX5-nmNu6lgM")
         // Places Key
-        GMSPlacesClient.provideAPIKey("AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo")
-        var preferredStatusBarStyle: UIStatusBarStyle {
-            return .lightContent
-        }
-        
+        GMSPlacesClient.provideAPIKey("AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo")        
         return true
     }
     
