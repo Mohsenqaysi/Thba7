@@ -15,7 +15,7 @@
         <scene sceneID="8wL-bc-ndM">
             <objects>
                 <collectionViewController id="zyT-yd-CJe" customClass="HomeCV" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="O1s-cO-ocn">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="O1s-cO-ocn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -82,7 +82,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gJ-XX-z0b">
                                 <rect key="frame" x="16" y="72" width="343" height="238"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-dz-Oqu">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-dz-Oqu">
                                         <rect key="frame" x="5" y="5" width="333" height="228"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -294,7 +294,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="afQ-0T-wcK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="أطلب" image="iconSheep" selectedImage="iconSheep" id="Ua0-XD-05v"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Ve-4b-ign">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Ve-4b-ign">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

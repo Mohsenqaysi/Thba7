@@ -24,10 +24,9 @@ struct ConstrucURL {
     }
     func getNearByURL() -> String {
         var url: String! = ""
-   
-//        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=21.5014766075092,39.1828934848309&radius=10&&key=AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo"
+
         if let lat = lat, let long = long, let key = key {
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(lat),\(long)&radius=10&key=\(key)"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&language=ar&location=\(lat),\(long)&radius=80&key=\(key)"
         }
         return url
     }
@@ -35,22 +34,23 @@ struct ConstrucURL {
     func getGecodeURL() -> String {
         var url: String! = ""
         if let lat = lat, let long = long, let key = key {
-            url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)&key=\(key)"
+            url = "https://maps.googleapis.com/maps/api/geocode/json?&language=ar&latlng=\(lat),\(long)&key=\(key)"
         }
         return url
     }
 }
-struct CurrentLocatioData {
-    let locationAddress: String?
-    let placeID: String?
+
+struct LikelyHoodsLocationsData {
+    let nearByPlace: String!
+    let locationAddress: String!
+    let latLng: Geometry!
 }
 
-struct Type{
-    let route = "route"
-    let street = "street_address"
-    let locality = "locality"
-    let political = "political"
+struct Geometry {
+    let lat: String!
+    let lng : String!
 }
+
 class MapVC: UIViewController, GMSMapViewDelegate {
     
     let key = "AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo"
@@ -61,7 +61,8 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     var zoomLevel: Float = 15.0
     var placesClient: GMSPlacesClient!
     
-    var currentLocatioData: CurrentLocatioData? = nil
+    var likelyHoodsLocationsData: LikelyHoodsLocationsData? = nil
+    var LikelyHoodsLocationsDataArray = [LikelyHoodsLocationsData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,12 +71,10 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
-        locationManager.distanceFilter = 50
+        locationManager.distanceFilter = 30
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
-        
         placesClient = GMSPlacesClient.shared()
-        
         createMap()
         
         /*
@@ -84,7 +83,6 @@ class MapVC: UIViewController, GMSMapViewDelegate {
          let circleView = CustomMarker()
          view.addSubview(circleView)
          //        view.bringSubview(toFront: circleView)
-         
          circleView.translatesAutoresizingMaskIntoConstraints = false
          let heightConstraint = NSLayoutConstraint(item: circleView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
          let widthConstraint = NSLayoutConstraint(item: circleView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
@@ -156,10 +154,10 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         //MARK: Update the currentLocation realTime
         currentLocation = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
     }
-    
-    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-        print("Long tap - new location: \(coordinate.latitude) \(coordinate.longitude)")
-        self.creaMarker(mapView: mapView, coordinates: coordinate, title: nil, subtitle: nil)
+
+    func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
+        marker.title = "I was draged"
+        fetchNearestPlaceAroundCoordinate(coordinates: currentLocation!)
     }
     
     // MARK: Handel JSON data
@@ -174,8 +172,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
                 if let address = results?["formatted_address"].stringValue, let placeID = results?["place_id"].stringValue {
                     print("Address: \(address)")
                     print("ID: \(placeID)")
-                    self.currentLocatioData = CurrentLocatioData(locationAddress: address, placeID: placeID)
-                    self.likelyPlace(coordinates: coordinates)
+                    self.likelyPlace(address: address, coordinates: coordinates)
                 }
             case .failure(let error):
                 print(error)
@@ -183,26 +180,41 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    func likelyPlace(coordinates: CLLocationCoordinate2D){
-        let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getNearByURL();       print("requestURL: \(requestURL)")
-        
+    func likelyPlace(address: String, coordinates: CLLocationCoordinate2D){
+        let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getNearByURL();
+//        print("requestURL: \(requestURL)")
+        //MARK: clear the array
+        self.LikelyHoodsLocationsDataArray.removeAll()
         Alamofire.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-//                print(json)
                 let results = json["results"].arrayValue
                 for result in results {
                     let types = result["types"].arrayValue
                     for type in types {
                         if type != "route" && type != "locality" && type != "political" && type != "street" {
                             print(type)
-                            let locationName = result["name"].stringValue
-                            let vicinity = result["vicinity"].stringValue
-                            print("locationName: \(locationName)")
-                            print("vicinity: \(vicinity)")
+                            let nearByPlace = result["name"].stringValue
+                            let city = result["vicinity"].stringValue
+                            print("-------------------------------")
+                            print("locationName: \(nearByPlace)")
+                            print("vicinity: \(city)")
+                            let location = result["geometry"]["location"]
+                            let lat = location["lat"].stringValue
+                            let lng = location["lng"].stringValue
+                            print("location: \(lat) and \(lng)")
+                            print("-------------------------------")
+                            
+                            self.marker.title = nearByPlace
+                            self.marker.snippet = city
+                            let geometyLocation = Geometry(lat: lat, lng: lng)
+                            self.likelyHoodsLocationsData = LikelyHoodsLocationsData(nearByPlace: nearByPlace, locationAddress: address, latLng: geometyLocation)
+                            self.LikelyHoodsLocationsDataArray.append(self.likelyHoodsLocationsData!)
                         }
                     }
+                    print(self.LikelyHoodsLocationsDataArray.count)
+                    print(self.LikelyHoodsLocationsDataArray)
                 }
             case .failure(let error):
                 print(error)
@@ -234,31 +246,8 @@ extension MapVC: CLLocationManagerDelegate {
     // Populate the array with the list of likely places.
     
     func likelyPlaces() {
-        // Clean up from previous sessions.
-        placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
-            if let error = error {
-                print("Pick Place error: \(error.localizedDescription)")
-                return
-            }
-            
-            if let placeLikelihoodList = placeLikelihoodList {
-                let place = placeLikelihoodList.likelihoods.first?.place
-                if let place = place {
-                    let likely = placeLikelihoodList.likelihoods.first?.likelihood
-                    
-                    print("---------------------------------")
-                    print("Current Place name \(place.name) with likleyhood of: \(String(describing: likely))")
-                    print("Current Coordinate \(place.coordinate)")
-                    print("Current Place address \(String(describing: place.formattedAddress!))")
-                    print("Current Place attributions \(String(describing: place.attributions))")
-                    print("Current PlaceID \(place.placeID)")
-                    print("---------------------------------")
-                }
-            }
-        })
+    
     }
-    
-    
     // Handle authorization for the location manager.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
