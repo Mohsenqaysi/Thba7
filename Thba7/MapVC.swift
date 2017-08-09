@@ -24,9 +24,9 @@ struct ConstrucURL {
     }
     func getNearByURL() -> String {
         var url: String! = ""
-
+        
         if let lat = lat, let long = long, let key = key {
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&language=ar&location=\(lat),\(long)&radius=80&key=\(key)"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&language=ar&location=\(lat),\(long)&radius=50&key=\(key)"
         }
         return url
     }
@@ -62,7 +62,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     var placesClient: GMSPlacesClient!
     
     var likelyHoodsLocationsData: LikelyHoodsLocationsData? = nil
-    var LikelyHoodsLocationsDataArray = [LikelyHoodsLocationsData]()
+    var likelyHoodsLocationsDataArray = [LikelyHoodsLocationsData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +154,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         //MARK: Update the currentLocation realTime
         currentLocation = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
     }
-
+    
     func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
         marker.title = "I was draged"
         fetchNearestPlaceAroundCoordinate(coordinates: currentLocation!)
@@ -182,9 +182,9 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     
     func likelyPlace(address: String, coordinates: CLLocationCoordinate2D){
         let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getNearByURL();
-//        print("requestURL: \(requestURL)")
+        //        print("requestURL: \(requestURL)")
         //MARK: clear the array
-        self.LikelyHoodsLocationsDataArray.removeAll()
+        self.likelyHoodsLocationsDataArray.removeAll()
         Alamofire.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -210,11 +210,11 @@ class MapVC: UIViewController, GMSMapViewDelegate {
                             self.marker.snippet = city
                             let geometyLocation = Geometry(lat: lat, lng: lng)
                             self.likelyHoodsLocationsData = LikelyHoodsLocationsData(nearByPlace: nearByPlace, locationAddress: address, latLng: geometyLocation)
-                            self.LikelyHoodsLocationsDataArray.append(self.likelyHoodsLocationsData!)
+                            self.likelyHoodsLocationsDataArray.append(self.likelyHoodsLocationsData!)
                         }
                     }
-                    print(self.LikelyHoodsLocationsDataArray.count)
-                    print(self.LikelyHoodsLocationsDataArray)
+                    self.likelyPlaces(likelyHoodArray: self.likelyHoodsLocationsDataArray)
+                    
                 }
             case .failure(let error):
                 print(error)
@@ -245,9 +245,24 @@ extension MapVC: CLLocationManagerDelegate {
     
     // Populate the array with the list of likely places.
     
-    func likelyPlaces() {
-    
+    func likelyPlaces(likelyHoodArray: [LikelyHoodsLocationsData]) {
+        print("------------------------------")
+        print("OLD - likelyPlaces: ")
+        print(self.likelyHoodsLocationsDataArray.count)
+        print(likelyHoodArray)
+        print("------------------------------")
+        //        let filteredArray =
+        print("------------------------------")
+        print("NEW- likelyPlaces: ")
+        let newArray = Array<LikelyHoodsLocationsData>().removeDublicate(places: likelyHoodArray)
+        for place in newArray {
+            print(place.nearByPlace)
+        }
+        print(newArray.count)
+        print(newArray)
+        print("------------------------------")
     }
+
     // Handle authorization for the location manager.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -271,3 +286,27 @@ extension MapVC: CLLocationManagerDelegate {
         print("Error: \(error)")
     }
 }
+
+extension Array {
+    
+    func removeDublicate (places: [LikelyHoodsLocationsData]) -> [LikelyHoodsLocationsData] {
+        var newSet = [LikelyHoodsLocationsData]()
+        var temp = [String]()
+        for i in places.enumerated() {
+            if temp.contains(i.element.nearByPlace) {
+                //                print("Alreay Exists in the array")
+            } else {
+                temp.append(i.element.nearByPlace)
+                newSet.append(i.element)
+            }
+        }
+        return newSet
+    }
+
+}
+
+
+
+
+
+
