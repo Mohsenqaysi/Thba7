@@ -20,6 +20,7 @@
 		FC7B4F091F2E504700970CFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7B4F071F2E504700970CFE /* Main.storyboard */; };
 		FC7B4F0B1F2E504700970CFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7B4F0A1F2E504700970CFE /* Assets.xcassets */; };
 		FC7B4F0E1F2E504700970CFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7B4F0C1F2E504700970CFE /* LaunchScreen.storyboard */; };
+		FC99DC101F3B78E80013A4B7 /* PickedPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99DC0F1F3B78E80013A4B7 /* PickedPlacesVC.swift */; };
 		FC9AC5A31F354C470001D464 /* NoInternetConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */; };
 		FCA7C5C01F39179E00B75915 /* CustomMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7C5BF1F39179E00B75915 /* CustomMarker.swift */; };
 		FCC456741F3232C200C24D79 /* OrderPageVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */; };
@@ -44,6 +45,7 @@
 		FC7B4F0A1F2E504700970CFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC7B4F0D1F2E504700970CFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC7B4F0F1F2E504700970CFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC99DC0F1F3B78E80013A4B7 /* PickedPlacesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedPlacesVC.swift; sourceTree = "<group>"; };
 		FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoInternetConnectVC.swift; sourceTree = "<group>"; };
 		FCA7C5BF1F39179E00B75915 /* CustomMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMarker.swift; sourceTree = "<group>"; };
 		FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPageVCViewController.swift; sourceTree = "<group>"; };
@@ -95,8 +97,8 @@
 				FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */,
 				FC169A191F3764E900756314 /* OrderPageVCCell.swift */,
 				FC73F6DD1F33464900008767 /* MapVC.swift */,
-				FCA7C5BF1F39179E00B75915 /* CustomMarker.swift */,
 				FCEDDC091F38A17F00571E82 /* UserInfoPageVC.swift */,
+				FC99DC0F1F3B78E80013A4B7 /* PickedPlacesVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -140,6 +142,7 @@
 			children = (
 				FC682F4D1F2F9E0F007D5955 /* Extensions.swift */,
 				FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */,
+				FCA7C5BF1F39179E00B75915 /* CustomMarker.swift */,
 			);
 			name = Helpper;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC99DC101F3B78E80013A4B7 /* PickedPlacesVC.swift in Sources */,
 				FC7B4F041F2E504700970CFE /* AppDelegate.swift in Sources */,
 				FC7A55651F2F59140039355B /* HomeCV.swift in Sources */,
 				FC5E9EEC1F38DEFA0049F810 /* Order.swift in Sources */,

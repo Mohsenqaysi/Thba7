@@ -53,6 +53,7 @@ struct Geometry {
 
 class MapVC: UIViewController, GMSMapViewDelegate {
     
+//    let vc = PickNearestPlaceTVC()
     let key = "AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo"
     var mapView: GMSMapView!
     var currentLocation: CLLocationCoordinate2D?
@@ -63,6 +64,8 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     
     var likelyHoodsLocationsData: LikelyHoodsLocationsData? = nil
     var likelyHoodsLocationsDataArray = [LikelyHoodsLocationsData]()
+    var filteredData = [LikelyHoodsLocationsData]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +99,26 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     
     override func didReceiveMemoryWarning() {
         print("To much memory useage...")
+    }
+    
+    @IBAction func showNearBy(_ sender: UIBarButtonItem) {
+        
+        performSegue(withIdentifier: "placesID", sender: self)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "placesID" {
+            if let vc = segue.destination as? PickedPlacesVC {
+                vc.likelyPlacesTableDataArray = filteredData
+                let backItem = UIBarButtonItem()
+                backItem.title = "رجوع"
+                navigationItem.backBarButtonItem = backItem
+                // Pass the title
+                vc.title = "أختر المكان الأقرب لك"
+            }
+        }
     }
     
     let getMyCurrentLocationButton: UIButton = {
@@ -180,6 +203,20 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         }
     }
     
+    @IBAction func unwindToContainerVC(segue: UIStoryboardSegue) {
+        print("I am back... form unwind Call")
+        if let location = segue.source as? PickedPlacesVC {
+            //            print("Current location is: \(String(describing: location.currentLocation?.coordinate))")
+            print("Current location is: \(String(describing: location.nearestPickedPlaceByUser?.nearByPlace))")
+            let lat = Double((location.nearestPickedPlaceByUser?.latLng.lat)!)
+            let lng =  Double((location.nearestPickedPlaceByUser?.latLng.lng)!)
+            let pickedLocation = CLLocationCoordinate2D(latitude: lat!, longitude: lng!)
+            let title = location.nearestPickedPlaceByUser?.nearByPlace
+            let subtitle = location.nearestPickedPlaceByUser?.locationAddress
+            self.creaMarker(mapView: mapView, coordinates: pickedLocation ,title:title , subtitle: subtitle)
+        }
+    }
+    
     func likelyPlace(address: String, coordinates: CLLocationCoordinate2D){
         let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getNearByURL();
         //        print("requestURL: \(requestURL)")
@@ -225,42 +262,46 @@ class MapVC: UIViewController, GMSMapViewDelegate {
 
 extension MapVC: CLLocationManagerDelegate {
     
-    // Handle incoming location events.
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.last!
-        print("Location: \(location)")
-        
-        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                              longitude: location.coordinate.longitude,
-                                              zoom: zoomLevel)
-        if mapView.isHidden {
-            mapView.isHidden = false
-            mapView.camera = camera
-        } else {
-            mapView.animate(to: camera)
-        }
-        // Populate the array with the list of likely places.
-        //        likelyPlaces()
-    }
+//    // Handle incoming location events.
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        let location: CLLocation = locations.last!
+//        print("Location: \(location)")
+//        
+//        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+//                                              longitude: location.coordinate.longitude,
+//                                              zoom: zoomLevel)
+//        if mapView.isHidden {
+//            mapView.isHidden = false
+//            mapView.camera = camera
+//        } else {
+//            mapView.animate(to: camera)
+//        }
+//        // Populate the array with the list of likely places.
+//        //        likelyPlaces()
+//    }
     
     // Populate the array with the list of likely places.
     
     func likelyPlaces(likelyHoodArray: [LikelyHoodsLocationsData]) {
-        print("------------------------------")
-        print("OLD - likelyPlaces: ")
-        print(self.likelyHoodsLocationsDataArray.count)
-        print(likelyHoodArray)
-        print("------------------------------")
-        //        let filteredArray =
-        print("------------------------------")
-        print("NEW- likelyPlaces: ")
+//        print("------------------------------")
+//        print("OLD - likelyPlaces: ")
+//        print(self.likelyHoodsLocationsDataArray.count)
+//        print(likelyHoodArray)
+//        print("------------------------------")
+//        //        let filteredArray =
+//        print("------------------------------")
+//        print("NEW- likelyPlaces: ")
         let newArray = Array<LikelyHoodsLocationsData>().removeDublicate(places: likelyHoodArray)
+        filteredData = newArray
         for place in newArray {
             print(place.nearByPlace)
         }
         print(newArray.count)
         print(newArray)
         print("------------------------------")
+        
+//        vc.likelyPlacesTableDataArray = filteredData
+//        self.present(vc, animated: true, completion: nil)
     }
 
     // Handle authorization for the location manager.

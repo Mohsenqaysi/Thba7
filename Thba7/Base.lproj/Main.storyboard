@@ -15,7 +15,7 @@
         <scene sceneID="8wL-bc-ndM">
             <objects>
                 <collectionViewController id="zyT-yd-CJe" customClass="HomeCV" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="O1s-cO-ocn">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="O1s-cO-ocn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -227,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khy-1W-wlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1509.5999999999999" y="-252.32383808095955"/>
+            <point key="canvasLocation" x="1681" y="-252"/>
         </scene>
         <!--User Info PageVC-->
         <scene sceneID="TXT-aL-KHM">
@@ -245,9 +245,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQC-Ng-Ug4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2295" y="-251"/>
+            <point key="canvasLocation" x="2535" y="-252"/>
         </scene>
-        <!--من نحن-->
+        <!--MapVC-->
         <scene sceneID="ohk-Ra-4yn">
             <objects>
                 <viewController id="pFC-7O-1mH" customClass="MapVC" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
@@ -260,15 +260,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="من نحن" image="iconInfo" id="sGb-LR-rA7"/>
-                    <connections>
-                        <segue destination="eeL-BI-lYM" kind="unwind" identifier="unwindTohomeCV" unwindAction="unwindToContainerVCWithSegue:" id="sKq-61-Q4k"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="fPe-CH-suB">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="PkX-lJ-xvX">
+                            <connections>
+                                <action selector="showNearBy:" destination="pFC-7O-1mH" id="iaO-1J-P7V"/>
+                                <segue destination="1S7-En-qPm" kind="show" identifier="placesID" id="wfb-qm-GfT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zyc-Wk-eHg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="eeL-BI-lYM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="414"/>
+            <point key="canvasLocation" x="788" y="413"/>
+        </scene>
+        <!--Picked PlacesVC-->
+        <scene sceneID="CoC-of-kIA">
+            <objects>
+                <tableViewController id="1S7-En-qPm" customClass="PickedPlacesVC" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gXs-cp-e6e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="U9Y-FG-ovt">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U9Y-FG-ovt" id="6pz-RJ-zlt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1S7-En-qPm" id="oGs-dM-LGs"/>
+                            <outlet property="delegate" destination="1S7-En-qPm" id="O0x-zp-MPk"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="5wd-3J-u8M" kind="unwind" identifier="unwindToMapVC" unwindAction="unwindToContainerVCWithSegue:" id="zfJ-Or-IIo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U6Y-FK-B1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5wd-3J-u8M" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1681" y="412"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Y4I-tL-TQs">
@@ -281,7 +316,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="afQ-0T-wcK" kind="relationship" relationship="viewControllers" id="rz5-mG-v5M"/>
-                        <segue destination="pFC-7O-1mH" kind="relationship" relationship="viewControllers" id="40f-1E-Ft0"/>
+                        <segue destination="fHe-65-4Hh" kind="relationship" relationship="viewControllers" id="40f-1E-Ft0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0kf-a9-u76" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -294,7 +329,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="afQ-0T-wcK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="أطلب" image="iconSheep" selectedImage="iconSheep" id="Ua0-XD-05v"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Ve-4b-ign">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Ve-4b-ign">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -306,6 +341,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3By-ES-nCy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-8.8000000000000007" y="-251.42428785607197"/>
+        </scene>
+        <!--من نحن-->
+        <scene sceneID="nhm-30-jer">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fHe-65-4Hh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="من نحن" image="iconInfo" id="sGb-LR-rA7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bEg-c4-seD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pFC-7O-1mH" kind="relationship" relationship="rootViewController" id="May-mH-lOC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bPo-Tr-QzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10.4" y="413.3433283358321"/>
         </scene>
     </scenes>
     <resources>
