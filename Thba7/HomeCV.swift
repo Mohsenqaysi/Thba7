@@ -126,14 +126,6 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             }
         }
     }
-    
-//    @IBAction func unwindToContainerVC(segue: UIStoryboardSegue) {
-//        print("I am back...")
-//        if let location = segue.source as? MapVC {
-////            print("Current location is: \(String(describing: location.currentLocation?.coordinate))")
-//            print("Current location is: \(String(describing: location.currentLocation))")
-//        }
-//    }
 }
 
 extension HomeCV {

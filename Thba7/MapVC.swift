@@ -22,11 +22,11 @@ struct ConstrucURL {
         self.long = long
         self.key = key
     }
-    func getNearByURL() -> String {
+    func getNearByURL(radius: Int) -> String {
         var url: String! = ""
         
         if let lat = lat, let long = long, let key = key {
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&language=ar&location=\(lat),\(long)&radius=50&key=\(key)"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&language=ar&location=\(lat),\(long)&radius=\(radius)&key=\(key)"
         }
         return url
     }
@@ -53,6 +53,7 @@ struct Geometry {
 
 class MapVC: UIViewController, GMSMapViewDelegate {
     
+    @IBOutlet weak var searchResultsItemButton: UIBarButtonItem!
 //    let vc = PickNearestPlaceTVC()
     let key = "AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo"
     var mapView: GMSMapView!
@@ -60,16 +61,32 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     var locationManager = CLLocationManager()
     var marker = GMSMarker()
     var zoomLevel: Float = 15.0
+    var radius: Int = 300
     var placesClient: GMSPlacesClient!
     
     var likelyHoodsLocationsData: LikelyHoodsLocationsData? = nil
     var likelyHoodsLocationsDataArray = [LikelyHoodsLocationsData]()
     var filteredData = [LikelyHoodsLocationsData]()
     
+    let loader: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()//frame: CGRect(x: 0, y: 0, width: withd/3, height: 400))
+        spinner.layer.cornerRadius = 3
+        spinner.activityIndicatorViewStyle = .whiteLarge
+        spinner.backgroundColor = UIColor.darkGray
+        spinner.layer.opacity = 0.9
+        return spinner
+    }()
+    
+    func centerTheLoderOnTheScreen() {
+        view.addSubview(loader)
+        loader.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if likelyHoodsLocationsDataArray.isEmpty {
+        self.navigationController?.isNavigationBarHidden = true
+        }
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
@@ -96,7 +113,10 @@ class MapVC: UIViewController, GMSMapViewDelegate {
          view.updateConstraints()
          */
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        likelyHoodsLocationsDataArray = []
+    }
     override func didReceiveMemoryWarning() {
         print("To much memory useage...")
     }
@@ -135,7 +155,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     }()
     
     func handelCurrentLocation() {
-        print("going back to HomeCV...")
+        print("Find Loaction around me .....")
         //        self.performSegue(withIdentifier: "unwindTohomeCV", sender: self)
         // Pass the new location and fetch the JSON data
         // with: "formatted_address" and "place_id"
@@ -186,7 +206,8 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     // MARK: Handel JSON data
     func fetchNearestPlaceAroundCoordinate(coordinates: CLLocationCoordinate2D) {
         let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getGecodeURL();
-        
+        centerTheLoderOnTheScreen()
+        loader.startAnimating()
         Alamofire.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -218,8 +239,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     }
     
     func likelyPlace(address: String, coordinates: CLLocationCoordinate2D){
-        let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getNearByURL();
-        //        print("requestURL: \(requestURL)")
+        let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getNearByURL(radius: radius);
         //MARK: clear the array
         self.likelyHoodsLocationsDataArray.removeAll()
         Alamofire.request(requestURL, method: .get).validate().responseJSON { response in
@@ -299,7 +319,9 @@ extension MapVC: CLLocationManagerDelegate {
         print(newArray.count)
         print(newArray)
         print("------------------------------")
-        
+        loader.stopAnimating()
+        self.navigationController?.isNavigationBarHidden = false
+        searchResultsItemButton.isEnabled = true
 //        vc.likelyPlacesTableDataArray = filteredData
 //        self.present(vc, animated: true, completion: nil)
     }
@@ -329,7 +351,6 @@ extension MapVC: CLLocationManagerDelegate {
 }
 
 extension Array {
-    
     func removeDublicate (places: [LikelyHoodsLocationsData]) -> [LikelyHoodsLocationsData] {
         var newSet = [LikelyHoodsLocationsData]()
         var temp = [String]()
@@ -343,11 +364,4 @@ extension Array {
         }
         return newSet
     }
-
 }
-
-
-
-
-
-
