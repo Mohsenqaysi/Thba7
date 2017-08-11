@@ -21,10 +21,19 @@ class UserInfoPageVC: UIViewController {
 
     var passedOrderData = [String]()
     
+    @IBOutlet var userInfoView: UIView!
+    
+    let redView: UIView = {
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat().getScreenWidth() - 12, height: 200))
+        v.backgroundColor = .red
+        v.viewCardThemeWithCornerRadius(radius: 7)
+        return v
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         print("--------------------------")
         print(passedOrderData)
         print("--------------------------")
+        userInfoView.addSubview(redView)
     }
 }

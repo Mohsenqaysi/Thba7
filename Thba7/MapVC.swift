@@ -87,6 +87,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         if likelyHoodsLocationsDataArray.isEmpty {
         self.navigationController?.isNavigationBarHidden = true
         }
+        
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
@@ -96,7 +97,6 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         locationManager.delegate = self
         placesClient = GMSPlacesClient.shared()
         createMap()
-        
         /*
          // Create a center-fix marker
          
@@ -181,6 +181,9 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         _ = mapView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: (tabBarHeigh! * 2), rightConstant: 0, widthConstant: 0, heightConstant: 0)
         print("tabBarHeigh: \(tabBarHeigh!)")
         _ = getMyCurrentLocationButton.anchor(mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: tabBarHeigh!, rightConstant: 0, widthConstant: 0, heightConstant: tabBarHeigh!)
+        
+        //MARK: add the view on top of the currentButton and hide it until the data are available and show it
+        
     }
     
     func creaMarker(mapView: GMSMapView, coordinates: CLLocationCoordinate2D, title: String?, subtitle: String? ) {
@@ -191,16 +194,27 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         marker.map = mapView
     }
     
+    func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
+        print("Drag")
+    }
+    
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         print("new location: \(position.target.latitude),\(position.target.longitude)")
-        self.creaMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
+//        self.creaMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
         //MARK: Update the currentLocation realTime
         currentLocation = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
     }
     
+    func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
+        print("Start Dragging")
+        marker.isDraggable = true
+    }
     func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
-        marker.title = "I was draged"
-        fetchNearestPlaceAroundCoordinate(coordinates: currentLocation!)
+        print("Stoped Dragging")
+        marker.isDraggable = false
+
+//        marker.title = "I was draged"
+//        fetchNearestPlaceAroundCoordinate(coordinates: currentLocation!)
     }
     
     // MARK: Handel JSON data
@@ -281,7 +295,10 @@ class MapVC: UIViewController, GMSMapViewDelegate {
 }
 
 extension MapVC: CLLocationManagerDelegate {
-    
+ 
+    /*
+     
+     
 //    // Handle incoming location events.
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        let location: CLLocation = locations.last!
@@ -299,18 +316,14 @@ extension MapVC: CLLocationManagerDelegate {
 //        // Populate the array with the list of likely places.
 //        //        likelyPlaces()
 //    }
+     
+    
+    */
     
     // Populate the array with the list of likely places.
     
     func likelyPlaces(likelyHoodArray: [LikelyHoodsLocationsData]) {
-//        print("------------------------------")
-//        print("OLD - likelyPlaces: ")
-//        print(self.likelyHoodsLocationsDataArray.count)
-//        print(likelyHoodArray)
-//        print("------------------------------")
-//        //        let filteredArray =
-//        print("------------------------------")
-//        print("NEW- likelyPlaces: ")
+
         let newArray = Array<LikelyHoodsLocationsData>().removeDublicate(places: likelyHoodArray)
         filteredData = newArray
         for place in newArray {
@@ -322,8 +335,6 @@ extension MapVC: CLLocationManagerDelegate {
         loader.stopAnimating()
         self.navigationController?.isNavigationBarHidden = false
         searchResultsItemButton.isEnabled = true
-//        vc.likelyPlacesTableDataArray = filteredData
-//        self.present(vc, animated: true, completion: nil)
     }
 
     // Handle authorization for the location manager.
@@ -348,6 +359,7 @@ extension MapVC: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
     }
+    
 }
 
 extension Array {
@@ -356,7 +368,6 @@ extension Array {
         var temp = [String]()
         for i in places.enumerated() {
             if temp.contains(i.element.nearByPlace) {
-                //                print("Alreay Exists in the array")
             } else {
                 temp.append(i.element.nearByPlace)
                 newSet.append(i.element)

@@ -128,7 +128,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         
         if indexPath.row == 0 {
             StringPickerPopover(title: "أختر الحجم", choices: sheepsSizes)
-                .setSize(width: 250.0, height: 200.0)
+                .setSize(width: 250.0, height: 150.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.size = selectedString
@@ -137,34 +137,40 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
+                    self.choosesArray.remove(at: 0)
+                    self.enbaleBuyButton()
                 })
                 .appear(originView: cell, baseViewController: self)
         }
         
         if indexPath.row == 1 {
             StringPickerPopover(title: "أختر التقطيع", choices: sheepCuts)
-                .setSize(width: 250.0, height: 200.0)
+                .setSize(width: 250.0, height: 150.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.cutTypee = selectedString
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
+                    self.choosesArray.remove(at: 1)
+                    self.enbaleBuyButton()
                 })
                 .appear(originView: cell, baseViewController: self)
         }
         
         if indexPath.row == 2 {
             StringPickerPopover(title: "أختر الكمية", choices: ["1","2","3","4","5","6","7","8","9","10"])
-                .setSize(width: 250.0, height: 200.0)
+                .setSize(width: 250.0, height: 150.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.quantity = selectedString
                     self.setTheCostLabel()
-                    cell.userChoose?.text = "1"
+                    cell.userChoose?.text = selectedString
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
+                    self.choosesArray.remove(at: 2)
+                    self.enbaleBuyButton()
                 })
                 .appear(originView: cell, baseViewController: self)
         }
