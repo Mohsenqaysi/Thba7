@@ -29,8 +29,14 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var totalCostLabel: UILabel!
     @IBOutlet weak var viewUnderBuyButton: UIView!
     
+    
     //MARK: Order instans
     let userOrder = Order()
+    var sheepsSizes = [String]()
+    var sheepSizeCost = [String]()
+    var sheepCuts = [String]()
+
+    
     var sheepOrderedImage: String = ""
     var animaleName: String = ""
     var animleImage: AnyObject?
@@ -43,6 +49,7 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Get the sheep name
         self.userOrder.name = animaleName
         productInfoTBV.delegate = self
@@ -120,7 +127,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         let cell = self.productInfoTBV.cellForItem(at: indexPath) as! OrderPageVCCell
         
         if indexPath.row == 0 {
-            StringPickerPopover(title: "أختر الحجم", choices: ["خروف صغير","خروف وسط","خروف كبير"])
+            StringPickerPopover(title: "أختر الحجم", choices: sheepsSizes)
                 .setSize(width: 250.0, height: 200.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
@@ -135,7 +142,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         }
         
         if indexPath.row == 1 {
-            StringPickerPopover(title: "أختر التقطيع", choices: ["كامل","أنصاف","أرباع","حي"])
+            StringPickerPopover(title: "أختر التقطيع", choices: sheepCuts)
                 .setSize(width: 250.0, height: 200.0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
@@ -154,6 +161,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.quantity = selectedString
                     self.setTheCostLabel()
+                    cell.userChoose?.text = "1"
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -182,39 +190,33 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         if choosesArray.count == 3 {
             buyNowButton.isEnabled = true
             buyNowButton.layer.opacity = 1.0
-//            viewUnderBuyButton.layer.opacity = 1.0
+            //            viewUnderBuyButton.layer.opacity = 1.0
             print(choosesArray)
         } else {
             buyNowButton.isEnabled = false
             buyNowButton.layer.opacity = 0.5
-//            viewUnderBuyButton.layer.opacity = 0.5
+            //            viewUnderBuyButton.layer.opacity = 0.5
             print(choosesArray)
         }
     }
     
-    //Mark: Pick the price
-    // get the type
-    // use the index to gte the price
-    // update the label
-    // ["خروف صغير 650","خروف وسط 850","خروف كبير 1000"]
-    
     func setTheCostLabel() {
         guard let index = userOrder.sizeIndex, userOrder.sizeIndex != nil else {
+            return
+        }
+        guard let cost = Int(sheepSizeCost[index]) else {
+            print("error... no data")
             return
         }
         guard let quantity =  Int(self.userOrder.quantity!), Int(self.userOrder.quantity!) != nil else {
             return
         }
         
-        //        if let index = userOrder.sizeIndex, let quantity = Int(self.userOrder.quantity!) {
         print(index)
+
         switch index {
-        case 0:
-            self.totalCostLabel.text = "\(quantity * 650) ريال"
-        case 1:
-            self.totalCostLabel.text = "\(quantity * 850) ريال"
-        case 2:
-            self.totalCostLabel.text = "\(quantity * 1000) ريال"
+        case 0..<10:
+            self.totalCostLabel.text = "\(quantity * cost) ريال"
         default:
             self.totalCostLabel.text = ""
         }

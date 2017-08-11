@@ -9,10 +9,14 @@
 import UIKit
 import Firebase
 import Kingfisher
+import SwiftyJSON
 
 struct DataModel {
     let image: String?
     let label: String?
+    let sizes: [String]
+    let costs: [String]
+    let cuts: [String]
 }
 
 private struct Identifiers {
@@ -22,11 +26,10 @@ private struct Identifiers {
 
 class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    
     var buyButtoTag: Int?
     
     let loderStatusLabel: UILabel = {
-        let lb = UILabel() //frame: CGRect(x: 0, y: 0, width: withd/3, height: 100))
+        let lb = UILabel()
         lb.text = "جاري التحميل..."
         lb.textAlignment = .center
         lb.textColor = .white
@@ -35,7 +38,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }()
     
     let loader: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView()//frame: CGRect(x: 0, y: 0, width: withd/3, height: 400))
+        let spinner = UIActivityIndicatorView()
         spinner.layer.cornerRadius = 3
         spinner.activityIndicatorViewStyle = .whiteLarge
         spinner.backgroundColor = UIColor.darkGray
@@ -88,14 +91,51 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     func loadData()  {
         ref.child("data").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get values
+            var costsDictionary = [String]()
+            var sizesDictionary = [String]()
+            var cutsDictionary = [String]()
+
             print("-----------------------------")
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 guard let restDict = rest.value as? [String: Any] else { continue }
-                let image = restDict["image"] as? String
-                let lablel = restDict["label"] as? String
-                let model = DataModel(image: image, label: lablel)
+                let json = JSON(restDict)
+//                print(json)
+                let image = json["image"].stringValue
+                let lablel = json["label"].stringValue
+                
+                // load the arrays vlaues:
+                let sizes = json["sizes"].arrayValue
+                for i in sizes.enumerated() {
+                    print("i: \(i.offset)")
+                    print("i: \(i.element.stringValue)")
+                    sizesDictionary.append(i.element.stringValue)
+                }
+                print("-----------------------------")
+                let costs = json["costs"].arrayValue
+                for i in costs.enumerated() {
+                    print("i: \(i.offset)")
+                    print("i: \(i.element.stringValue)")
+                    costsDictionary.append(i.element.stringValue)
+                }
+                print("-----------------------------")
+                let cuts = json["cuts"].arrayValue
+                for i in cuts.enumerated() {
+                    print("i: \(i.offset)")
+                    print("i: \(i.element.stringValue)")
+                    cutsDictionary.append(i.element.stringValue)
+                }
+                
+                let model = DataModel(image: image, label: lablel, sizes: sizesDictionary, costs: costsDictionary, cuts: cutsDictionary)
                 self.dataArray.append(model)
+                costsDictionary.removeAll()
+                sizesDictionary.removeAll()
+                cutsDictionary.removeAll()
             }
+            print("costs: \(costsDictionary)")
+            print("sizes: \(sizesDictionary)")
+            print("cuts: \(cutsDictionary)")
+ 
+
             print("-----------------------------")
             self.loader.stopAnimating()
             self.collectionView?.reloadData()
@@ -123,6 +163,9 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 let animalType = dataArray[buyButtoTag!].label!
                 vc.title = animalType
                 vc.animaleName = animalType
+                vc.sheepsSizes = dataArray[buyButtoTag!].sizes
+                vc.sheepCuts = dataArray[buyButtoTag!].cuts
+                vc.sheepSizeCost = dataArray[buyButtoTag!].costs
             }
         }
     }
