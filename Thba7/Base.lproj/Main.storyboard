@@ -242,13 +242,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="userInfoView" destination="x9b-Cc-r8b" id="GSV-xR-SCN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQC-Ng-Ug4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2479" y="-251"/>
+            <point key="canvasLocation" x="2477.5999999999999" y="-251.42428785607197"/>
         </scene>
         <!--MapVC-->
         <scene sceneID="ohk-Ra-4yn">

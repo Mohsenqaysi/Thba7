@@ -97,6 +97,8 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         locationManager.delegate = self
         placesClient = GMSPlacesClient.shared()
         createMap()
+//        marker.isDraggable = true
+
         /*
          // Create a center-fix marker
          
@@ -112,7 +114,32 @@ class MapVC: UIViewController, GMSMapViewDelegate {
          
          view.updateConstraints()
          */
+        
+//        let pressGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePress))
+//        view.addGestureRecognizer(pressGestureRecognizer)
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("ended")
+        let lastLocation = CLLocationCoordinate2D(latitude: (locations.last?.coordinate.latitude)!, longitude:  (locations.last?.coordinate.longitude)!)
+//        fetchNearestPlaceAroundCoordinate(coordinates: lastLocation)
+
+
+    }
+    
+    
+//    func handlePress(sender: UILongPressGestureRecognizer) {
+//        if sender.state == UIGestureRecognizerState.began {
+//            // handle start of pressing
+//            print("began")
+//        }
+//        else if sender.state == UIGestureRecognizerState.ended {
+//            // handle end of pressing
+//            print("ended")
+//
+//        }
+//    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         likelyHoodsLocationsDataArray = []
@@ -178,9 +205,9 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         view.addSubview(getMyCurrentLocationButton)
         
         let tabBarHeigh = self.tabBarController?.tabBar.frame.size.height
-        _ = mapView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: (tabBarHeigh! * 2), rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = mapView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: (tabBarHeigh! * 2), rightConstant: 0, widthConstant: 0, heightConstant: 0)
         print("tabBarHeigh: \(tabBarHeigh!)")
-        _ = getMyCurrentLocationButton.anchor(mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: tabBarHeigh!, rightConstant: 0, widthConstant: 0, heightConstant: tabBarHeigh!)
+        _ = getMyCurrentLocationButton.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: tabBarHeigh!, rightConstant: 0, widthConstant: 0, heightConstant: tabBarHeigh!)
         
         //MARK: add the view on top of the currentButton and hide it until the data are available and show it
         
@@ -194,29 +221,15 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         marker.map = mapView
     }
     
-    func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
-        print("Drag")
-    }
-    
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         print("new location: \(position.target.latitude),\(position.target.longitude)")
-//        self.creaMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
+        self.creaMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
         //MARK: Update the currentLocation realTime
         currentLocation = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
     }
     
-    func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
-        print("Start Dragging")
-        marker.isDraggable = true
-    }
-    func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
-        print("Stoped Dragging")
-        marker.isDraggable = false
 
-//        marker.title = "I was draged"
-//        fetchNearestPlaceAroundCoordinate(coordinates: currentLocation!)
-    }
-    
+
     // MARK: Handel JSON data
     func fetchNearestPlaceAroundCoordinate(coordinates: CLLocationCoordinate2D) {
         let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getGecodeURL();

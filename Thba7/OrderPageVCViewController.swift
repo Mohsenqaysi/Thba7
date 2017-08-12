@@ -133,12 +133,10 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.size = selectedString
                     self.userOrder.sizeIndex = selectedRow
-                    self.setTheCostLabel()
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
-                    self.choosesArray.remove(at: 0)
-                    self.enbaleBuyButton()
+                    self.removeChoses(index: indexPath.row)
                 })
                 .appear(originView: cell, baseViewController: self)
         }
@@ -152,8 +150,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
-                    self.choosesArray.remove(at: 1)
-                    self.enbaleBuyButton()
+                    self.removeChoses(index: indexPath.row)
                 })
                 .appear(originView: cell, baseViewController: self)
         }
@@ -169,8 +166,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
-                    self.choosesArray.remove(at: 2)
-                    self.enbaleBuyButton()
+                    self.removeChoses(index: indexPath.row)
                 })
                 .appear(originView: cell, baseViewController: self)
         }
@@ -226,5 +222,14 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         default:
             self.totalCostLabel.text = ""
         }
+    }
+    
+    func removeChoses(index: Int){
+        if !choosesArray.isEmpty {
+            self.choosesArray.remove(at: index)
+        } else {
+            choosesArray = [String]()
+        }
+        self.enbaleBuyButton()
     }
 }

@@ -69,9 +69,9 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             // add constraint to loderStatusLabel
             let w = CGFloat().getScreenWidth()
             let h =  CGFloat().getScreenHeight()
-            _ = loader.anchor(nil, left: nil, bottom: nil, right: nil, topConstant: h/4, leftConstant: w/4, bottomConstant: h/4, rightConstant: w/4, widthConstant: 150, heightConstant: 80)
+            _ = loader.anchor(top: nil, left: nil, bottom: nil, right: nil, topConstant: h/4, leftConstant: w/4, bottomConstant: h/4, rightConstant: w/4, widthConstant: 150, heightConstant: 80)
             
-            _ = loderStatusLabel.anchor(nil, left: loader.leftAnchor, bottom: loader.bottomAnchor, right: loader.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            _ = loderStatusLabel.anchor(top: nil, left: loader.leftAnchor, bottom: loader.bottomAnchor, right: loader.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
             ref = Database.database().reference()
             //MARK:- Load the data into the collectionTable
