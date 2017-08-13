@@ -51,18 +51,23 @@ struct Geometry {
     let lng : String!
 }
 
+var zoomLevel: Float = 15.0
+
+
 class MapVC: UIViewController, GMSMapViewDelegate {
     
     @IBOutlet weak var searchResultsItemButton: UIBarButtonItem!
-//    let vc = PickNearestPlaceTVC()
+    //    let vc = PickNearestPlaceTVC()
     let key = "AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo"
     var mapView: GMSMapView!
     var currentLocation: CLLocationCoordinate2D?
     var locationManager = CLLocationManager()
     var marker = GMSMarker()
-    var zoomLevel: Float = 15.0
     var radius: Int = 300
     var placesClient: GMSPlacesClient!
+    
+    var camera = GMSCameraPosition.camera(withLatitude: 16.533593,
+                                          longitude: 42.798357, zoom: zoomLevel)
     
     var likelyHoodsLocationsData: LikelyHoodsLocationsData? = nil
     var likelyHoodsLocationsDataArray = [LikelyHoodsLocationsData]()
@@ -85,7 +90,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         if likelyHoodsLocationsDataArray.isEmpty {
-        self.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.isNavigationBarHidden = true
         }
         
         locationManager = CLLocationManager()
@@ -97,8 +102,8 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         locationManager.delegate = self
         placesClient = GMSPlacesClient.shared()
         createMap()
-//        marker.isDraggable = true
-
+        //        marker.isDraggable = true
+        
         /*
          // Create a center-fix marker
          
@@ -115,30 +120,16 @@ class MapVC: UIViewController, GMSMapViewDelegate {
          view.updateConstraints()
          */
         
-//        let pressGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePress))
-//        view.addGestureRecognizer(pressGestureRecognizer)
+        //        let pressGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePress))
+        //        view.addGestureRecognizer(pressGestureRecognizer)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("ended")
-        let lastLocation = CLLocationCoordinate2D(latitude: (locations.last?.coordinate.latitude)!, longitude:  (locations.last?.coordinate.longitude)!)
-//        fetchNearestPlaceAroundCoordinate(coordinates: lastLocation)
-
-
-    }
-    
-    
-//    func handlePress(sender: UILongPressGestureRecognizer) {
-//        if sender.state == UIGestureRecognizerState.began {
-//            // handle start of pressing
-//            print("began")
-//        }
-//        else if sender.state == UIGestureRecognizerState.ended {
-//            // handle end of pressing
-//            print("ended")
-//
-//        }
-//    }
+    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    //        print("ended")
+    //        let lastLocation = CLLocationCoordinate2D(latitude: (locations.last?.coordinate.latitude)!, longitude:  (locations.last?.coordinate.longitude)!)
+    ////        fetchNearestPlaceAroundCoordinate(coordinates: lastLocation)
+    //
+    //    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -151,7 +142,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     @IBAction func showNearBy(_ sender: UIBarButtonItem) {
         
         performSegue(withIdentifier: "placesID", sender: self)
-
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -191,8 +182,6 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     
     func createMap() {
         
-        let camera = GMSCameraPosition.camera(withLatitude: 16.533593,
-                                              longitude: 42.798357, zoom: 15)
         mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
@@ -213,7 +202,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         
     }
     
-    func creaMarker(mapView: GMSMapView, coordinates: CLLocationCoordinate2D, title: String?, subtitle: String? ) {
+    func createMarker(mapView: GMSMapView, coordinates: CLLocationCoordinate2D, title: String?, subtitle: String? ) {
         // Creates a marker in the center of the map.
         marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude , longitude: coordinates.longitude)
         marker.title = title
@@ -223,13 +212,13 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         print("new location: \(position.target.latitude),\(position.target.longitude)")
-        self.creaMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
+        self.createMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
         //MARK: Update the currentLocation realTime
         currentLocation = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
     }
     
-
-
+    
+    
     // MARK: Handel JSON data
     func fetchNearestPlaceAroundCoordinate(coordinates: CLLocationCoordinate2D) {
         let requestURL = ConstrucURL(lat: coordinates.latitude, long: coordinates.longitude, key: key).getGecodeURL();
@@ -261,7 +250,9 @@ class MapVC: UIViewController, GMSMapViewDelegate {
             let pickedLocation = CLLocationCoordinate2D(latitude: lat!, longitude: lng!)
             let title = location.nearestPickedPlaceByUser?.nearByPlace
             let subtitle = location.nearestPickedPlaceByUser?.locationAddress
-            self.creaMarker(mapView: mapView, coordinates: pickedLocation ,title:title , subtitle: subtitle)
+            let newMarkerPosion = GMSCameraPosition.camera(withLatitude: lat!, longitude: lng!, zoom: zoomLevel)
+            mapView.animate(to: newMarkerPosion)
+            self.createMarker(mapView: mapView, coordinates: pickedLocation ,title:title , subtitle: subtitle)
         }
     }
     
@@ -308,35 +299,35 @@ class MapVC: UIViewController, GMSMapViewDelegate {
 }
 
 extension MapVC: CLLocationManagerDelegate {
- 
+    
     /*
      
      
-//    // Handle incoming location events.
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        let location: CLLocation = locations.last!
-//        print("Location: \(location)")
-//        
-//        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-//                                              longitude: location.coordinate.longitude,
-//                                              zoom: zoomLevel)
-//        if mapView.isHidden {
-//            mapView.isHidden = false
-//            mapView.camera = camera
-//        } else {
-//            mapView.animate(to: camera)
-//        }
-//        // Populate the array with the list of likely places.
-//        //        likelyPlaces()
-//    }
+     //    // Handle incoming location events.
+     //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+     //        let location: CLLocation = locations.last!
+     //        print("Location: \(location)")
+     //
+     //        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+     //                                              longitude: location.coordinate.longitude,
+     //                                              zoom: zoomLevel)
+     //        if mapView.isHidden {
+     //            mapView.isHidden = false
+     //            mapView.camera = camera
+     //        } else {
+     //            mapView.animate(to: camera)
+     //        }
+     //        // Populate the array with the list of likely places.
+     //        //        likelyPlaces()
+     //    }
      
-    
-    */
+     
+     */
     
     // Populate the array with the list of likely places.
     
     func likelyPlaces(likelyHoodArray: [LikelyHoodsLocationsData]) {
-
+        
         let newArray = Array<LikelyHoodsLocationsData>().removeDublicate(places: likelyHoodArray)
         filteredData = newArray
         for place in newArray {
@@ -349,7 +340,7 @@ extension MapVC: CLLocationManagerDelegate {
         self.navigationController?.isNavigationBarHidden = false
         searchResultsItemButton.isEnabled = true
     }
-
+    
     // Handle authorization for the location manager.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {

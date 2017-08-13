@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import Spring
 
 
 private struct OrderInfo {
@@ -33,22 +35,22 @@ class UserInfoPageVC: UIViewController {
         return v
     }()
     
-    let userInfoViewContiner: UIView = {
-        let v = UIView()
+    let userInfoViewContiner: SpringView = {
+        let v = SpringView()
         v.backgroundColor = .white
         v.viewCardThemeWithCornerRadius(radius: 7)
         return v
     }()
     
-    let orderInfoViewContiner: UIView = {
-        let v = UIView()
+    let orderInfoViewContiner: SpringView = {
+        let v = SpringView()
         v.backgroundColor = .blue
         v.viewCardThemeWithCornerRadius(radius: 7)
         return v
     }()
     
-    let locationOnMapInfoContinerView: UIView = {
-        let v = UIView()
+    let locationOnMapInfoContinerView: SpringView = {
+        let v = SpringView()
         v.backgroundColor = .green
         v.viewCardThemeWithCornerRadius(radius: 7)
         return v
@@ -75,7 +77,7 @@ class UserInfoPageVC: UIViewController {
     let userPhoneNumber: UITextField = {
         let v = UITextField()
         v.placeholder = "رقم الجوال (*)"
-        v.keyboardType = .numberPad
+        v.keyboardType = .phonePad
         //        v.adjustsFontSizeToFitWidth = true
         v.textAlignment = .right
         return v
@@ -107,14 +109,24 @@ class UserInfoPageVC: UIViewController {
         return v
     }()
     
-    let deliveryInfoLabel: UILabel = {
-        let label = UILabel()
+    let deliveryInfoLabel: SpringLabel = {
+        let label = SpringLabel()
         label.text = "عنوان التوصيل"
         label.textColor = UIColor(red:0.35, green:0.35, blue:0.36, alpha:1.0)
         label.textAlignment = .center
         label.layer.cornerRadius = 16
         label.font = UIFont.boldSystemFont(ofSize: 18)
         return label
+    }()
+    
+    let submitButton: UIButton = {
+        let bnt = UIButton(type: .system)
+        bnt.backgroundColor = UIColor(red:0.25, green:0.79, blue:0.46, alpha:1.0)
+        bnt.viewCardTheme()
+        bnt.setTitle("أرسل الطلب", for: UIControlState.normal)
+        bnt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        bnt.addTarget(self, action: #selector(handelSubmitButton), for: .touchUpInside)
+        return bnt
     }()
     
     override func viewDidLoad() {
@@ -134,14 +146,20 @@ class UserInfoPageVC: UIViewController {
         _ = deliveryInfoLabel.anchor(top: scrollingView.topAnchor, left: scrollingView.leftAnchor, bottom: nil, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0,widthConstant: 0, heightConstant: userInfoViewContinerHeight / 3)
         
         _ = userInfoViewContiner.anchor(top: deliveryInfoLabel.bottomAnchor, left: scrollingView.leftAnchor, bottom: nil, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: userInfoViewContinerHeight)
-        
+       
         // MARK: Add other Subviews
         userInfoContinerView()
         orderInfoContinerView()
         userLocationOnMapInfoContinerView()
+        setUpSubmitButton()
         
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+
+    }
     func userInfoContinerView() {
         // MARK: Add views to the ContinerView
         userInfoViewContiner.addSubview(userName) // userName Insdie userInfoViewContiner
@@ -165,6 +183,15 @@ class UserInfoPageVC: UIViewController {
         
         //Add done button to userPhoneNumber pad keyboard
         userPhoneNumber.inputAccessoryView = toolBarAndDoneButtonUserNumber
+        
+        // Animation
+        // Animation
+        deliveryInfoLabel.animation = "fadeInLeft"
+        deliveryInfoLabel.delay = 0.5
+        deliveryInfoLabel.animate()
+        userInfoViewContiner.animation = "fadeInDown"
+        userInfoViewContiner.delay = 0.5
+        userInfoViewContiner.animate()
     }
     
     func handeluserPhoneNumberDoneButton()  {
@@ -174,11 +201,55 @@ class UserInfoPageVC: UIViewController {
     func orderInfoContinerView() {
         scrollingView.addSubview(orderInfoViewContiner) // Blue
         _ = orderInfoViewContiner.anchor(top: userInfoViewContiner.bottomAnchor, left: scrollingView.leftAnchor, bottom: nil, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: CGFloat().getScreenWidth(), heightConstant: 400)
+        
+        // Animation
+        orderInfoViewContiner.animation = "fadeInLeft"
+        orderInfoViewContiner.delay = 0.5
+        orderInfoViewContiner.animate()
     }
     
     func userLocationOnMapInfoContinerView() {
         scrollingView.addSubview(locationOnMapInfoContinerView) // Green
-        _ = locationOnMapInfoContinerView.anchor(top: orderInfoViewContiner.bottomAnchor, left: scrollingView.leftAnchor, bottom: scrollingView.bottomAnchor, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: CGFloat().getScreenWidth(), heightConstant: 400)
+        _ = locationOnMapInfoContinerView.anchor(top: orderInfoViewContiner.bottomAnchor, left: scrollingView.leftAnchor, bottom: nil, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: CGFloat().getScreenWidth(), heightConstant: 400)
+        
+        // Animation
+        locationOnMapInfoContinerView.animation = "fadeInLeft"
+        locationOnMapInfoContinerView.delay = 0.3
+        locationOnMapInfoContinerView.animate()
+    }
+    
+    func setUpSubmitButton() {
+        scrollingView.addSubview(submitButton)
+        _ = submitButton.anchor(top: locationOnMapInfoContinerView.bottomAnchor, left: scrollingView.leftAnchor, bottom: scrollingView.bottomAnchor, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        
+        // Animation
+        userInfoViewContiner.animation = "fadeInDown"
+        userInfoViewContiner.delay = 0.3
+        userInfoViewContiner.animate()
+    }
+    
+    func handelSubmitButton() {
+        
+        guard let name = userName.text, userName.text != "" else {
+            userNameSepearator.enableErrorIndecatorLayer(textField: userName)
+            return
+        }
+        
+        userNameSepearator.disableErrorIndecatorLayer(textField: userName)
+        guard let addree = userAddress.text, userAddress.text != "" else {
+            userAddressSepearator.enableErrorIndecatorLayer(textField: userAddress)
+            return
+        }
+        
+        userAddressSepearator.disableErrorIndecatorLayer(textField: userAddress)
+       
+        guard let phoneNumber = userPhoneNumber.text, (userPhoneNumber.text?.characters.count)! == 10 else {
+            print("Wrong Number")
+            userPhoneNumberSepearator.enablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
+            return
+        }
+        userPhoneNumberSepearator.disablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
+        print("\(name) - \(addree) - \(phoneNumber)")
     }
 }
 
@@ -187,5 +258,33 @@ extension UserInfoPageVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         return false
+    }
+}
+
+extension UIView {
+    
+    func enableErrorIndecatorLayer(textField: UITextField) {
+        let errorColor: UIColor = UIColor(red:0.83, green:0.00, blue:0.00, alpha:1.0)
+        self.layer.backgroundColor = errorColor.cgColor
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSForegroundColorAttributeName: errorColor])
+    }
+
+    
+    func disableErrorIndecatorLayer(textField: UITextField) {
+        self.layer.backgroundColor = UIColor.white.cgColor
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.white])
+    }
+    
+    
+    func enablePhoneNumberErrorIndecatorLayer(textField: UITextField) {
+        let errorColor: UIColor = UIColor(red:0.83, green:0.00, blue:0.00, alpha:1.0)
+        textField.text = ""
+        let errorMasge = "الرجاء أدخل رقم جوال صحيح"
+        textField.attributedPlaceholder = NSAttributedString(string: errorMasge, attributes: [NSForegroundColorAttributeName: errorColor])
+    }
+    
+    
+    func disablePhoneNumberErrorIndecatorLayer(textField: UITextField) {
+        textField.textColor = UIColor(red:0.25, green:0.79, blue:0.46, alpha:1.0)
     }
 }
