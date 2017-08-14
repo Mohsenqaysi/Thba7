@@ -79,12 +79,25 @@ class UserInfoPageVC: UIViewController, UIGestureRecognizerDelegate {
     
     lazy var userPhoneNumber: UIView = {
         let v = UIView()
-//        v. = "رقم الجوال (*)"
-        //        v.keyboardType = .phonePad
+        //        v. = "رقم الجوال (*)"
         let gestur = UITapGestureRecognizer(target: self, action: #selector(handelPhoneNumber(sender:)))
         gestur.delegate = self
         v.addGestureRecognizer(gestur)
         return v
+    }()
+    
+    
+    let userPhoneNumberLabel: SpringLabel = {
+        let label = SpringLabel()
+        label.text = "رقم الجوال (*)"
+        label.textColor = UIColor(red:0.35, green:0.35, blue:0.36, alpha:0.5)
+        label.textAlignment = .right
+        label.layer.cornerRadius = 7
+        label.layer.borderWidth = 1
+        label.layer.masksToBounds = false
+        label.layer.borderColor = UIColor(red:0.35, green:0.35, blue:0.36, alpha:0.7).cgColor
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        return label
     }()
     
     func handelPhoneNumber(sender: UIGestureRecognizer)  {
@@ -95,6 +108,7 @@ class UserInfoPageVC: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func unwindToUserInfoPageVC(segue: UIStoryboardSegue) {
         print("UserInfoPageVC ... form unwind Call")
         if let userVerifedPhoneNumber = segue.source as? VerifySMSCodeViewController {
+            userPhoneNumberLabel.text = userVerifedPhoneNumber.number
             print(userVerifedPhoneNumber.number)
         }
     }
@@ -184,6 +198,7 @@ class UserInfoPageVC: UIViewController, UIGestureRecognizerDelegate {
         userInfoViewContiner.addSubview(userAddress) // userAddress Insdie userInfoViewContiner
         userInfoViewContiner.addSubview(userAddressSepearator) // lineSepearator
         userInfoViewContiner.addSubview(userPhoneNumber) // userPhoneNumber Insdie userInfoViewContiner
+        userPhoneNumber.addSubview(userPhoneNumberLabel) // add userPhoneNumberLabel insdie the userPhoneNumber View
         
         self.userName.delegate = self
         self.userAddress.delegate = self
@@ -193,12 +208,13 @@ class UserInfoPageVC: UIViewController, UIGestureRecognizerDelegate {
         _ = userNameSepearator.anchor(top: userName.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 1, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 1)
         // Address
         _ = userAddress.anchor(top: userName.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: userInfoViewContinerHeight / 3)
-        _ = userAddressSepearator.anchor(top: userAddress.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 1)
+        _ = userAddressSepearator.anchor(top: userAddress.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: userInfoViewContinerHeight / 3)
         // Phone Number
-        _ = userPhoneNumber.anchor(top: userAddress.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 3, rightConstant: 12, widthConstant: 0, heightConstant: userInfoViewContinerHeight / 4)
+        _ = userPhoneNumber.anchor(top: userAddress.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 3, rightConstant: 12, widthConstant: 0, heightConstant: userInfoViewContinerHeight / 3)
+        _ = userPhoneNumberLabel.anchor(top: userPhoneNumber.topAnchor, left: userPhoneNumber.leftAnchor, bottom: userPhoneNumber.bottomAnchor, right: userPhoneNumber.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: userInfoViewContinerHeight / 3)
         
         //Add done button to userPhoneNumber pad keyboard
-//        userPhoneNumber.inputAccessoryView = toolBarAndDoneButtonUserNumber
+        //        userPhoneNumber.inputAccessoryView = toolBarAndDoneButtonUserNumber
         
         // Animation
         // Animation
@@ -265,7 +281,7 @@ class UserInfoPageVC: UIViewController, UIGestureRecognizerDelegate {
         //            return
         //        }
         
-//        userPhoneNumberSepearator.disablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
+        //        userPhoneNumberSepearator.disablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
         print("\(name) - \(addree) - ") //\(phoneNumber)")
     }
 }
@@ -279,7 +295,7 @@ extension UserInfoPageVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == userPhoneNumber {
-        print("I am userPhoneNumber... ")
+            print("I am userPhoneNumber... ")
         }
     }
 }
