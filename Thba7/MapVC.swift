@@ -280,7 +280,6 @@ class MapVC: UIViewController, GMSMapViewDelegate {
                             let lng = location["lng"].stringValue
                             print("location: \(lat) and \(lng)")
                             print("-------------------------------")
-                            
                             self.marker.title = nearByPlace
                             self.marker.snippet = city
                             let geometyLocation = Geometry(lat: lat, lng: lng)
@@ -289,7 +288,6 @@ class MapVC: UIViewController, GMSMapViewDelegate {
                         }
                     }
                     self.likelyPlaces(likelyHoodArray: self.likelyHoodsLocationsDataArray)
-                    
                 }
             case .failure(let error):
                 print(error)
@@ -301,8 +299,6 @@ class MapVC: UIViewController, GMSMapViewDelegate {
 extension MapVC: CLLocationManagerDelegate {
     
     /*
-     
-     
      //    // Handle incoming location events.
      //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
      //        let location: CLLocation = locations.last!
@@ -320,8 +316,6 @@ extension MapVC: CLLocationManagerDelegate {
      //        // Populate the array with the list of likely places.
      //        //        likelyPlaces()
      //    }
-     
-     
      */
     
     // Populate the array with the list of likely places.
@@ -363,7 +357,6 @@ extension MapVC: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
     }
-    
 }
 
 extension Array {

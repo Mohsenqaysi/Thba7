@@ -19,8 +19,9 @@ private struct OrderInfo {
     var countity: String?
 }
 
-class UserInfoPageVC: UIViewController {
+class UserInfoPageVC: UIViewController, UIGestureRecognizerDelegate {
     
+    let segueKey = "goToVerifyPage"
     var passedOrderData = [String]()
     let userInfoViewContinerHeight: CGFloat = 100.0
     
@@ -61,6 +62,7 @@ class UserInfoPageVC: UIViewController {
         v.placeholder = "الأسم (*)"
         v.keyboardType = .asciiCapable
         v.returnKeyType = .done
+        v.borderStyle = .roundedRect
         v.textAlignment = .right
         return v
     }()
@@ -70,18 +72,32 @@ class UserInfoPageVC: UIViewController {
         v.placeholder = "العنوان (*)"
         v.keyboardType = .asciiCapable
         v.returnKeyType = .done
+        v.borderStyle = .roundedRect
         v.textAlignment = .right
         return v
     }()
     
-    let userPhoneNumber: UITextField = {
-        let v = UITextField()
-        v.placeholder = "رقم الجوال (*)"
-        v.keyboardType = .phonePad
-        //        v.adjustsFontSizeToFitWidth = true
-        v.textAlignment = .right
+    lazy var userPhoneNumber: UIView = {
+        let v = UIView()
+//        v. = "رقم الجوال (*)"
+        //        v.keyboardType = .phonePad
+        let gestur = UITapGestureRecognizer(target: self, action: #selector(handelPhoneNumber(sender:)))
+        gestur.delegate = self
+        v.addGestureRecognizer(gestur)
         return v
     }()
+    
+    func handelPhoneNumber(sender: UIGestureRecognizer)  {
+        print("gesture tap: \(sender.state)")
+        self.performSegue(withIdentifier: self.segueKey, sender: sender)
+    }
+    
+    @IBAction func unwindToUserInfoPageVC(segue: UIStoryboardSegue) {
+        print("UserInfoPageVC ... form unwind Call")
+        if let userVerifedPhoneNumber = segue.source as? VerifySMSCodeViewController {
+            print(userVerifedPhoneNumber.number)
+        }
+    }
     
     let toolBarAndDoneButtonUserNumber: UIToolbar = {
         let toolBarAndDoneButtonUserNumber = UIToolbar()
@@ -136,6 +152,7 @@ class UserInfoPageVC: UIViewController {
         print("--------------------------")
         scrollViewContiner()
     }
+    
     func scrollViewContiner() {
         // Add the scrollingView inside the View
         view.addSubview(scrollingView) // add to rootView
@@ -146,7 +163,7 @@ class UserInfoPageVC: UIViewController {
         _ = deliveryInfoLabel.anchor(top: scrollingView.topAnchor, left: scrollingView.leftAnchor, bottom: nil, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0,widthConstant: 0, heightConstant: userInfoViewContinerHeight / 3)
         
         _ = userInfoViewContiner.anchor(top: deliveryInfoLabel.bottomAnchor, left: scrollingView.leftAnchor, bottom: nil, right: scrollingView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: userInfoViewContinerHeight)
-       
+        
         // MARK: Add other Subviews
         userInfoContinerView()
         orderInfoContinerView()
@@ -158,7 +175,7 @@ class UserInfoPageVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-
+        
     }
     func userInfoContinerView() {
         // MARK: Add views to the ContinerView
@@ -170,8 +187,7 @@ class UserInfoPageVC: UIViewController {
         
         self.userName.delegate = self
         self.userAddress.delegate = self
-        self.userPhoneNumber.delegate = self
-        
+        //        self.handelPhoneNumber
         // name
         _ = userName.anchor(top: userInfoViewContiner.topAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 1, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: userInfoViewContinerHeight / 3)
         _ = userNameSepearator.anchor(top: userName.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 1, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 1)
@@ -182,7 +198,7 @@ class UserInfoPageVC: UIViewController {
         _ = userPhoneNumber.anchor(top: userAddress.bottomAnchor, left: userInfoViewContiner.leftAnchor, bottom: nil, right: userInfoViewContiner.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 3, rightConstant: 12, widthConstant: 0, heightConstant: userInfoViewContinerHeight / 4)
         
         //Add done button to userPhoneNumber pad keyboard
-        userPhoneNumber.inputAccessoryView = toolBarAndDoneButtonUserNumber
+//        userPhoneNumber.inputAccessoryView = toolBarAndDoneButtonUserNumber
         
         // Animation
         // Animation
@@ -242,14 +258,15 @@ class UserInfoPageVC: UIViewController {
         }
         
         userAddressSepearator.disableErrorIndecatorLayer(textField: userAddress)
-       
-        guard let phoneNumber = userPhoneNumber.text, (userPhoneNumber.text?.characters.count)! == 10 else {
-            print("Wrong Number")
-            userPhoneNumberSepearator.enablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
-            return
-        }
-        userPhoneNumberSepearator.disablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
-        print("\(name) - \(addree) - \(phoneNumber)")
+        
+        //        guard let phoneNumber = userPhoneNumber.text, (userPhoneNumber.text?.characters.count)! == 10 else {
+        //            print("Wrong Number")
+        //            userPhoneNumberSepearator.enablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
+        //            return
+        //        }
+        
+//        userPhoneNumberSepearator.disablePhoneNumberErrorIndecatorLayer(textField: userPhoneNumber)
+        print("\(name) - \(addree) - ") //\(phoneNumber)")
     }
 }
 
@@ -258,6 +275,12 @@ extension UserInfoPageVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         return false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == userPhoneNumber {
+        print("I am userPhoneNumber... ")
+        }
     }
 }
 
@@ -268,13 +291,11 @@ extension UIView {
         self.layer.backgroundColor = errorColor.cgColor
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSForegroundColorAttributeName: errorColor])
     }
-
     
     func disableErrorIndecatorLayer(textField: UITextField) {
         self.layer.backgroundColor = UIColor.white.cgColor
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.white])
     }
-    
     
     func enablePhoneNumberErrorIndecatorLayer(textField: UITextField) {
         let errorColor: UIColor = UIColor(red:0.83, green:0.00, blue:0.00, alpha:1.0)
@@ -282,7 +303,6 @@ extension UIView {
         let errorMasge = "الرجاء أدخل رقم جوال صحيح"
         textField.attributedPlaceholder = NSAttributedString(string: errorMasge, attributes: [NSForegroundColorAttributeName: errorColor])
     }
-    
     
     func disablePhoneNumberErrorIndecatorLayer(textField: UITextField) {
         textField.textColor = UIColor(red:0.25, green:0.79, blue:0.46, alpha:1.0)
