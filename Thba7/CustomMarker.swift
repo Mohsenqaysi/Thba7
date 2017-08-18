@@ -9,10 +9,10 @@
 import UIKit
 
 class CustomMarker: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        sutUpView()
+        setUpView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,8 +26,8 @@ class CustomMarker: UIView {
         return p
     }()
     
-    func sutUpView(){
-    self.addSubview(pin)
+    func setUpView(){
+        self.addSubview(pin)
         self.frame = pin.frame
     }
 }

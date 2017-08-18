@@ -386,10 +386,13 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" keyboardAppearance="alert" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gfB-gk-dke" id="pyC-GV-Vvk"/>
+                                </connections>
                             </textField>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="O3F-yi-nsy">
                                 <rect key="frame" x="165" y="192" width="37" height="37"/>
-                                <color key="color" red="0.25098040700000002" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="color" red="0.039279513889999999" green="0.54652778970000004" blue="0.91243489580000003" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="تأكيد الرقم سوف يسهل عملية التواصل وتنفذي الطلبات" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rOt-l8-8I0">
                                 <rect key="frame" x="8" y="72" width="351" height="88"/>
@@ -409,7 +412,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRf-Ye-LWK">
                                 <rect key="frame" x="12" y="311" width="351" height="44"/>
-                                <color key="backgroundColor" red="0.25098040700000002" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.039279513889999999" green="0.54652778970000004" blue="0.91243489580000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="QGr-cA-vSL"/>
                                 </constraints>
@@ -471,6 +474,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="go"/>
+                                <connections>
+                                    <outlet property="delegate" destination="3vq-9O-f0R" id="eNN-25-EtU"/>
+                                </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="تم أرسال رقم التفعيل للرقم" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zza-qm-E5s">
                                 <rect key="frame" x="9" y="72" width="350" height="64"/>
@@ -489,7 +495,7 @@
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9U5-rf-bAm">
                                 <rect key="frame" x="166" y="195" width="37" height="37"/>
-                                <color key="color" red="0.25098040700000002" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="color" red="0.039279513889999999" green="0.54652778970000004" blue="0.91243489580000003" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoM-Mn-5w7">
                                 <rect key="frame" x="16" y="365" width="343" height="21"/>
@@ -502,7 +508,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYS-1o-MU0">
                                 <rect key="frame" x="16" y="311" width="343" height="44"/>
-                                <color key="backgroundColor" red="0.25098040700000002" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.039279513889999999" green="0.54652778970000004" blue="0.91243489580000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="تأكيد">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

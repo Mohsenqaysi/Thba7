@@ -122,6 +122,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         return cell
     }
     
+    
     // MARK: The user chooses for the order
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = self.productInfoTBV.cellForItem(at: indexPath) as! OrderPageVCCell
@@ -129,6 +130,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         if indexPath.row == 0 {
             StringPickerPopover(title: "أختر الحجم", choices: sheepsSizes)
                 .setSize(width: 250.0, height: 150.0)
+                .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.size = selectedString
@@ -144,6 +146,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         if indexPath.row == 1 {
             StringPickerPopover(title: "أختر التقطيع", choices: sheepCuts)
                 .setSize(width: 250.0, height: 150.0)
+                .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.cutTypee = selectedString
@@ -158,6 +161,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         if indexPath.row == 2 {
             StringPickerPopover(title: "أختر الكمية", choices: ["1","2","3","4","5","6","7","8","9","10"])
                 .setSize(width: 250.0, height: 150.0)
+                .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
                     self.userOrder.quantity = selectedString

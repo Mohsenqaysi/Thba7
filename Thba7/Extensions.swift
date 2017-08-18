@@ -81,6 +81,7 @@ extension UIView {
         self.layer.shadowOpacity = 0.8
     }
 }
+
 extension UIView {
     
     func anchorToTop(_
@@ -180,5 +181,4 @@ extension Bool {
         let needsConnection = flags.contains(.connectionRequired)
         return (isReachable && !needsConnection)
     }
-    
 }

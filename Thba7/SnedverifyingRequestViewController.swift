@@ -17,7 +17,10 @@ class SnedverifyingRequestViewController: UIViewController {
     @IBOutlet weak var loader: UIActivityIndicatorView!
     
     var verification: Verification!
+    var textFieldPhoneNumberFormatter: TextFieldPhoneNumberFormatter!
     var applicationKey = "48b2c223-0c89-4876-9f0c-913d99ef135a"
+    var countryCode = "+353"
+    var formatedNumber = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +42,20 @@ class SnedverifyingRequestViewController: UIViewController {
         
         guard let number = phoneNumberTextField.text, phoneNumberTextField.text != "" else {
             print("Phone Number is Worng")
+            self.loader.startAnimating()
             return
         }
-        verification = SMSVerification(applicationKey, phoneNumber: number)
-        //        verification = CalloutVerification(applicationKey, phoneNumber: number, custom: "Mohsen")
+        
+        formatedNumber = countryCode.appending(number)
+        print("Formated #: \(formatedNumber)")
+        
+        verification = SMSVerification(applicationKey, phoneNumber: formatedNumber)
         verification.initiate { (respnse, error) in
             
             if error != nil {
                 print("SMSVerification Erro Someing is wrong: \(respnse.success)")
                 print(error.debugDescription)
             }
-            
-//            guard let result = respnse.success else {
-//                print("Someing is wrong: \(respnse.success)")
-//                return
-//            }
-            
             print("result: \(respnse.success)")
             self.performSegue(withIdentifier: self.segueKey, sender: sender)
         }
@@ -68,8 +69,10 @@ class SnedverifyingRequestViewController: UIViewController {
                     print("Phone Number is Worng")
                     return
                 }
+                
                 vc.verification = self.verification
-                vc.number = number
+                vc.number = formatedNumber
+                verification.cancel()
                 self.loader.isHidden = true
                 self.loader.stopAnimating()
             }
@@ -83,5 +86,10 @@ extension SnedverifyingRequestViewController : UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let numberInput = phoneNumberTextField.text else { return true }
+        let newLength = numberInput.characters.count + string.characters.count - range.length
+        return newLength <= 15
+    }
 }
-

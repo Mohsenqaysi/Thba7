@@ -19,7 +19,6 @@ class VerifySMSCodeViewController: UIViewController {
     var verification: Verification!
     var applicationKey = "48b2c223-0c89-4876-9f0c-913d99ef135a"
     var number = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         loader.isHidden = true
@@ -53,9 +52,16 @@ class VerifySMSCodeViewController: UIViewController {
 }
 
 
-extension VerifySMSCodeViewController : UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+extension VerifySMSCodeViewController: UITextFieldDelegate {
+    
+    func phoneNumberTextField(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let numberInput = codeTextField.text else { return true }
+        let newLength = numberInput.characters.count + string.characters.count - range.length
+        return newLength <= 4
     }
 }
