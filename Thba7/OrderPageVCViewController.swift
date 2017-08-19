@@ -75,7 +75,7 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     // MARK: Perper for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.segueUserInfoPageVCIdentifier {
-            if let vc = segue.destination as? UserInfoPageVC {
+            if let vc = segue.destination as? UserInfoTableViewController {
                 let backItem = UIBarButtonItem()
                 backItem.title = "رجوع"
                 navigationItem.backBarButtonItem = backItem

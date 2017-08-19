@@ -9,87 +9,98 @@
 import UIKit
 
 class UserInfoTableViewController: UITableViewController {
-
+    
+    var passedOrderData = [String]()
+    let cellID = "cell"
+    let FinalCollectionViewCellID = "collectionViewCell"
+    var array: [String] = ["Hi", "Alex", "Mohsen"]
+    @IBOutlet var tableVC: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var firstNmae: UITextField!
+    @IBOutlet weak var lastNmae: UITextField!
+    @IBOutlet weak var finalOrderTableView: UITableView!
+    
+    @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet weak var addressSection: UITableViewCell!
+    @IBOutlet weak var userAddress: UITextView!
+    @IBOutlet weak var confiremedUserPhoneNumberLabel: UILabel!
+    @IBOutlet weak var confiremedUserPhoneNumberIcon: UIImageView!
+    @IBOutlet weak var confiremedUserPhoneNumberButtom: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.reloadData()
+        
+        let nib = UINib(nibName: "FinalOrderCollectionViewCell", bundle: nil)
+        self.collectionView.register(nib, forCellWithReuseIdentifier: FinalCollectionViewCellID)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        mapButton.layer.cornerRadius = mapButton.frame.size.height / 2
+        confiremedUserPhoneNumberButtom.viewCardTheme()
+        tableView.viewCardTheme()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 260
     }
+    
+    @IBAction func placeOrderButton(_ sender: UIButton) {
+        
+        print(collectionView.contentSize.height)
+        print(collectionView.frame.height * CGFloat(array.count))
+    }
+}
 
+extension UserInfoTableViewController {
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return array.count
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.textAlignment = .center
+            headerView.textLabel?.textColor = UIColor(hex: "6D6D6D")
+        }
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    //    override  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //
+    //        switch indexPath.section {
+    //        case 0:
+    //            return CGFloat(260)
+    //        case 1:
+    //            return CGFloat(130)
+    //        case 2:
+    //            return CGFloat(collectionView.frame.size.height * CGFloat(array.count))
+    //        default:
+    //            return CGFloat(44)
+    //        }
+    //    }
 }
+
+extension UserInfoTableViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let collectioCell = collectionView.dequeueReusableCell(withReuseIdentifier: FinalCollectionViewCellID, for: indexPath) as! FinalOrderCollectionViewCell
+        collectioCell.label.text = passedOrderData[indexPath.item]
+        return collectioCell
+    }
+}
+

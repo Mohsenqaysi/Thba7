@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		20B218E991FBAFFB4BFF4F6C /* Pods_Thba7.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */; };
 		FC0DDDF11F2F53AC00B16B2B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */; };
+		FC12C4881F48EB9C007958BE /* FinalOrderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12C4861F48EB9C007958BE /* FinalOrderCollectionViewCell.swift */; };
+		FC12C4891F48EB9C007958BE /* FinalOrderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC12C4871F48EB9C007958BE /* FinalOrderCollectionViewCell.xib */; };
 		FC169A1A1F3764E900756314 /* OrderPageVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC169A191F3764E900756314 /* OrderPageVCCell.swift */; };
 		FC3C3CA91F422E52002D542C /* SnedverifyingRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */; };
 		FC3C3CAA1F422E52002D542C /* VerifySMSCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */; };
@@ -35,6 +37,8 @@
 		7DCABE7E95F210EDD3450D63 /* Pods-Thba7.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thba7.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thba7/Pods-Thba7.debug.xcconfig"; sourceTree = "<group>"; };
 		DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thba7.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC12C4861F48EB9C007958BE /* FinalOrderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalOrderCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC12C4871F48EB9C007958BE /* FinalOrderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalOrderCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC169A191F3764E900756314 /* OrderPageVCCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPageVCCell.swift; sourceTree = "<group>"; };
 		FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnedverifyingRequestViewController.swift; sourceTree = "<group>"; };
 		FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifySMSCodeViewController.swift; sourceTree = "<group>"; };
@@ -87,12 +91,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FC12C48C1F48F0B0007958BE /* Order Cell's */ = {
+			isa = PBXGroup;
+			children = (
+				FC9A5BC01F478A6C00D03BA2 /* UserInfoTableViewController.swift */,
+				FC12C4861F48EB9C007958BE /* FinalOrderCollectionViewCell.swift */,
+				FC12C4871F48EB9C007958BE /* FinalOrderCollectionViewCell.xib */,
+			);
+			name = "Order Cell's";
+			sourceTree = "<group>";
+		};
 		FC3C3CA61F422E3E002D542C /* UserNumber VC */ = {
 			isa = PBXGroup;
 			children = (
 				FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */,
 				FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */,
-				FC9A5BC01F478A6C00D03BA2 /* UserInfoTableViewController.swift */,
 			);
 			name = "UserNumber VC";
 			sourceTree = "<group>";
@@ -116,6 +129,7 @@
 				FCEDDC091F38A17F00571E82 /* UserInfoPageVC.swift */,
 				FC73F6DD1F33464900008767 /* MapVC.swift */,
 				FC99DC0F1F3B78E80013A4B7 /* PickedPlacesVC.swift */,
+				FC12C48C1F48F0B0007958BE /* Order Cell's */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -240,6 +254,7 @@
 				FC7B4F0E1F2E504700970CFE /* LaunchScreen.storyboard in Resources */,
 				FC0DDDF11F2F53AC00B16B2B /* GoogleService-Info.plist in Resources */,
 				FC7B4F0B1F2E504700970CFE /* Assets.xcassets in Resources */,
+				FC12C4891F48EB9C007958BE /* FinalOrderCollectionViewCell.xib in Resources */,
 				FC7B4F091F2E504700970CFE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +341,7 @@
 			files = (
 				FC3C3CAA1F422E52002D542C /* VerifySMSCodeViewController.swift in Sources */,
 				FC99DC101F3B78E80013A4B7 /* PickedPlacesVC.swift in Sources */,
+				FC12C4881F48EB9C007958BE /* FinalOrderCollectionViewCell.swift in Sources */,
 				FC7B4F041F2E504700970CFE /* AppDelegate.swift in Sources */,
 				FC7A55651F2F59140039355B /* HomeCV.swift in Sources */,
 				FC5E9EEC1F38DEFA0049F810 /* Order.swift in Sources */,
