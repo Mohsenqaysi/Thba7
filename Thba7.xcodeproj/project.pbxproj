@@ -96,18 +96,17 @@
 			children = (
 				FC9A5BC01F478A6C00D03BA2 /* UserInfoTableViewController.swift */,
 				FC12C4861F48EB9C007958BE /* FinalOrderCollectionViewCell.swift */,
-				FC12C4871F48EB9C007958BE /* FinalOrderCollectionViewCell.xib */,
 			);
 			name = "Order Cell's";
 			sourceTree = "<group>";
 		};
-		FC3C3CA61F422E3E002D542C /* UserNumber VC */ = {
+		FC3C3CA61F422E3E002D542C /* SMS Handlers VC */ = {
 			isa = PBXGroup;
 			children = (
 				FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */,
 				FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */,
 			);
-			name = "UserNumber VC";
+			name = "SMS Handlers VC";
 			sourceTree = "<group>";
 		};
 		FC5E9EEA1F38DED80049F810 /* Models */ = {
@@ -121,14 +120,13 @@
 		FC7A55631F2F58E40039355B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC3C3CA61F422E3E002D542C /* UserNumber VC */,
+				FC3C3CA61F422E3E002D542C /* SMS Handlers VC */,
 				FC7A55641F2F59140039355B /* HomeCV.swift */,
 				FC7A55661F2F5A4D0039355B /* HomeCollectionViewCell.swift */,
 				FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */,
 				FC169A191F3764E900756314 /* OrderPageVCCell.swift */,
 				FCEDDC091F38A17F00571E82 /* UserInfoPageVC.swift */,
-				FC73F6DD1F33464900008767 /* MapVC.swift */,
-				FC99DC0F1F3B78E80013A4B7 /* PickedPlacesVC.swift */,
+				FCEEB8481F4A441100686C8B /* Map VC */,
 				FC12C48C1F48F0B0007958BE /* Order Cell's */,
 			);
 			name = Controllers;
@@ -156,8 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				FC7B4F031F2E504700970CFE /* AppDelegate.swift */,
-				FC5E9EEA1F38DED80049F810 /* Models */,
 				FC9AC5A41F35513A0001D464 /* Helpper */,
+				FC5E9EEA1F38DED80049F810 /* Models */,
 				FC7A55631F2F58E40039355B /* Controllers */,
 				FC9AC5A51F3551530001D464 /* Views */,
 				FC7B4F0A1F2E504700970CFE /* Assets.xcassets */,
@@ -182,9 +180,19 @@
 			isa = PBXGroup;
 			children = (
 				FC7A55671F2F5A4E0039355B /* HomeCollectionViewCell.xib */,
+				FC12C4871F48EB9C007958BE /* FinalOrderCollectionViewCell.xib */,
 				FC7B4F071F2E504700970CFE /* Main.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		FCEEB8481F4A441100686C8B /* Map VC */ = {
+			isa = PBXGroup;
+			children = (
+				FC73F6DD1F33464900008767 /* MapVC.swift */,
+				FC99DC0F1F3B78E80013A4B7 /* PickedPlacesVC.swift */,
+			);
+			name = "Map VC";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,7 +280,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/SinchVerification-Swift/SinchVerification.framework",
 				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyPickerPopover/SwiftyPickerPopover.framework",
@@ -283,7 +290,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SinchVerification.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyPickerPopover.framework",

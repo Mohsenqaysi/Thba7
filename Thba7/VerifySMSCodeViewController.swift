@@ -7,18 +7,25 @@
 //
 
 import UIKit
-import SinchVerification
+import Foundation
+import SwiftyJSON
 
 class VerifySMSCodeViewController: UIViewController {
+    struct UnwindIdentifier {
+        static let unwindTo_PhoneNumber_ID = "unwindTo_UserInfoTableViewController_PhoneNumber"
+    }
     
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var statusLabel: UILabel!
     
-    var verification: Verification!
-    var applicationKey = "48b2c223-0c89-4876-9f0c-913d99ef135a"
     var number = ""
+    let appID = "sejrLD_Wnr6HwJPHNbYVS29XvPO1gu" // Get it from the Nnifonic Website
+    
+    let numberVerifedText = "تم تأكيد رقمك ... شكراً"
+    let number_Not_VerifedText = "لم تم تأكيد رقمك ... الرجاء أدخال الرقم الصحيح"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loader.isHidden = true
@@ -26,26 +33,49 @@ class VerifySMSCodeViewController: UIViewController {
         self.codeTextField.delegate = self
     }
     
+    func codeVerification() {
+        
+        
+    }
+    
     @IBAction func verifyButton(_ sender: Any) {
         self.loader.isHidden = false
         self.loader.startAnimating()
+        
+        let url = URL(string: "http://api.unifonic.com/rest/Verify/VerifyNumber")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         guard let code = codeTextField.text, codeTextField.text != "" else {
             print("Code Number is Worng")
             return
         }
-        verification.verify(code) { (staus, err) in
-            if err != nil {
-                print("Code Number is Worng")
-                self.statusLabel.text = " الكود المدخل غير صحيح"
-                self.loader.isHidden = true
-                self.loader.stopAnimating()
+        request.httpBody = "AppSid=\(appID)&Recipient=\(number)&PassCode=\(code)".data(using: .utf8)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response, let data = data {
+                let status = JSON(response)
+                let result = JSON(data)
+                print("Status: \(status)\nResult: \(result)\n\n")
+                if result["success"].stringValue == "true" {
+                    print(result["success"].stringValue)
+                    DispatchQueue.main.async {
+                        self.statusLabel.text = self.numberVerifedText
+                        self.performSegue(withIdentifier: UnwindIdentifier.unwindTo_PhoneNumber_ID, sender: self)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        print("Someting went worng")
+                        self.statusLabel.text = self.number_Not_VerifedText
+                        self.loader.isHidden = true
+                        self.loader.stopAnimating()
+                    }
+                }
             } else {
-                print("staus succsued: \(staus)")
-                self.statusLabel.text = " تم التسجيل بنجاح"
-                self.statusLabel.textColor = .green
-                self.performSegue(withIdentifier: "unwindToUserInfoPageVC", sender: self)
+                print(error!)
             }
         }
+        task.resume()
         self.loader.isHidden = true
         self.loader.stopAnimating()
     }

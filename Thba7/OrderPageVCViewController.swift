@@ -20,6 +20,7 @@ private struct Identifiers {
     static let segueUserInfoPageVCIdentifier: String = "segueUserInfoPageVC.ientifier"
 }
 
+
 class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var SheepImage: UIImageView!
@@ -31,7 +32,7 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     
     
     //MARK: Order instans
-    let userOrder = Order()
+    var userOrder = Order()
     var sheepsSizes = [String]()
     var sheepSizeCost = [String]()
     var sheepCuts = [String]()
@@ -81,17 +82,19 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
                 navigationItem.backBarButtonItem = backItem
                 // Pass the title
                 vc.title = "معلومات التوصيل"
-                vc.passedOrderData = choosesArray
+//                vc.passedOrderData = choosesArray
+                vc.userPlacedOrder = userOrder.getOrderInfo()
             }
         }
     }
     func loadData(){
         // MARK: Load the data inot the table view
         let url = URL(string: sheepOrderedImage)!
-        SheepImage.kf.indicatorType = .activity
         SheepImage.kf.setImage(with: url)
+        self.userOrder.productImage = SheepImage.image
+
         
-        // set the height of the TBV
+        // Set the height of the TBV
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
@@ -222,7 +225,9 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
 
         switch index {
         case 0..<10:
-            self.totalCostLabel.text = "\(quantity * cost) ريال"
+            let totalCost = Int(quantity * cost)
+            userOrder.totalCost = totalCost
+            self.totalCostLabel.text = "\(totalCost) ريال"
         default:
             self.totalCostLabel.text = ""
         }

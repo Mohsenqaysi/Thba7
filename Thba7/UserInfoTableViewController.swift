@@ -11,9 +11,10 @@ import UIKit
 class UserInfoTableViewController: UITableViewController {
     
     var passedOrderData = [String]()
+    var userPlacedOrder: [Order.OrderInfo] = []
     let cellID = "cell"
     let FinalCollectionViewCellID = "collectionViewCell"
-    var array: [String] = ["Hi", "Alex", "Mohsen"]
+
     @IBOutlet var tableVC: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -30,6 +31,11 @@ class UserInfoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        confiremedUserPhoneNumberLabel.isHidden = true
+        confiremedUserPhoneNumberIcon.isHidden = true
+        
+        print("user order: \(userPlacedOrder)")
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.reloadData()
@@ -50,7 +56,19 @@ class UserInfoTableViewController: UITableViewController {
     @IBAction func placeOrderButton(_ sender: UIButton) {
         
         print(collectionView.contentSize.height)
-        print(collectionView.frame.height * CGFloat(array.count))
+//        print(collectionView.frame.height * CGFloat(array.count))
+    }
+    
+    @IBAction func unwindTo_UserInfoTableViewController_PhoneNumber(segue: UIStoryboardSegue) {
+        confiremedUserPhoneNumberLabel.isHidden = false
+        confiremedUserPhoneNumberIcon.isHidden = false
+        
+        if let userVerifedPhoneNumber = segue.source as? VerifySMSCodeViewController {
+            self.confiremedUserPhoneNumberLabel.text = userVerifedPhoneNumber.number
+            self.confiremedUserPhoneNumberButtom.isEnabled = false
+            self.confiremedUserPhoneNumberButtom.layer.opacity = 0.5
+            print(userVerifedPhoneNumber.number)
+        }
     }
 }
 
@@ -60,7 +78,7 @@ extension UserInfoTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return array.count
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -93,13 +111,14 @@ extension UserInfoTableViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return userPlacedOrder.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let collectioCell = collectionView.dequeueReusableCell(withReuseIdentifier: FinalCollectionViewCellID, for: indexPath) as! FinalOrderCollectionViewCell
-        collectioCell.label.text = passedOrderData[indexPath.item]
+        collectioCell.image.image = userPlacedOrder[indexPath.item].productImage
+        collectioCell.label.text = userPlacedOrder[indexPath.item].name
         return collectioCell
     }
 }

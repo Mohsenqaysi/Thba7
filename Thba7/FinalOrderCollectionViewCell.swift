@@ -8,7 +8,10 @@
 
 import UIKit
 
+
+
 class FinalOrderCollectionViewCell: UICollectionViewCell {
+
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var label: UILabel!
 
@@ -16,5 +19,4 @@ class FinalOrderCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
 }

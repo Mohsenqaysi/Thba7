@@ -11,13 +11,13 @@ import Firebase
 import Spring
 
 
-private struct OrderInfo {
-    var animaleImage: UIImageView?
-    var animaleNameOrdered: String?
-    var size: String?
-    var cutType: String?
-    var countity: String?
-}
+//struct OrderInfo {
+//    var animaleImage: UIImageView?
+//    var animaleNameOrdered: String?
+//    var size: String?
+//    var cutType: String?
+//    var countity: String?
+//}
 
 class UserInfoPageVC: UIViewController, UIGestureRecognizerDelegate {
     
