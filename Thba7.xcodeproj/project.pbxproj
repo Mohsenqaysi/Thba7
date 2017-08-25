@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		20B218E991FBAFFB4BFF4F6C /* Pods_Thba7.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */; };
-		FC0DDDF11F2F53AC00B16B2B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */; };
 		FC12C4881F48EB9C007958BE /* FinalOrderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12C4861F48EB9C007958BE /* FinalOrderCollectionViewCell.swift */; };
 		FC12C4891F48EB9C007958BE /* FinalOrderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC12C4871F48EB9C007958BE /* FinalOrderCollectionViewCell.xib */; };
 		FC169A1A1F3764E900756314 /* OrderPageVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC169A191F3764E900756314 /* OrderPageVCCell.swift */; };
 		FC3C3CA91F422E52002D542C /* SnedverifyingRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */; };
 		FC3C3CAA1F422E52002D542C /* VerifySMSCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */; };
+		FC470F151F4F7E9900A33FFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC470F141F4F7E9900A33FFF /* GoogleService-Info.plist */; };
 		FC5E9EEC1F38DEFA0049F810 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9EEB1F38DEFA0049F810 /* Order.swift */; };
 		FC682F4E1F2F9E0F007D5955 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC682F4D1F2F9E0F007D5955 /* Extensions.swift */; };
 		FC73F6DE1F33464900008767 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73F6DD1F33464900008767 /* MapVC.swift */; };
@@ -36,12 +36,12 @@
 		32119CFA4E74804B71EF7094 /* Pods-Thba7.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thba7.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thba7/Pods-Thba7.release.xcconfig"; sourceTree = "<group>"; };
 		7DCABE7E95F210EDD3450D63 /* Pods-Thba7.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thba7.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thba7/Pods-Thba7.debug.xcconfig"; sourceTree = "<group>"; };
 		DA965AA56C265CF9805CE16E /* Pods_Thba7.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thba7.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC12C4861F48EB9C007958BE /* FinalOrderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalOrderCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC12C4871F48EB9C007958BE /* FinalOrderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalOrderCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC169A191F3764E900756314 /* OrderPageVCCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPageVCCell.swift; sourceTree = "<group>"; };
 		FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnedverifyingRequestViewController.swift; sourceTree = "<group>"; };
 		FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifySMSCodeViewController.swift; sourceTree = "<group>"; };
+		FC470F141F4F7E9900A33FFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC5E9EEB1F38DEFA0049F810 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		FC682F4D1F2F9E0F007D5955 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FC73F6DD1F33464900008767 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				FC7B4F0A1F2E504700970CFE /* Assets.xcassets */,
 				FC7B4F0C1F2E504700970CFE /* LaunchScreen.storyboard */,
 				FC7B4F0F1F2E504700970CFE /* Info.plist */,
-				FC0DDDF01F2F53AC00B16B2B /* GoogleService-Info.plist */,
+				FC470F141F4F7E9900A33FFF /* GoogleService-Info.plist */,
 			);
 			path = Thba7;
 			sourceTree = "<group>";
@@ -260,10 +260,10 @@
 			files = (
 				FC7A55691F2F5A4E0039355B /* HomeCollectionViewCell.xib in Resources */,
 				FC7B4F0E1F2E504700970CFE /* LaunchScreen.storyboard in Resources */,
-				FC0DDDF11F2F53AC00B16B2B /* GoogleService-Info.plist in Resources */,
 				FC7B4F0B1F2E504700970CFE /* Assets.xcassets in Resources */,
 				FC12C4891F48EB9C007958BE /* FinalOrderCollectionViewCell.xib in Resources */,
 				FC7B4F091F2E504700970CFE /* Main.storyboard in Resources */,
+				FC470F151F4F7E9900A33FFF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

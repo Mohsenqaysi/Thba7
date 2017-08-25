@@ -57,7 +57,7 @@ var zoomLevel: Float = 15.0
 class MapVC: UIViewController, GMSMapViewDelegate {
     
     @IBOutlet weak var searchResultsItemButton: UIBarButtonItem!
-    //    let vc = PickNearestPlaceTVC()
+    let custommarkerView = CustomMarker()
     let key = "AIzaSyD1alfLEREzjLBq8AyWPURxqvQ1bv_2TCo"
     var mapView: GMSMapView!
     var currentLocation: CLLocationCoordinate2D?
@@ -102,34 +102,22 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         locationManager.delegate = self
         placesClient = GMSPlacesClient.shared()
         createMap()
-        //        marker.isDraggable = true
         
-        /*
-         // Create a center-fix marker
-         
-         let circleView = CustomMarker()
-         view.addSubview(circleView)
-         //        view.bringSubview(toFront: circleView)
-         circleView.translatesAutoresizingMaskIntoConstraints = false
-         let heightConstraint = NSLayoutConstraint(item: circleView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
-         let widthConstraint = NSLayoutConstraint(item: circleView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
-         let centerXConstraint = NSLayoutConstraint(item: circleView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
-         let centerYConstraint = NSLayoutConstraint(item: circleView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
-         NSLayoutConstraint.activate([heightConstraint, widthConstraint, centerXConstraint, centerYConstraint])
-         
-         view.updateConstraints()
-         */
+       /*
+        // Create a center-fix marker
         
-        //        let pressGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePress))
-        //        view.addGestureRecognizer(pressGestureRecognizer)
+        view.addSubview(custommarkerView)
+        //        view.bringSubview(toFront: custommarkerView)
+        custommarkerView.translatesAutoresizingMaskIntoConstraints = false
+        let heightConstraint = NSLayoutConstraint(item: custommarkerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+        let widthConstraint = NSLayoutConstraint(item: custommarkerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+        let centerXConstraint = NSLayoutConstraint(item: custommarkerView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+        let centerYConstraint = NSLayoutConstraint(item: custommarkerView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([heightConstraint, widthConstraint, centerXConstraint, centerYConstraint])
+        
+        view.updateConstraints()
+        */
     }
-    
-    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //        print("ended")
-    //        let lastLocation = CLLocationCoordinate2D(latitude: (locations.last?.coordinate.latitude)!, longitude:  (locations.last?.coordinate.longitude)!)
-    ////        fetchNearestPlaceAroundCoordinate(coordinates: lastLocation)
-    //
-    //    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -178,13 +166,22 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         // Pass the new location and fetch the JSON data
         // with: "formatted_address" and "place_id"
         fetchNearestPlaceAroundCoordinate(coordinates: currentLocation!)
+        
+//        findUserLocationAndDropPin()
+    }
+    
+    func findUserLocationAndDropPin(){
+        let userLocationCoordinates = CLLocationCoordinate2DMake((locationManager.location?.coordinate.latitude)!, (locationManager.location?.coordinate.longitude)!)
+        
+        let newMarkerPosion = GMSCameraPosition.camera(withTarget: userLocationCoordinates, zoom: zoomLevel)
+        mapView.animate(to: newMarkerPosion)
     }
     
     func createMap() {
         
         mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+        marker.iconView = custommarkerView
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self
@@ -204,19 +201,12 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     
     func createMarker(mapView: GMSMapView, coordinates: CLLocationCoordinate2D, title: String?, subtitle: String? ) {
         // Creates a marker in the center of the map.
-        marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude , longitude: coordinates.longitude)
+        marker.position = coordinates//CLLocationCoordinate2D(latitude: coordinates.latitude , longitude: coordinates.longitude)
         marker.title = title
         marker.snippet = subtitle
+//        mapView.selectedMarker = marker
         marker.map = mapView
     }
-    
-    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        print("new location: \(position.target.latitude),\(position.target.longitude)")
-        self.createMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
-        //MARK: Update the currentLocation realTime
-        currentLocation = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
-    }
-    
     
     
     // MARK: Handel JSON data
@@ -250,9 +240,11 @@ class MapVC: UIViewController, GMSMapViewDelegate {
             let pickedLocation = CLLocationCoordinate2D(latitude: lat!, longitude: lng!)
             let title = location.nearestPickedPlaceByUser?.nearByPlace
             let subtitle = location.nearestPickedPlaceByUser?.locationAddress
-            let newMarkerPosion = GMSCameraPosition.camera(withLatitude: lat!, longitude: lng!, zoom: zoomLevel)
+            let newMarkerPosion = GMSCameraPosition.camera(withLatitude: lat!, longitude: lng!, zoom: 18)
             mapView.animate(to: newMarkerPosion)
-            self.createMarker(mapView: mapView, coordinates: pickedLocation ,title:title , subtitle: subtitle)
+            DispatchQueue.main.async {
+            self.createMarker(mapView: self.mapView, coordinates: pickedLocation ,title:title , subtitle: subtitle)
+            }
         }
     }
     
@@ -298,25 +290,32 @@ class MapVC: UIViewController, GMSMapViewDelegate {
 
 extension MapVC: CLLocationManagerDelegate {
     
-    /*
-     //    // Handle incoming location events.
-     //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-     //        let location: CLLocation = locations.last!
-     //        print("Location: \(location)")
-     //
-     //        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-     //                                              longitude: location.coordinate.longitude,
-     //                                              zoom: zoomLevel)
-     //        if mapView.isHidden {
-     //            mapView.isHidden = false
-     //            mapView.camera = camera
-     //        } else {
-     //            mapView.animate(to: camera)
-     //        }
-     //        // Populate the array with the list of likely places.
-     //        //        likelyPlaces()
-     //    }
-     */
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location: CLLocation = locations.last!
+        print("Current_Location: \(location)")
+        
+        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                              longitude: location.coordinate.longitude,
+                                              zoom: zoomLevel)
+        if mapView.isHidden {
+            mapView.isHidden = false
+            mapView.camera = camera
+        } else {
+            mapView.animate(to: camera)
+        }
+    }
+
+    //MARK: didChange
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        print("new location: \(position.target.latitude) \(position.target.longitude)")
+//                mapView.animate(to: position)
+        self.createMarker(mapView: mapView, coordinates: position.target, title: nil, subtitle: nil)
+        //MARK: Update the currentLocation realTime
+        currentLocation = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
+        
+    }
+    
     
     // Populate the array with the list of likely places.
     
