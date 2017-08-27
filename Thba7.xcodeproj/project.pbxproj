@@ -14,6 +14,8 @@
 		FC3C3CA91F422E52002D542C /* SnedverifyingRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */; };
 		FC3C3CAA1F422E52002D542C /* VerifySMSCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */; };
 		FC470F151F4F7E9900A33FFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC470F141F4F7E9900A33FFF /* GoogleService-Info.plist */; };
+		FC5CA1C81F534EBC003C42DC /* OrderItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CA1C71F534EBC003C42DC /* OrderItems.swift */; };
+		FC5CA1CA1F535337003C42DC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CA1C91F535337003C42DC /* DataStore.swift */; };
 		FC5E9EEC1F38DEFA0049F810 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9EEB1F38DEFA0049F810 /* Order.swift */; };
 		FC682F4E1F2F9E0F007D5955 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC682F4D1F2F9E0F007D5955 /* Extensions.swift */; };
 		FC73F6DE1F33464900008767 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73F6DD1F33464900008767 /* MapVC.swift */; };
@@ -42,6 +44,8 @@
 		FC3C3CA71F422E52002D542C /* SnedverifyingRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnedverifyingRequestViewController.swift; sourceTree = "<group>"; };
 		FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifySMSCodeViewController.swift; sourceTree = "<group>"; };
 		FC470F141F4F7E9900A33FFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC5CA1C71F534EBC003C42DC /* OrderItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderItems.swift; sourceTree = "<group>"; };
+		FC5CA1C91F535337003C42DC /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		FC5E9EEB1F38DEFA0049F810 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		FC682F4D1F2F9E0F007D5955 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FC73F6DD1F33464900008767 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				FC5E9EEB1F38DEFA0049F810 /* Order.swift */,
+				FC5CA1C91F535337003C42DC /* DataStore.swift */,
+				FC5CA1C71F534EBC003C42DC /* OrderItems.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -120,7 +126,6 @@
 		FC7A55631F2F58E40039355B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC3C3CA61F422E3E002D542C /* SMS Handlers VC */,
 				FC7A55641F2F59140039355B /* HomeCV.swift */,
 				FC7A55661F2F5A4D0039355B /* HomeCollectionViewCell.swift */,
 				FCC456731F3232C200C24D79 /* OrderPageVCViewController.swift */,
@@ -172,6 +177,7 @@
 				FC682F4D1F2F9E0F007D5955 /* Extensions.swift */,
 				FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */,
 				FCA7C5BF1F39179E00B75915 /* CustomMarker.swift */,
+				FC3C3CA61F422E3E002D542C /* SMS Handlers VC */,
 			);
 			name = Helpper;
 			sourceTree = "<group>";
@@ -352,6 +358,8 @@
 				FC7A55651F2F59140039355B /* HomeCV.swift in Sources */,
 				FC5E9EEC1F38DEFA0049F810 /* Order.swift in Sources */,
 				FC169A1A1F3764E900756314 /* OrderPageVCCell.swift in Sources */,
+				FC5CA1CA1F535337003C42DC /* DataStore.swift in Sources */,
+				FC5CA1C81F534EBC003C42DC /* OrderItems.swift in Sources */,
 				FCA7C5C01F39179E00B75915 /* CustomMarker.swift in Sources */,
 				FC7A55681F2F5A4E0039355B /* HomeCollectionViewCell.swift in Sources */,
 				FC73F6DE1F33464900008767 /* MapVC.swift in Sources */,
