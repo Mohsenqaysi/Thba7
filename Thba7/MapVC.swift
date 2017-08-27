@@ -240,7 +240,7 @@ class MapVC: UIViewController, GMSMapViewDelegate {
             let pickedLocation = CLLocationCoordinate2D(latitude: lat!, longitude: lng!)
             let title = location.nearestPickedPlaceByUser?.nearByPlace
             let subtitle = location.nearestPickedPlaceByUser?.locationAddress
-            let newMarkerPosion = GMSCameraPosition.camera(withLatitude: lat!, longitude: lng!, zoom: 18)
+            let newMarkerPosion = GMSCameraPosition.camera(withLatitude: lat!, longitude: lng!, zoom: zoomLevel + 1.0)
             mapView.animate(to: newMarkerPosion)
             DispatchQueue.main.async {
             self.createMarker(mapView: self.mapView, coordinates: pickedLocation ,title:title , subtitle: subtitle)
