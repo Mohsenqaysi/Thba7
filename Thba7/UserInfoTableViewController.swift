@@ -11,7 +11,7 @@ import UIKit
 class UserInfoTableViewController: UITableViewController {
     
     var passedOrderData = [String]()
-    var userPlacedOrder: [Order.OrderInfo] = []
+    var userPlacedOrder: [OrderItems] = []
     let cellID = "cell"
     let FinalCollectionViewCellID = "collectionViewCell"
 
@@ -117,7 +117,7 @@ extension UserInfoTableViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let collectioCell = collectionView.dequeueReusableCell(withReuseIdentifier: FinalCollectionViewCellID, for: indexPath) as! FinalOrderCollectionViewCell
-        collectioCell.image.image = userPlacedOrder[indexPath.item].productImage
+//        collectioCell.image.image = userPlacedOrder[indexPath.item].productImage
         collectioCell.label.text = userPlacedOrder[indexPath.item].name
         return collectioCell
     }

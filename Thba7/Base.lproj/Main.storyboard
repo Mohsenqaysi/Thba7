@@ -12,10 +12,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HomeCV-->
+        <!--Home View Contoller-->
         <scene sceneID="8wL-bc-ndM">
             <objects>
-                <collectionViewController id="zyT-yd-CJe" customClass="HomeCV" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="zyT-yd-CJe" customClass="HomeViewContoller" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="O1s-cO-ocn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="788" y="-252.32383808095955"/>
         </scene>
-        <!--Order PageVC View Controller-->
+        <!--Order Page View Controller-->
         <scene sceneID="i5H-nm-4wr">
             <objects>
-                <viewController storyboardIdentifier="UIStoryboardOrderSegue" id="gDF-qG-oq2" customClass="OrderPageVCViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIStoryboardOrderSegue" id="gDF-qG-oq2" customClass="OrderPageViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WXb-BQ-v82"/>
                         <viewControllerLayoutGuide type="bottom" id="JVW-we-qVM"/>
@@ -176,7 +176,7 @@
                                             <constraint firstAttribute="width" constant="162" id="Vww-ZI-lNt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        <state key="normal" title="أشتري الأن">
+                                        <state key="normal" title="أضف للعربة">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -589,10 +589,10 @@
             </objects>
             <point key="canvasLocation" x="-10.4" y="413.3433283358321"/>
         </scene>
-        <!--Snedverifying Request View Controller-->
+        <!--Sned Verifying Request View Controller-->
         <scene sceneID="ejB-IG-3sV">
             <objects>
-                <viewController id="gfB-gk-dke" customClass="SnedverifyingRequestViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gfB-gk-dke" customClass="SnedVerifyingRequestViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5qA-GY-mAW"/>
                         <viewControllerLayoutGuide type="bottom" id="WgH-tK-09N"/>

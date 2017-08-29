@@ -1,5 +1,5 @@
 //
-//  SnedverifyingRequestViewController.swift
+//  SnedVerifyingRequestViewController.swift
 //  SMS Verifying
 //
 //  Created by Mohsen Qaysi on 8/14/17.
@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import SwiftyJSON
 
-class SnedverifyingRequestViewController: UIViewController {
+class SnedVerifyingRequestViewController: UIViewController {
     
     let segueKey = "goToCodeVerifyPage"
     
@@ -91,7 +91,7 @@ class SnedverifyingRequestViewController: UIViewController {
     }
 }
 
-extension SnedverifyingRequestViewController : UITextFieldDelegate {
+extension SnedVerifyingRequestViewController : UITextFieldDelegate {
     
     func phoneNumberTextField(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -28,7 +28,7 @@ class OrderItems: NSObject, NSCoding  {
     private var _sizeIndex = ""
     private var _cutTypee = ""
     private var _quantity = "1"
-    private var _totalCost = "0"
+    private var _totalCost: Int = 0
     
     // Accessors
     var productImage: String {
@@ -80,7 +80,7 @@ class OrderItems: NSObject, NSCoding  {
         }
     }
     
-    var totalCost: String {
+    var totalCost: Int {
         get {
             return _totalCost
         } set {
@@ -91,8 +91,7 @@ class OrderItems: NSObject, NSCoding  {
     override init() {} // Empty constructor
     
     // init the instinces
-    init(image: String, name: String,cost: String,size: String,indexSize: String, cutTypee: String,quantity: String, totalCost: String) {
-       
+    init(image: String, name: String,cost: String,size: String,indexSize: String, cutTypee: String,quantity: String, totalCost: Int) {
         self._productImage = image
         self._name = name
         self._size = size
@@ -124,7 +123,7 @@ class OrderItems: NSObject, NSCoding  {
         if let cutTypeeObject = aDecoder.decodeObject(forKey: OrderItems_Keys.cutTypee) as? String {
             self._cutTypee = cutTypeeObject
         }
-        if let totalCostObject = aDecoder.decodeObject(forKey: OrderItems_Keys.totalCost) as? String {
+        if let totalCostObject = aDecoder.decodeObject(forKey: OrderItems_Keys.totalCost) as? Int {
             self._totalCost = totalCostObject
         }
     }

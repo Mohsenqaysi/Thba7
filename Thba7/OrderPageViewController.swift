@@ -1,5 +1,5 @@
 //
-//  OrderPageVCViewController.swift
+//  OrderPageViewController.swift
 //  Thba7
 //
 //  Created by Mohsen Qaysi on 8/2/17.
@@ -20,8 +20,7 @@ private struct Identifiers {
     static let segueUserInfoPageVCIdentifier: String = "segueUserInfoPageVC.ientifier"
 }
 
-
-class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class OrderPageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var SheepImage: UIImageView!
     @IBOutlet weak var backGroundView: UIView!
@@ -30,9 +29,10 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var totalCostLabel: UILabel!
     @IBOutlet weak var viewUnderBuyButton: UIView!
     
-    
+    //MARK: New OrderItem
+    var _order = OrderItems()
     //MARK: Order instans
-    var userOrder = Order()
+//    var userOrder = Order()
     var sheepsSizes = [String]()
     var sheepSizeCost = [String]()
     var sheepCuts = [String]()
@@ -50,9 +50,9 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Get the sheep name
-        self.userOrder.name = animaleName
+        self._order.name = animaleName
+//        self.userOrder.name = animaleName
         productInfoTBV.delegate = self
         productInfoTBV.viewCardTheme()
         buyNowButton.viewCardThemeWithCornerRadius(radius: 0)
@@ -65,9 +65,9 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     // MARK: Segue to the userInfo VC
     func handelBuyButton(){
         if !choosesArray.isEmpty {
-            if let info = userOrder.getOrderInfo() {
-                print(info)
-            }
+//            if let info = userOrder.getOrderInfo() {
+//                print(info)
+//            }
         } else {
             print("Place fill in the form fully")
         }
@@ -83,7 +83,7 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
                 // Pass the title
                 vc.title = "معلومات التوصيل"
 //                vc.passedOrderData = choosesArray
-                vc.userPlacedOrder = userOrder.getOrderInfo()
+//                vc.userPlacedOrder = userOrder.getOrderInfo()
             }
         }
     }
@@ -91,8 +91,7 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
         // MARK: Load the data inot the table view
         let url = URL(string: sheepOrderedImage)!
         SheepImage.kf.setImage(with: url)
-        self.userOrder.productImage = SheepImage.image
-
+        self._order.productImage = sheepOrderedImage // SheepImage.image
         
         // Set the height of the TBV
         navigationController?.navigationBar.tintColor = UIColor.white
@@ -112,7 +111,7 @@ class OrderPageVCViewController: UIViewController, UICollectionViewDataSource, U
     }
 }
 
-extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
+extension OrderPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productInfo.count
@@ -136,8 +135,11 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
-                    self.userOrder.size = selectedString
-                    self.userOrder.sizeIndex = selectedRow
+//                    self.userOrder.size = selectedString
+//                    self.userOrder.sizeIndex = selectedRow
+                    self._order.size = selectedString
+                    self._order.sizeIndex = String(describing: selectedRow)
+
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -152,7 +154,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
-                    self.userOrder.cutTypee = selectedString
+                     self._order.cutTypee = selectedString
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -167,7 +169,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
                 .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
-                    self.userOrder.quantity = selectedString
+                    self._order.quantity = selectedString
                     self.setTheCostLabel()
                     cell.userChoose?.text = selectedString
                 })
@@ -210,14 +212,14 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func setTheCostLabel() {
-        guard let index = userOrder.sizeIndex, userOrder.sizeIndex != nil else {
+        guard let index = Int(_order.sizeIndex) else {
             return
         }
         guard let cost = Int(sheepSizeCost[index]) else {
             print("error... no data")
             return
         }
-        guard let quantity =  Int(self.userOrder.quantity!), Int(self.userOrder.quantity!) != nil else {
+        guard let quantity =  Int(self._order.quantity), Int(self._order.quantity) != nil else {
             return
         }
         
@@ -226,7 +228,7 @@ extension OrderPageVCViewController: UICollectionViewDelegateFlowLayout {
         switch index {
         case 0..<10:
             let totalCost = Int(quantity * cost)
-            userOrder.totalCost = totalCost
+            _order.totalCost = totalCost
             self.totalCostLabel.text = "\(totalCost) ريال"
         default:
             self.totalCostLabel.text = ""

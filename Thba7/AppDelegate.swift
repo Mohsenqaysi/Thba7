@@ -15,7 +15,8 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
+    var Unifomica_Sid = "sejrLD_Wnr6HwJPHNbYVS29XvPO1gu" // Get it from the Nnifonic Website
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

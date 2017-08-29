@@ -21,7 +21,8 @@ class VerifySMSCodeViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     var number = ""
-    let appID = "sejrLD_Wnr6HwJPHNbYVS29XvPO1gu" // Get it from the Nnifonic Website
+    let appID = UIApplication.shared.delegate as! AppDelegate
+    //"sejrLD_Wnr6HwJPHNbYVS29XvPO1gu" // Get it from the Nnifonic Website
     
     let numberVerifedText = "تم تأكيد رقمك ... شكراً"
     let number_Not_VerifedText = "لم تم تأكيد رقمك ... الرجاء أدخال الرقم الصحيح"
@@ -50,7 +51,7 @@ class VerifySMSCodeViewController: UIViewController {
             print("Code Number is Worng")
             return
         }
-        request.httpBody = "AppSid=\(appID)&Recipient=\(number)&PassCode=\(code)".data(using: .utf8)
+        request.httpBody = "AppSid=\(appID.Unifomica_Sid)&Recipient=\(number)&PassCode=\(code)".data(using: .utf8)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let response = response, let data = data {

@@ -1,5 +1,5 @@
 //
-//  HomeCV.swift
+//  HomeViewContoller.swift
 //  Thba7
 //
 //  Created by Mohsen Qaysi on 7/31/17.
@@ -24,7 +24,7 @@ private struct Identifiers {
     static let segueOrderPageVCIdentifier: String = "orderPageVC.Identifier"
 }
 
-class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeViewContoller: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var buyButtoTag: Int?
     
@@ -154,7 +154,7 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if segue.identifier == Identifiers.segueOrderPageVCIdentifier {
-            if let vc = segue.destination as? OrderPageVCViewController {
+            if let vc = segue.destination as? OrderPageViewController {
                 vc.sheepOrderedImage = dataArray[buyButtoTag!].image!
                 let backItem = UIBarButtonItem()
                 backItem.title = "رجوع"
@@ -171,7 +171,8 @@ class HomeCV: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension HomeCV {
+//MARK: extension HomeCV
+extension HomeViewContoller {
     
     // MARK: UICollectionViewDataSource
     
