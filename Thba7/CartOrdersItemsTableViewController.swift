@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Spring
+
 
 class CartOrdersItemsTableViewController: UITableViewController {
     let TAB_BAR_INDEX = 1
@@ -14,8 +16,18 @@ class CartOrdersItemsTableViewController: UITableViewController {
     let cellID = "CartCell"
     var store = DataStore.sharedInstnce
     
+    let checkOutButton: SpringButton = {
+        let bnt = SpringButton(type: .system)
+        bnt.setTitle("أكمل عملية الشراء", for: .normal)
+        bnt.setTitleColor(.white, for: .normal)
+        bnt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        bnt.backgroundColor =  UIColor(red:0.25, green:0.79, blue:0.46, alpha:1.0)
+//        bnt.isEnabled = false
+        bnt.viewCardTheme()
+        return bnt
+    }()
+    
     @IBOutlet var cartTableView: UITableView!
-    var cartOrderItems  = ["Hi"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +37,7 @@ class CartOrdersItemsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("viewWillAppear: CartOrdersItemsTableViewController ... is loaded")
+       
         self.loadDate() // try to load data from user device
         let flag = store.shoppingItems.isEmpty
         
@@ -47,22 +60,39 @@ class CartOrdersItemsTableViewController: UITableViewController {
         }
     }
     
-    func noItemsInCartView(_ view: UIView) {
+    func noItemsInCartView(_ customView: UIView) {
         print("Sorry no items on the cart")
-        self.tableView.insertSubview(view, aboveSubview: self.tableView)
+        self.tableView.insertSubview(customView, aboveSubview: self.tableView)
         self.tableView.bringSubview(toFront: view)
         self.tableView.separatorStyle = .none
     }
     
-    func ItemsInCartView(_ view: UIView) {
+    func ItemsInCartView(_ customView: UIView) {
         print("Items on the cart ... are loading")
         // Register cell classes
+        customView.isHidden = true
         self.tableView.separatorStyle = .singleLine
         self.tableView.reloadData()
+        self.setUpCheckOutButton()
     }
     
     func loadDate(){
         HandelBadgeIndecatorTabBar().Update(tabBar: self.tabBarController?.tabBar)
+    }
+    
+    func setUpCheckOutButton(){
+    self.navigationController?.view.addSubview(checkOutButton)
+        guard let tabBarHeight = self.tabBarController?.tabBar.bounds.height.advanced(by: 12) else {
+        debugPrint("Cannot get the height of the: tabBarHeight")
+            return
+        }
+        print("tabBarHeight: ",tabBarHeight)
+        let superView = navigationController?.view
+       _ = checkOutButton.anchor(top: nil, left: superView?.leftAnchor, bottom: superView?.bottomAnchor, right: superView?.rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: tabBarHeight, rightConstant: 12, widthConstant: 0, heightConstant: 42)
+        
+        checkOutButton.animation = "fadeInUp"
+        //        checkOutButton.delay = 0.1
+        checkOutButton.animate()
     }
 }
 

@@ -9,6 +9,7 @@
 import UIKit
 
 class HandelBadgeIndecatorTabBar: NSObject {
+
     var store = DataStore.sharedInstnce
     
     func Update(tabBar: UITabBar? ) {
