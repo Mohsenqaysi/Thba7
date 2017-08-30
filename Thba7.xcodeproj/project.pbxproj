@@ -13,6 +13,10 @@
 		FC169A1A1F3764E900756314 /* OrderPageVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC169A191F3764E900756314 /* OrderPageVCCell.swift */; };
 		FC3C3CA91F422E52002D542C /* SnedVerifyingRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA71F422E52002D542C /* SnedVerifyingRequestViewController.swift */; };
 		FC3C3CAA1F422E52002D542C /* VerifySMSCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */; };
+		FC3EE1911F55AD04006651A4 /* NoOrderItemsOnTheCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3EE1901F55AD04006651A4 /* NoOrderItemsOnTheCart.swift */; };
+		FC3EE1931F55ADE3006651A4 /* CartOrdersItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3EE1921F55ADE3006651A4 /* CartOrdersItemsTableViewController.swift */; };
+		FC3EE1951F55BC94006651A4 /* HandelBadgeIndecatorTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3EE1941F55BC94006651A4 /* HandelBadgeIndecatorTabBar.swift */; };
+		FC3EE1981F55C59F006651A4 /* CartOrdersItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3EE1961F55C59F006651A4 /* CartOrdersItemsCell.swift */; };
 		FC470F151F4F7E9900A33FFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC470F141F4F7E9900A33FFF /* GoogleService-Info.plist */; };
 		FC5CA1C81F534EBC003C42DC /* OrderItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CA1C71F534EBC003C42DC /* OrderItems.swift */; };
 		FC5CA1CA1F535337003C42DC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CA1C91F535337003C42DC /* DataStore.swift */; };
@@ -43,6 +47,10 @@
 		FC169A191F3764E900756314 /* OrderPageVCCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPageVCCell.swift; sourceTree = "<group>"; };
 		FC3C3CA71F422E52002D542C /* SnedVerifyingRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnedVerifyingRequestViewController.swift; sourceTree = "<group>"; };
 		FC3C3CA81F422E52002D542C /* VerifySMSCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifySMSCodeViewController.swift; sourceTree = "<group>"; };
+		FC3EE1901F55AD04006651A4 /* NoOrderItemsOnTheCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoOrderItemsOnTheCart.swift; sourceTree = "<group>"; };
+		FC3EE1921F55ADE3006651A4 /* CartOrdersItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartOrdersItemsTableViewController.swift; sourceTree = "<group>"; };
+		FC3EE1941F55BC94006651A4 /* HandelBadgeIndecatorTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandelBadgeIndecatorTabBar.swift; sourceTree = "<group>"; };
+		FC3EE1961F55C59F006651A4 /* CartOrdersItemsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartOrdersItemsCell.swift; sourceTree = "<group>"; };
 		FC470F141F4F7E9900A33FFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC5CA1C71F534EBC003C42DC /* OrderItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderItems.swift; sourceTree = "<group>"; };
 		FC5CA1C91F535337003C42DC /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -110,6 +118,7 @@
 				FC7A55661F2F5A4D0039355B /* HomeCollectionViewCell.swift */,
 				FC169A191F3764E900756314 /* OrderPageVCCell.swift */,
 				FC12C4861F48EB9C007958BE /* FinalOrderCollectionViewCell.swift */,
+				FC3EE1961F55C59F006651A4 /* CartOrdersItemsCell.swift */,
 			);
 			name = "ViewContrller - Cell's";
 			sourceTree = "<group>";
@@ -131,6 +140,7 @@
 				FCC456731F3232C200C24D79 /* OrderPageViewController.swift */,
 				FCEDDC091F38A17F00571E82 /* UserInfoPageVC.swift */,
 				FC9A5BC01F478A6C00D03BA2 /* UserInfoTableViewController.swift */,
+				FC3EE1921F55ADE3006651A4 /* CartOrdersItemsTableViewController.swift */,
 				FC3EE18D1F559AFB006651A4 /* ViewContrller - Cell's */,
 				FCEEB8481F4A441100686C8B /* Map VC */,
 			);
@@ -177,7 +187,9 @@
 			children = (
 				FC682F4D1F2F9E0F007D5955 /* Extensions.swift */,
 				FC9AC5A21F354C470001D464 /* NoInternetConnectVC.swift */,
+				FC3EE1901F55AD04006651A4 /* NoOrderItemsOnTheCart.swift */,
 				FCA7C5BF1F39179E00B75915 /* CustomMarker.swift */,
+				FC3EE1941F55BC94006651A4 /* HandelBadgeIndecatorTabBar.swift */,
 			);
 			name = Helpper;
 			sourceTree = "<group>";
@@ -352,6 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC3C3CAA1F422E52002D542C /* VerifySMSCodeViewController.swift in Sources */,
+				FC3EE1931F55ADE3006651A4 /* CartOrdersItemsTableViewController.swift in Sources */,
+				FC3EE1911F55AD04006651A4 /* NoOrderItemsOnTheCart.swift in Sources */,
 				FC99DC101F3B78E80013A4B7 /* PickedPlacesVC.swift in Sources */,
 				FC12C4881F48EB9C007958BE /* FinalOrderCollectionViewCell.swift in Sources */,
 				FC7B4F041F2E504700970CFE /* AppDelegate.swift in Sources */,
@@ -360,7 +374,9 @@
 				FC169A1A1F3764E900756314 /* OrderPageVCCell.swift in Sources */,
 				FC5CA1CA1F535337003C42DC /* DataStore.swift in Sources */,
 				FC5CA1C81F534EBC003C42DC /* OrderItems.swift in Sources */,
+				FC3EE1951F55BC94006651A4 /* HandelBadgeIndecatorTabBar.swift in Sources */,
 				FCA7C5C01F39179E00B75915 /* CustomMarker.swift in Sources */,
+				FC3EE1981F55C59F006651A4 /* CartOrdersItemsCell.swift in Sources */,
 				FC7A55681F2F5A4E0039355B /* HomeCollectionViewCell.swift in Sources */,
 				FC73F6DE1F33464900008767 /* MapVC.swift in Sources */,
 				FC3C3CA91F422E52002D542C /* SnedVerifyingRequestViewController.swift in Sources */,

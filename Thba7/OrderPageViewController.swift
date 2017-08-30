@@ -29,6 +29,9 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var totalCostLabel: UILabel!
     @IBOutlet weak var viewUnderBuyButton: UIView!
     
+    var store = DataStore.sharedInstnce // this is used Golbally
+    let bagde = HandelBadgeIndecatorTabBar()
+
     //MARK: New OrderItem
     var _order = OrderItems()
     //MARK: Order instans
@@ -61,6 +64,7 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
         productInfoTBV.isScrollEnabled = false
         loadData()
         buyNowButton.addTarget(self, action: #selector(handelBuyButton), for: .touchUpInside)
+        
     }
     // MARK: Segue to the userInfo VC
     func handelBuyButton(){
@@ -68,6 +72,7 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
 //            if let info = userOrder.getOrderInfo() {
 //                print(info)
 //            }
+            self.saveData()
         } else {
             print("Place fill in the form fully")
         }
@@ -244,3 +249,34 @@ extension OrderPageViewController: UICollectionViewDelegateFlowLayout {
         self.enbaleBuyButton()
     }
 }
+
+extension OrderPageViewController {
+
+    func saveData(){ //, completed: (_ status: Bool) -> Void ){
+        // add it to the array
+        print("Oder to be saved: ", _order)
+        self.store.shoppingItems.append(_order)
+        NSKeyedArchiver.archiveRootObject(self.store.shoppingItems, toFile: String().filePath)
+        loadDate()
+    }
+    
+    private func loadDate(){
+        // if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of OrderItems
+        if let userOrders = NSKeyedUnarchiver.unarchiveObject(withFile: String().filePath) as? [OrderItems] {
+            self.store.shoppingItems = userOrders
+            guard let tabItems = self.tabBarController?.tabBar.items as NSArray! else {return}
+            bagde.UpdateBadge(tabBarControllerItems: tabItems, badgeCount: userOrders.count)
+        }
+    }
+}
+
+extension String {
+    
+    var filePath: String {
+        let manager = FileManager.default // get access to the user device File system
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        //        print("this is the url path in the documentDirectory \(String(describing: url))")
+        return url!.appendingPathComponent("Orders").path
+    }
+}
+

@@ -19,12 +19,16 @@ struct DataModel {
     let cuts: [String]
 }
 
+
 private struct Identifiers {
     static let homeVCCell: String = "HomeVCCell"
     static let segueOrderPageVCIdentifier: String = "orderPageVC.Identifier"
 }
 
 class HomeViewContoller: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var store = DataStore.sharedInstnce
+    //    let bagde = HandelBadgeIndecatorTabBar()
     
     var buyButtoTag: Int?
     
@@ -52,7 +56,13 @@ class HomeViewContoller: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad... is loaded: HomeViewContoller")
         loadMainView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print("viewWillAppear: HomeViewContoller ... is loaded")
+        loadDate()
     }
     
     func loadMainView(){
@@ -94,12 +104,12 @@ class HomeViewContoller: UICollectionViewController, UICollectionViewDelegateFlo
             var costsDictionary = [String]()
             var sizesDictionary = [String]()
             var cutsDictionary = [String]()
-
+            
             print("-----------------------------")
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 guard let restDict = rest.value as? [String: Any] else { continue }
                 let json = JSON(restDict)
-//                print(json)
+                //                print(json)
                 let image = json["image"].stringValue
                 let lablel = json["label"].stringValue
                 
@@ -134,8 +144,8 @@ class HomeViewContoller: UICollectionViewController, UICollectionViewDelegateFlo
             print("costs: \(costsDictionary)")
             print("sizes: \(sizesDictionary)")
             print("cuts: \(cutsDictionary)")
- 
-
+            
+            
             print("-----------------------------")
             self.loader.stopAnimating()
             self.collectionView?.reloadData()
@@ -152,7 +162,7 @@ class HomeViewContoller: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+        
         if segue.identifier == Identifiers.segueOrderPageVCIdentifier {
             if let vc = segue.destination as? OrderPageViewController {
                 vc.sheepOrderedImage = dataArray[buyButtoTag!].image!
@@ -200,5 +210,15 @@ extension HomeViewContoller {
         cell.buyButton.addTarget(self, action: #selector(moreToOderVC), for: .touchUpInside)
         cell.buyButton.tag = indexPath.item
         return cell
+    }
+    
+    func loadDate(){
+        // if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of OrderItems
+        if let userOrders = NSKeyedUnarchiver.unarchiveObject(withFile: String().filePath)
+            as? [OrderItems] {
+            self.store.shoppingItems = userOrders
+            guard let tabItems = self.tabBarController?.tabBar.items as NSArray! else {return}
+            HandelBadgeIndecatorTabBar().UpdateBadge(tabBarControllerItems: tabItems, badgeCount: userOrders.count)
+        }
     }
 }

@@ -18,6 +18,7 @@ class OrderItems: NSObject, NSCoding  {
         static let size = "size.key"
         static let sizeIndex = "sizeIndex.key"
         static let cutTypee = "cutTypee.key"
+        static let quantity = "quantity.key"
         static let totalCost = "cost.key"
     }
     
@@ -123,6 +124,9 @@ class OrderItems: NSObject, NSCoding  {
         if let cutTypeeObject = aDecoder.decodeObject(forKey: OrderItems_Keys.cutTypee) as? String {
             self._cutTypee = cutTypeeObject
         }
+        if let quantityTypeeObject = aDecoder.decodeObject(forKey: OrderItems_Keys.quantity) as? String {
+            self._quantity = quantityTypeeObject
+        }
         if let totalCostObject = aDecoder.decodeObject(forKey: OrderItems_Keys.totalCost) as? Int {
             self._totalCost = totalCostObject
         }
@@ -135,7 +139,7 @@ class OrderItems: NSObject, NSCoding  {
         aCoder.encode(_size, forKey: OrderItems_Keys.size)
         aCoder.encode(_sizeIndex, forKey: OrderItems_Keys.sizeIndex)
         aCoder.encode(_cutTypee, forKey: OrderItems_Keys.cutTypee)
+        aCoder.encode(_quantity, forKey: OrderItems_Keys.quantity)
         aCoder.encode(_totalCost, forKey: OrderItems_Keys.totalCost)
- 
     }
 }

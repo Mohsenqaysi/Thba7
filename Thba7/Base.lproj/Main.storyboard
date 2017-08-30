@@ -36,7 +36,7 @@
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="gDF-qG-oq2" kind="show" identifier="orderPageVC.Identifier" id="o1H-mA-26j"/>
+                                    <segue destination="gDF-qG-oq2" kind="show" identifier="orderPageVC.Identifier" id="ucR-RB-JD5"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -179,9 +179,6 @@
                                         <state key="normal" title="أضف للعربة">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="Md6-c2-4eM" kind="show" identifier="segueUserInfoPageVC.ientifier" id="12d-CW-BJK"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="8lb-Hg-v46">
                                         <rect key="frame" x="8" y="8" width="172" height="46"/>
@@ -229,6 +226,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khy-1W-wlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1681" y="-252"/>
+        </scene>
+        <!--Cart Orders Items Table View Controller-->
+        <scene sceneID="A9e-m1-Fw0">
+            <objects>
+                <tableViewController id="GVU-lf-gKL" customClass="CartOrdersItemsTableViewController" customModule="Thba7" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="151" sectionHeaderHeight="28" sectionFooterHeight="28" id="qQK-BA-zoQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartCell" rowHeight="150" id="GU2-Fh-AeC" customClass="CartOrdersItemsCell" customModule="Thba7" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GU2-Fh-AeC" id="ALx-6i-3id">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vI-vu-TOt">
+                                            <rect key="frame" x="52" y="19" width="156" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cut" translatesAutoresizingMaskIntoConstraints="NO" id="PDp-tZ-hOM">
+                                            <rect key="frame" x="216" y="48" width="21" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cut Type" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIq-dO-1bA">
+                                            <rect key="frame" x="52" y="48" width="156" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.84206742710000004" green="0.84206742710000004" blue="0.84206742710000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9Y-bn-tFu">
+                                            <rect key="frame" x="166" y="117" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YsQ-Og-FnS">
+                                            <rect key="frame" x="112" y="117" width="46" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="➖"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyX-a4-Eaw">
+                                            <rect key="frame" x="216" y="117" width="39" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="➕"/>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fZ4-YV-pn0">
+                                            <rect key="frame" x="291" y="19" width="76" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="orderCutTypeLabel" destination="JIq-dO-1bA" id="mXS-Rs-vI1"/>
+                                    <outlet property="orderImage" destination="fZ4-YV-pn0" id="fhO-sE-Dfa"/>
+                                    <outlet property="orderNameLabel" destination="3vI-vu-TOt" id="rOz-km-0bP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="GVU-lf-gKL" id="4eu-6y-Gyv"/>
+                            <outlet property="delegate" destination="GVU-lf-gKL" id="owq-7a-7NM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="yNA-Ng-m35"/>
+                    <connections>
+                        <outlet property="cartTableView" destination="qQK-BA-zoQ" id="RNw-P9-ke1"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nrv-cC-0aU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="928.79999999999995" y="402.54872563718146"/>
         </scene>
         <!--User Info Table View Controller-->
         <scene sceneID="r3F-8f-Bhr">
@@ -454,7 +529,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wrJ-xS-Ntk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2549.5999999999999" y="-251.87406296851577"/>
+            <point key="canvasLocation" x="5223.1999999999998" y="-302.24887556221893"/>
         </scene>
         <!--User Info PageVC-->
         <scene sceneID="TXT-aL-KHM">
@@ -472,7 +547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQC-Ng-Ug4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3278" y="-1267"/>
+            <point key="canvasLocation" x="5012" y="-1317"/>
         </scene>
         <!--MapVC-->
         <scene sceneID="ohk-Ra-4yn">
@@ -502,7 +577,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zyc-Wk-eHg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2550" y="933"/>
+            <point key="canvasLocation" x="5223.1999999999998" y="881.5592203898052"/>
         </scene>
         <!--Picked PlacesVC-->
         <scene sceneID="CoC-of-kIA">
@@ -534,7 +609,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6Y-FK-B1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5wd-3J-u8M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3302" y="933"/>
+            <point key="canvasLocation" x="5975.1999999999998" y="881.5592203898052"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Y4I-tL-TQs">
@@ -547,7 +622,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="afQ-0T-wcK" kind="relationship" relationship="viewControllers" id="rz5-mG-v5M"/>
-                        <segue destination="fHe-65-4Hh" kind="relationship" relationship="viewControllers" id="40f-1E-Ft0"/>
+                        <segue destination="bYz-as-lBl" kind="relationship" relationship="viewControllers" id="3n5-au-Urg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0kf-a9-u76" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -573,22 +648,6 @@
             </objects>
             <point key="canvasLocation" x="-8.8000000000000007" y="-251.42428785607197"/>
         </scene>
-        <!--من نحن-->
-        <scene sceneID="nhm-30-jer">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fHe-65-4Hh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="من نحن" image="iconInfo" id="sGb-LR-rA7"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bEg-c4-seD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bPo-Tr-QzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-10.4" y="413.3433283358321"/>
-        </scene>
         <!--Sned Verifying Request View Controller-->
         <scene sceneID="ejB-IG-3sV">
             <objects>
@@ -602,7 +661,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jz-Ct-v4G">
-                                <rect key="frame" x="16" y="72" width="343" height="336"/>
+                                <rect key="frame" x="16" y="28" width="343" height="336"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="O3F-yi-nsy">
                                         <rect key="frame" x="153" y="150" width="37" height="37"/>
@@ -685,7 +744,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSp-C1-pv8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3303" y="-252"/>
+            <point key="canvasLocation" x="5975.1999999999998" y="-303.14842578710648"/>
         </scene>
         <!--VerifySMS Code View Controller-->
         <scene sceneID="8Uo-EL-H5l">
@@ -700,7 +759,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6d-hz-Jxt">
-                                <rect key="frame" x="16" y="72" width="345" height="1071"/>
+                                <rect key="frame" x="16" y="28" width="345" height="1164"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="_ _ _ _ " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RgD-we-ozz">
                                         <rect key="frame" x="76" y="188" width="204" height="30"/>
@@ -798,12 +857,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iao-vc-5C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="uDL-0k-wlR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4132" y="-252.77361319340332"/>
+            <point key="canvasLocation" x="6804" y="-303.14842578710648"/>
+        </scene>
+        <!--سلة الطلبات-->
+        <scene sceneID="t7v-TE-CVo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bYz-as-lBl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="سلة الطلبات" image="cart_sheep" selectedImage="cart_sheep" id="QHH-In-GvE"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eZO-Kp-WEl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GVU-lf-gKL" kind="relationship" relationship="rootViewController" id="zW0-rQ-i2Q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Squ-VX-M2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10.4" y="402.54872563718146"/>
         </scene>
     </scenes>
     <resources>
+        <image name="cart_sheep" width="33" height="33"/>
+        <image name="cut" width="50" height="50"/>
         <image name="doneIcon" width="50" height="50"/>
-        <image name="iconInfo" width="25" height="25"/>
         <image name="iconSheep" width="25" height="25"/>
         <image name="logo" width="1504" height="1504"/>
         <image name="mapIcon" width="100" height="100"/>
