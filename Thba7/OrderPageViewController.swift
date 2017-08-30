@@ -30,16 +30,15 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var viewUnderBuyButton: UIView!
     
     var store = DataStore.sharedInstnce // this is used Golbally
-    let bagde = HandelBadgeIndecatorTabBar()
-
+    
     //MARK: New OrderItem
     var _order = OrderItems()
     //MARK: Order instans
-//    var userOrder = Order()
+    //    var userOrder = Order()
     var sheepsSizes = [String]()
     var sheepSizeCost = [String]()
     var sheepCuts = [String]()
-
+    
     
     var sheepOrderedImage: String = ""
     var animaleName: String = ""
@@ -55,7 +54,7 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
         super.viewDidLoad()
         // Get the sheep name
         self._order.name = animaleName
-//        self.userOrder.name = animaleName
+        //        self.userOrder.name = animaleName
         productInfoTBV.delegate = self
         productInfoTBV.viewCardTheme()
         buyNowButton.viewCardThemeWithCornerRadius(radius: 0)
@@ -69,9 +68,9 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
     // MARK: Segue to the userInfo VC
     func handelBuyButton(){
         if !choosesArray.isEmpty {
-//            if let info = userOrder.getOrderInfo() {
-//                print(info)
-//            }
+            //            if let info = userOrder.getOrderInfo() {
+            //                print(info)
+            //            }
             self.saveData()
         } else {
             print("Place fill in the form fully")
@@ -87,8 +86,8 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
                 navigationItem.backBarButtonItem = backItem
                 // Pass the title
                 vc.title = "معلومات التوصيل"
-//                vc.passedOrderData = choosesArray
-//                vc.userPlacedOrder = userOrder.getOrderInfo()
+                //                vc.passedOrderData = choosesArray
+                //                vc.userPlacedOrder = userOrder.getOrderInfo()
             }
         }
     }
@@ -140,11 +139,11 @@ extension OrderPageViewController: UICollectionViewDelegateFlowLayout {
                 .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
-//                    self.userOrder.size = selectedString
-//                    self.userOrder.sizeIndex = selectedRow
+                    //                    self.userOrder.size = selectedString
+                    //                    self.userOrder.sizeIndex = selectedRow
                     self._order.size = selectedString
                     self._order.sizeIndex = String(describing: selectedRow)
-
+                    
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -159,7 +158,7 @@ extension OrderPageViewController: UICollectionViewDelegateFlowLayout {
                 .setSelectedRow(0)
                 .setDoneButton(action: { (popover, selectedRow, selectedString) in
                     self.setUpLabelAndAddToarray(cell: cell, indexPath: indexPath, selectedString: selectedString)
-                     self._order.cutTypee = selectedString
+                    self._order.cutTypee = selectedString
                 })
                 .setCancelButton(action: { v in print("cancel")
                     cell.userChoose?.text = ""
@@ -229,7 +228,7 @@ extension OrderPageViewController: UICollectionViewDelegateFlowLayout {
         }
         
         print(index)
-
+        
         switch index {
         case 0..<10:
             let totalCost = Int(quantity * cost)
@@ -251,7 +250,7 @@ extension OrderPageViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension OrderPageViewController {
-
+    
     func saveData(){ //, completed: (_ status: Bool) -> Void ){
         // add it to the array
         print("Oder to be saved: ", _order)
@@ -261,12 +260,7 @@ extension OrderPageViewController {
     }
     
     private func loadDate(){
-        // if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of OrderItems
-        if let userOrders = NSKeyedUnarchiver.unarchiveObject(withFile: String().filePath) as? [OrderItems] {
-            self.store.shoppingItems = userOrders
-            guard let tabItems = self.tabBarController?.tabBar.items as NSArray! else {return}
-            bagde.UpdateBadge(tabBarControllerItems: tabItems, badgeCount: userOrders.count)
-        }
+        HandelBadgeIndecatorTabBar().Update(tabBar: self.tabBarController?.tabBar)
     }
 }
 

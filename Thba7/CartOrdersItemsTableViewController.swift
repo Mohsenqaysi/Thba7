@@ -16,7 +16,6 @@ class CartOrdersItemsTableViewController: UITableViewController {
     
     @IBOutlet var cartTableView: UITableView!
     var cartOrderItems  = ["Hi"]
-    let bagde = HandelBadgeIndecatorTabBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,12 +62,7 @@ class CartOrdersItemsTableViewController: UITableViewController {
     }
     
     func loadDate(){
-        // if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of OrderItems
-        if let userOrders = NSKeyedUnarchiver.unarchiveObject(withFile: String().filePath) as? [OrderItems] {
-            self.store.shoppingItems = userOrders
-            guard let tabItems = self.tabBarController?.tabBar.items as NSArray! else {return}
-            bagde.UpdateBadge(tabBarControllerItems: tabItems, badgeCount: userOrders.count)
-        }
+        HandelBadgeIndecatorTabBar().Update(tabBar: self.tabBarController?.tabBar)
     }
 }
 
