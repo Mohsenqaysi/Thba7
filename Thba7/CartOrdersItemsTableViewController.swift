@@ -10,7 +10,13 @@ import UIKit
 import Spring
 
 
-class CartOrdersItemsTableViewController: UITableViewController {
+class CartOrdersItemsTableViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    var emptyShopingCartView: UIView!
+    
+    let name = NSNotification.Name("Notification.name")
+    
     let TAB_BAR_INDEX = 1
     
     let cellID = "CartCell"
@@ -22,7 +28,7 @@ class CartOrdersItemsTableViewController: UITableViewController {
         bnt.setTitleColor(.white, for: .normal)
         bnt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         bnt.backgroundColor =  UIColor(red:0.25, green:0.79, blue:0.46, alpha:1.0)
-//        bnt.isEnabled = false
+        //        bnt.isEnabled = false
         bnt.viewCardTheme()
         return bnt
     }()
@@ -31,49 +37,66 @@ class CartOrdersItemsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // hide the tableView by default
+        self.tableView.isHidden = true
+        
+        // add the emptyShopingCartView to the main view as a subview
+        emptyShopingCartView = NoOrderItemsOnTheCart(frame: view.frame)
+        self.view.addSubview(emptyShopingCartView)
+//        checkDataAndLoadthem()
+
         print("viewDidLoad... is loaded: CartOrdersItemsTableViewController")
+        NotificationCenter.default.addObserver(self, selector: #selector(CartOrdersItemsTableViewController.methodOfReceivedNotification(notification:)), name: name, object: nil)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        checkDataAndLoadthem()
+    }
+    
+    //MARK: Notification observor call
+    func methodOfReceivedNotification(notification: Notification){
+        print("methodOfReceivedNotification... I was called")
+//        checkDataAndLoadthem()
+//        loadDate()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
+        print("methodOfReceivedNotification... I was deinit")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("viewWillAppear: CartOrdersItemsTableViewController ... is loaded")
-       
         self.loadDate() // try to load data from user device
+        checkDataAndLoadthem()
+    }
+    
+    func checkDataAndLoadthem() {
+
         let flag = store.shoppingItems.isEmpty
-        
+        print("flag: ",flag)
         if flag {
-            checkForCartItems(flag: flag)
+            noItemsInShoppingCartView(emptyShopingCartView!)
         } else {
-            checkForCartItems(flag: flag)
+            self.loadItemsInCartView(emptyShopingCartView!)
         }
     }
     
-    
-    
-    func checkForCartItems(flag: Bool) {
-        let noItemsView = NoOrderItemsOnTheCart(frame: self.tableView.frame)
-        switch flag {
-        case true:
-            self.noItemsInCartView(noItemsView)
-        case false:
-            self.ItemsInCartView(noItemsView)
-        }
-    }
-    
-    func noItemsInCartView(_ customView: UIView) {
+    func noItemsInShoppingCartView(_ customView: UIView) {
         print("Sorry no items on the cart")
-        self.tableView.insertSubview(customView, aboveSubview: self.tableView)
-        self.tableView.bringSubview(toFront: view)
-        self.tableView.separatorStyle = .none
+        //        self.view.addSubview(customView)
     }
     
-    func ItemsInCartView(_ customView: UIView) {
+    func loadItemsInCartView(_ customView: UIView) {
         print("Items on the cart ... are loading")
-        // Register cell classes
         customView.isHidden = true
-        self.tableView.separatorStyle = .singleLine
-        self.tableView.reloadData()
-        self.setUpCheckOutButton()
+        DispatchQueue.main.async {
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+            self.setUpCheckOutButton()
+        }
     }
     
     func loadDate(){
@@ -81,14 +104,14 @@ class CartOrdersItemsTableViewController: UITableViewController {
     }
     
     func setUpCheckOutButton(){
-    self.navigationController?.view.addSubview(checkOutButton)
+        self.navigationController?.view.addSubview(checkOutButton)
         guard let tabBarHeight = self.tabBarController?.tabBar.bounds.height.advanced(by: 12) else {
-        debugPrint("Cannot get the height of the: tabBarHeight")
+            debugPrint("Cannot get the height of the: tabBarHeight")
             return
         }
         print("tabBarHeight: ",tabBarHeight)
         let superView = navigationController?.view
-       _ = checkOutButton.anchor(top: nil, left: superView?.leftAnchor, bottom: superView?.bottomAnchor, right: superView?.rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: tabBarHeight, rightConstant: 12, widthConstant: 0, heightConstant: 42)
+        _ = checkOutButton.anchor(top: nil, left: superView?.leftAnchor, bottom: superView?.bottomAnchor, right: superView?.rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: tabBarHeight, rightConstant: 12, widthConstant: 0, heightConstant: 42)
         
         checkOutButton.animation = "fadeInUp"
         //        checkOutButton.delay = 0.1
@@ -96,39 +119,34 @@ class CartOrdersItemsTableViewController: UITableViewController {
     }
 }
 
-extension CartOrdersItemsTableViewController {
+extension CartOrdersItemsTableViewController: UITableViewDataSource, UITableViewDelegate {
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.store.shoppingItems.count
         print("Items in the array: ", count)
         return count //self.store.shoppingItems.count
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CartOrdersItemsCell
         let order = self.store.shoppingItems[indexPath.row]
-
+        
         if let url = URL.init(string: order.productImage) {
             print("URL: \(url)")
             cell.orderImage.kf.indicatorType = .activity
             cell.orderImage.kf.setImage(with: url)
             cell.orderImage.viewCardThemeWithCornerRadius(radius: cell.orderImage.frame.size.height / 2)
         }
-
+        
         cell.orderNameLabel.text = order.name
         cell.orderCutTypeLabel.text = order.cutTypee
         return cell
     }
-    
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return CGFloat(150)
-//    }
     
 }

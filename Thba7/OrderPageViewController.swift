@@ -20,6 +20,7 @@ private struct Identifiers {
     static let segueUserInfoPageVCIdentifier: String = "segueUserInfoPageVC.ientifier"
 }
 
+
 class OrderPageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var SheepImage: UIImageView!
@@ -30,7 +31,7 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var viewUnderBuyButton: UIView!
     
     var store = DataStore.sharedInstnce // this is used Golbally
-    
+
     //MARK: New OrderItem
     var _order = OrderItems()
     //MARK: Order instans
@@ -63,7 +64,6 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
         productInfoTBV.isScrollEnabled = false
         loadData()
         buyNowButton.addTarget(self, action: #selector(handelBuyButton), for: .touchUpInside)
-        
     }
     // MARK: Segue to the userInfo VC
     func handelBuyButton(){
@@ -77,20 +77,23 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
     
-    // MARK: Perper for segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Identifiers.segueUserInfoPageVCIdentifier {
-            if let vc = segue.destination as? UserInfoTableViewController {
-                let backItem = UIBarButtonItem()
-                backItem.title = "رجوع"
-                navigationItem.backBarButtonItem = backItem
-                // Pass the title
-                vc.title = "معلومات التوصيل"
-                //                vc.passedOrderData = choosesArray
-                //                vc.userPlacedOrder = userOrder.getOrderInfo()
-            }
-        }
-    }
+//    // MARK: Perper for segue
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == Identifiers.segueUserInfoPageVCIdentifier {
+//            if let vc = segue.destination as? UserInfoTableViewController {
+//                let backItem = UIBarButtonItem()
+//                backItem.title = "رجوع"
+//                navigationItem.backBarButtonItem = backItem
+//                // Pass the title
+//                vc.title = "معلومات التوصيل"
+//                
+//                //                vc.passedOrderData = choosesArray
+//                //                vc.userPlacedOrder = userOrder.getOrderInfo()
+//            }
+//        }
+//    }
+    
+    
     func loadData(){
         // MARK: Load the data inot the table view
         let url = URL(string: sheepOrderedImage)!
@@ -257,6 +260,13 @@ extension OrderPageViewController {
         self.store.shoppingItems.append(_order)
         NSKeyedArchiver.archiveRootObject(self.store.shoppingItems, toFile: String().filePath)
         loadDate()
+        notifyTheCartClass()
+    }
+    
+    func notifyTheCartClass(){
+    let name = NSNotification.Name("Notification.name")
+    NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
+        
     }
     
     private func loadDate(){

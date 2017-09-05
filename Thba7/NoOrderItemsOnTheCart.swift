@@ -40,7 +40,7 @@ class NoOrderItemsOnTheCart: UIView {
         text.text = "عفوا لا يوجد لديك طلبات حالياً" //"Sorry No Connection"
         text.font = UIFont.boldSystemFont(ofSize: 24)
         text.textAlignment = .center
-        text.textColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+        text.textColor = .red//UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
         return text
     }()
     
