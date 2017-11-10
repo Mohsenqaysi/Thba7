@@ -29,8 +29,6 @@ class SnedVerifyingRequestViewController: UIViewController {
         
     }
     
-   
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.loader.isHidden = true

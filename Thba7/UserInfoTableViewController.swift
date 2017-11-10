@@ -10,6 +10,8 @@ import UIKit
 
 class UserInfoTableViewController: UITableViewController {
     
+    var store = DataStore.sharedInstnce
+
     var passedOrderData = [String]()
     var userPlacedOrder: [OrderItems] = []
     let cellID = "cell"
@@ -87,20 +89,6 @@ extension UserInfoTableViewController {
             headerView.textLabel?.textColor = UIColor(hex: "6D6D6D")
         }
     }
-    
-    //    override  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //
-    //        switch indexPath.section {
-    //        case 0:
-    //            return CGFloat(260)
-    //        case 1:
-    //            return CGFloat(130)
-    //        case 2:
-    //            return CGFloat(collectionView.frame.size.height * CGFloat(array.count))
-    //        default:
-    //            return CGFloat(44)
-    //        }
-    //    }
 }
 
 extension UserInfoTableViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -111,14 +99,25 @@ extension UserInfoTableViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userPlacedOrder.count
+        let count = self.store.shoppingItems.count
+        print("Items in the array: ", count)
+        return count //self.store.shoppingItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let collectioCell = collectionView.dequeueReusableCell(withReuseIdentifier: FinalCollectionViewCellID, for: indexPath) as! FinalOrderCollectionViewCell
-//        collectioCell.image.image = userPlacedOrder[indexPath.item].productImage
-        collectioCell.label.text = userPlacedOrder[indexPath.item].name
+        let order = self.store.shoppingItems[indexPath.row]
+        
+        if let url = URL.init(string: order.productImage) {
+            print("URL: \(url)")
+            collectioCell.image.kf.indicatorType = .activity
+            collectioCell.image.kf.setImage(with: url)
+            collectioCell.image.viewCardThemeWithCornerRadius(radius: collectioCell.image.frame.size.height / 2)
+        }
+        
+        collectioCell.label.text = order.name
+//        collectioCell.orderCutTypeLabel.text = order.cutTypee
         return collectioCell
     }
 }

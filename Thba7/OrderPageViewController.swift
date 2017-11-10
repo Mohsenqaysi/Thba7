@@ -30,6 +30,7 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var totalCostLabel: UILabel!
     @IBOutlet weak var viewUnderBuyButton: UIView!
     
+
     var store = DataStore.sharedInstnce // this is used Golbally
 
     //MARK: New OrderItem
@@ -68,31 +69,12 @@ class OrderPageViewController: UIViewController, UICollectionViewDataSource, UIC
     // MARK: Segue to the userInfo VC
     func handelBuyButton(){
         if !choosesArray.isEmpty {
-            //            if let info = userOrder.getOrderInfo() {
-            //                print(info)
-            //            }
             self.saveData()
         } else {
             print("Place fill in the form fully")
+            //TODO: Add an alert to 
         }
     }
-    
-//    // MARK: Perper for segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == Identifiers.segueUserInfoPageVCIdentifier {
-//            if let vc = segue.destination as? UserInfoTableViewController {
-//                let backItem = UIBarButtonItem()
-//                backItem.title = "رجوع"
-//                navigationItem.backBarButtonItem = backItem
-//                // Pass the title
-//                vc.title = "معلومات التوصيل"
-//                
-//                //                vc.passedOrderData = choosesArray
-//                //                vc.userPlacedOrder = userOrder.getOrderInfo()
-//            }
-//        }
-//    }
-    
     
     func loadData(){
         // MARK: Load the data inot the table view
