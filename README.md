@@ -9,7 +9,7 @@
 
 ## Here is a video of the system
 
-[![asciicast](https://img.youtube.com/vi/uRzgrFqfZlY/0.jpg)](https://www.youtube.com/watch?v=uRzgrFqfZlY)
+[![asciicast](https://img.youtube.com/vi/l8-Q3eiSgi8/0.jpg)](https://youtu.be/l8-Q3eiSgi8)
 
 
 
