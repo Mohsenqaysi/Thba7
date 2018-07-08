@@ -42,18 +42,19 @@ class CartOrdersItemsTableViewController: UIViewController {
     
     func handelCheckOutButton() {
         print(123)
+        checkOutButton.isHidden = true
         performSegue(withIdentifier: CartOrderIdentifiers.segueID, sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == CartOrderIdentifiers.segueID {
-            //            if let vc = segue.destination as! UserInfoTableViewController {
-            //                checkOutButton.isHidden = true
-            checkOutButton.removeFromSuperview()
-            //            }
-        }
-    }
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //
+    ////        if segue.identifier == CartOrderIdentifiers.segueID {
+    ////            if let vc = segue.destination as! UserInfoTableViewController {
+    //                checkOutButton.isHidden = true
+    ////                //            checkOutButton.isHidden = true
+    ////            }
+    ////        }
+    //    }
     
     @IBOutlet var cartTableView: UITableView!
     
@@ -175,5 +176,4 @@ extension CartOrdersItemsTableViewController: UITableViewDataSource, UITableView
         cell.orderCutTypeLabel.text = order.cutTypee
         return cell
     }
-    
 }

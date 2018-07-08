@@ -19,9 +19,9 @@ class CustomMarker: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-   private let pin: UIImageView = {
+    private let pin: UIImageView = {
         let p = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 45))
-        p.image = UIImage(named: "pin_green")//"default_marker")//?.withRenderingMode(.alwaysTemplate)
+        p.image = UIImage(named:"carICon")//"default_marker")//?.withRenderingMode(.alwaysTemplate)
         p.tintColor = UIColor.blue
         return p
     }()

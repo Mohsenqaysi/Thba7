@@ -66,8 +66,9 @@ class MapVC: UIViewController, GMSMapViewDelegate {
     var radius: Int = 300
     var placesClient: GMSPlacesClient!
     
-    var camera = GMSCameraPosition.camera(withLatitude: 16.533593,
-                                          longitude: 42.798357, zoom: zoomLevel)
+    //MARK: Latitude and longitude
+    var camera = GMSCameraPosition.camera(withLatitude: 24.719714,
+                                          longitude: 46.672338, zoom: zoomLevel)
     
     var likelyHoodsLocationsData: LikelyHoodsLocationsData? = nil
     var likelyHoodsLocationsDataArray = [LikelyHoodsLocationsData]()
@@ -181,8 +182,10 @@ class MapVC: UIViewController, GMSMapViewDelegate {
         
         mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         mapView.isMyLocationEnabled = true
-        marker.iconView = custommarkerView
+        mapView.settings.compassButton = true
         mapView.settings.myLocationButton = true
+        mapView.settings.indoorPicker = true
+        marker.iconView = custommarkerView
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self
         
@@ -298,6 +301,7 @@ extension MapVC: CLLocationManagerDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: zoomLevel)
+        mapView.settings.compassButton = true
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera

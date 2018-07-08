@@ -8,7 +8,10 @@
 
 import UIKit
 
-class UserInfoTableViewController: UITableViewController {
+class UserInfoTableViewController: UITableViewController, UITextFieldDelegate {
+    @IBOutlet weak var nameInputTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
     
     var store = DataStore.sharedInstnce
 
@@ -33,7 +36,10 @@ class UserInfoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.nameInputTextField.delegate = self
+        self.cityTextField.delegate = self
+        self.lastNameTextField.delegate = self
+        
         confiremedUserPhoneNumberLabel.isHidden = true
         confiremedUserPhoneNumberIcon.isHidden = true
         
@@ -55,8 +61,12 @@ class UserInfoTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 260
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
     @IBAction func placeOrderButton(_ sender: UIButton) {
-        
         print(collectionView.contentSize.height)
 //        print(collectionView.frame.height * CGFloat(array.count))
     }
