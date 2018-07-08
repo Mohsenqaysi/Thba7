@@ -1,0 +1,18 @@
+{
+  "data" : {
+    "one" : {
+      "costs" : [ 650, 850, 1000 ],
+      "cuts" : [ "كامل", "حي", "Qurters" ],
+      "image" : "https://firebasestorage.googleapis.com/v0/b/thba7-89711.appspot.com/o/productsImages%2F%D8%AE%D8%B1%D9%88%D9%81.jpg?alt=media&token=11f86dea-6662-48dc-a3c8-2d460f3b2363",
+      "label" : "خروف بلدي",
+      "sizes" : [ "خروف صغير", "خروف وسط", "خروف كبير" ]
+    },
+    "two" : {
+      "costs" : [ 650, 850 ],
+      "cuts" : [ "كامل", "حي", "أرباع" ],
+      "image" : "https://firebasestorage.googleapis.com/v0/b/thba7-89711.appspot.com/o/productsImages%2Fc64f76dc20c246ca88ee180fe4b4b781.jpeg?alt=media&token=f64728d1-783e-4985-8719-f2725e8ed6fd",
+      "label" : "تيس جنوبي",
+      "sizes" : [ "تيس صغير", "تيس وسط" ]
+    }
+  }
+}
